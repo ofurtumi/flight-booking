@@ -8,12 +8,12 @@ CREATE TABLE User(
     name VARCHAR(30),
     prev_flights VARCHAR(30),
     prev_bookings VARCHAR(30)
-)
+);
 
 CREATE TABLE Seat(
     id VARCHAR(3),
     reserved BOOLEAN
-)
+);
 /* Gæti þurft að laga date */
 CREATE TABLE SingleFlight(
     fid VARCHAR(30) PRIMARY KEY,
@@ -23,7 +23,7 @@ CREATE TABLE SingleFlight(
     depTime DATE,
     arriTime DATE,
     price INT
-)
+);
 
 CREATE TABLE Bookings(
     userid VARCHAR(30) REFERENCES User(id),
@@ -31,4 +31,4 @@ CREATE TABLE Bookings(
     seatnum VARCHAR(3) REFERENCES Seat(id),
     bookingid VARCHAR(30),
     passenger INT
-)
+);
