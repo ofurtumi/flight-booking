@@ -25,7 +25,8 @@ CREATE TABLE Single_flight (
 CREATE TABLE Bookings (
     userid VARCHAR(30) REFERENCES User(id),
     flight_id VARCHAR(30) REFERENCES Single_flight(flight_id),
-    booking_id VARCHAR(30)
+    booking_id VARCHAR(30),
+    seat_id VARCHAR(3) /* T.d. 32A */
 );
 
 CREATE TABLE Seat (
