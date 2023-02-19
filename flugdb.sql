@@ -3,32 +3,36 @@
     UsierID er int fyrir Kt. spurning hvort að við viljum halda því eða gera random
     string id.
 */
-CREATE TABLE User(
-    Userid INT,
+CREATE TABLE User (
+    user_id INT,
     name VARCHAR(30),
     prev_flights VARCHAR(30),
     prev_bookings VARCHAR(30)
 );
 
-CREATE TABLE Seat(
-    id VARCHAR(3),
-    reserved BOOLEAN
-);
 /* Gæti þurft að laga date */
-CREATE TABLE SingleFlight(
-    fid VARCHAR(30) PRIMARY KEY,
-    seats VARCHAR(3) REFERENCES Seats(seats),
-    depAddress VARCHAR(50),
-    arriAddress VARCHAR(50),
-    depTime DATE,
-    arriTime DATE,
+/* Tumi: tók út seats úr single flight, setti frekar Seat upp með primary key sem notar flight_id og position, þannig hægt að reffa það frekar*/
+CREATE TABLE Single_flight (
+    flight_id VARCHAR(30) PRIMARY KEY,
+    departure_address VARCHAR(50),
+    arrival_address VARCHAR(50),
+    departure_time DATE,
+    arrival_time DATE,
     price INT
 );
 
-CREATE TABLE Bookings(
+/*Tumi: svipað hér og með Single_flight, tók út vísun í Seat num, þá getum við haft mörg sæti fyrir hverja bókun, vitnar bara í Seat.booking_id til að fá upp öll sæti tengd þeirri bókun*/
+CREATE TABLE Bookings (
     userid VARCHAR(30) REFERENCES User(id),
-    flightid VARCHAR(30) REFERENCES SingleFlight(fid),
-    seatnum VARCHAR(3) REFERENCES Seat(id),
-    bookingid VARCHAR(30),
-    passenger INT
+    flight_id VARCHAR(30) REFERENCES Single_flight(flight_id),
+    booking_id VARCHAR(30)
 );
+
+CREATE TABLE Seat (
+    f_id VARCHAR(30) REFERENCES Single_flight(flight_id), 
+    position VARCHAR(3),
+    reserved BOOLEAN,
+    booking_id VARCHAR(30) REFERENCES Bookings(booking_id),
+    PRIMARY KEY (f_id, position)
+);
+
