@@ -4,35 +4,35 @@
     string id.
 */
 CREATE TABLE User (
-    user_id INT,
+    userId INT,
     name VARCHAR(30),
-    prev_flights VARCHAR(30),
-    prev_bookings VARCHAR(30)
+    prevFlights VARCHAR(30),
+    prevBookings VARCHAR(30)
 );
 
 /* Gæti þurft að laga date */
 /* Tumi: tók út seats úr single flight, setti frekar Seat upp með primary key sem notar flight_id og position, þannig hægt að reffa það frekar*/
 CREATE TABLE Single_flight (
-    flight_id VARCHAR(30) PRIMARY KEY,
-    departure_address VARCHAR(50),
-    arrival_address VARCHAR(50),
-    departure_time DATE,
-    arrival_time DATE,
+    flightId VARCHAR(30) PRIMARY KEY,
+    departureAddress VARCHAR(50),
+    arrivalAddress VARCHAR(50),
+    departureTime DATE,
+    arrivalTime DATE,
     price INT
 );
 
 /*Tumi: svipað hér og með Single_flight, tók út vísun í Seat num, þá getum við haft mörg sæti fyrir hverja bókun, vitnar bara í Seat.booking_id til að fá upp öll sæti tengd þeirri bókun*/
 CREATE TABLE Bookings (
-    userid VARCHAR(30) REFERENCES User(id),
-    flight_id VARCHAR(30) REFERENCES Single_flight(flight_id),
-    booking_id VARCHAR(30)
+    userId VARCHAR(30) REFERENCES User(id),
+    flightId VARCHAR(30) REFERENCES Single_flight(flight_id),
+    bookingId VARCHAR(30)
 );
 
 CREATE TABLE Seat (
-    f_id VARCHAR(30) REFERENCES Single_flight(flight_id), 
+    flightId VARCHAR(30) REFERENCES Single_flight(flight_id), 
     position VARCHAR(3),
     reserved BOOLEAN,
-    booking_id VARCHAR(30) REFERENCES Bookings(booking_id),
-    PRIMARY KEY (f_id, position)
+    bookingId VARCHAR(30) REFERENCES Bookings(booking_id),
+    PRIMARY KEY (flightId, position)
 );
 
