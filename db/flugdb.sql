@@ -3,14 +3,14 @@
     UsierID er int fyrir Kt. spurning hvort að við viljum halda því eða gera random
     string id.
 */
-CREATE TABLE User (
+CREATE TABLE Users (
     userId INT,
     name VARCHAR(30)
 );
 
 /* Gæti þurft að laga date */
 /* Tumi: tók út seats úr single flight, setti frekar Seat upp með primary key sem notar flight_id og position, þannig hægt að reffa það frekar*/
-CREATE TABLE Single_flight (
+CREATE TABLE Flight (
     flightId VARCHAR(30) PRIMARY KEY,
     departureAddress VARCHAR(50),
     arrivalAddress VARCHAR(50),
@@ -26,7 +26,7 @@ CREATE TABLE Bookings (
     bookingId VARCHAR(30)
 );
 
-CREATE TABLE Seat (
+CREATE TABLE Seats (
     flightId VARCHAR(30) REFERENCES Single_flight(flight_id), 
     position VARCHAR(3),
     reserved BOOLEAN,
@@ -34,7 +34,8 @@ CREATE TABLE Seat (
     PRIMARY KEY (flightId, position)
 );
 
-INSERT INTO User (
+INSERT INTO Users (
   userId,
   name
 ) VALUES ( 1, "Tumi"), (2, "Gunnar");
+

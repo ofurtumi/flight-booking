@@ -1,5 +1,7 @@
 import os
 
+os.system('mkdir -p src/db')
+
 cmd = ""
 if os.name == 'nt':
     cmd = 'cmd /c "sqlite3 -init db/flugdb.sql"'

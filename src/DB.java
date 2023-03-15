@@ -25,6 +25,13 @@ public class DB {
     }
   }
 
+  /**
+   * returns a ResultSet containing data from 
+   * the database corresponding to the given query and values
+   * @param query   an sqlite querystring
+   * @param values  a array of strings used to add variable data to queries
+   * @return        ResultSet for the given query and values
+   */
   public static ResultSet query(String query, String[] values) {
     ResultSet rs = null;
     try {
@@ -38,8 +45,9 @@ public class DB {
 
     } catch (Exception e) {
       System.err.println(e);
+    } finally {
+      return rs;
     }
-    return rs;
   }  
 
   /*
