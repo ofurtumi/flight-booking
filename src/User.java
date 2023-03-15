@@ -5,7 +5,7 @@ public class User {
     DB database = new DB();
 
     database.open();
-    ResultSet rs = database.query("SELECT * FROM User where userID = ?;", args);
+    ResultSet rs = database.query("SELECT * FROM Users where userID = ?;", args);
     while (rs.next()) {
       System.out.printf("User #%d: %s", rs.getInt(1), rs.getString(2));
     }
