@@ -5,9 +5,7 @@
 */
 CREATE TABLE User (
     userId INT,
-    name VARCHAR(30),
-    prevFlights VARCHAR(30),
-    prevBookings VARCHAR(30)
+    name VARCHAR(30)
 );
 
 /* Gæti þurft að laga date */
@@ -36,3 +34,7 @@ CREATE TABLE Seat (
     PRIMARY KEY (flightId, position)
 );
 
+INSERT INTO User (
+  userId,
+  name
+) VALUES ( 1, "Tumi"), (2, "Gunnar");
