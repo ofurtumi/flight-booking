@@ -4,7 +4,7 @@
     string id.
 */
 CREATE TABLE Users (
-    userId INT,
+    userId INT PRIMARY KEY,
     name VARCHAR(30)
 );
 
