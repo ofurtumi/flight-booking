@@ -1,3 +1,4 @@
+package Application;
 import java.util.Date;
 
 public class Flight {
@@ -28,5 +29,9 @@ public class Flight {
 
         departureTime = dT;
         departureAddress = dA;
+    }
+
+    public static void main(String[] args) {
+        Seat seat = new Seat("das","bsl", true);    
     }
 }
