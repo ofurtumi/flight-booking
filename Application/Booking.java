@@ -1,3 +1,5 @@
+package Application;
+
 public class Booking {
     private Flight flightId;
     private User userId;
