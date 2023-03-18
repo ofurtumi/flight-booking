@@ -1,4 +1,4 @@
-/*  
+/*
     Það þarf að uppfæra hvernig við ætlum að halda utanum prev flights og bookings
     UsierID er int fyrir Kt. spurning hvort að við viljum halda því eða gera random
     string id.
@@ -14,8 +14,8 @@ CREATE TABLE Flight (
     flightId VARCHAR(30) PRIMARY KEY,
     departureAddress VARCHAR(50),
     arrivalAddress VARCHAR(50),
-    departureTime DATE,
-    arrivalTime DATE,
+    departureTime DATETIME,
+    arrivalTime DATETIME,
     price INT
 );
 
@@ -27,15 +27,9 @@ CREATE TABLE Bookings (
 );
 
 CREATE TABLE Seats (
-    flightId VARCHAR(30) REFERENCES Single_flight(flight_id), 
+    flightId VARCHAR(30) REFERENCES Single_flight(flight_id),
     position VARCHAR(3),
     reserved BOOLEAN,
     bookingId VARCHAR(30) REFERENCES Bookings(booking_id),
     PRIMARY KEY (flightId, position)
 );
-
-INSERT INTO Users (
-  userId,
-  name
-) VALUES ( 1, "Tumi"), (2, "Gunnar");
-
