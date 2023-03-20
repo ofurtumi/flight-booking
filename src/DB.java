@@ -10,10 +10,10 @@ public class DB {
   private Connection conn = null;
 
   public void open() {
-    try {
+    try { 
       if (conn == null) {
         conn = DriverManager.getConnection(connectionURL);
-      }
+      } 
     } catch (Exception e) {
       System.err.println(e);
     }
