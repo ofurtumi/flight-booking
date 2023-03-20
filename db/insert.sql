@@ -1,7 +1,7 @@
 INSERT INTO Users (
   userId,
   name
-) VALUES ( 1, "Tumi"), (2, "Gunnar"), (3, "Hákon");
+) VALUES ( 1010012260, "Tumi"), (2002203459, "Gunnar"), (2404016960, "Hákon");
 
 INSERT INTO Flight (
     flightId,
@@ -16,7 +16,7 @@ INSERT INTO Bookings (
     userId,
     flightId,
     bookingId
-) VALUES (1, "F123", "Book1");
+) VALUES (1010012260, "F123", "Book1");
 
 INSERT INTO Seats (
     flightId,
