@@ -1,11 +1,13 @@
 import os
 
-os.system('mkdir -p src/db')
+# create directory if it doesn't exist
+if not os.path.exists("src/db"):
+    os.makedirs("src/db")
 
-cmd = ""
+# execute SQLite commands
 if os.name == 'nt':
-    cmd = 'cmd /c "sqlite3 -init db/schema.sql"'
+    cmd = 'cmd /c "sqlite3 src/db/flightBooking.db < db/Schema.sql && sqlite3 src/db/flightBooking.db < db/Insert.sql"'
 else:
-    cmd = "cd db && echo '.save ../src/db/schema.db' | sqlite3 -init schema.sql"
+    cmd = "cd db && sqlite3 ../src/db/schema.db < schema.sql"
 
 os.system(cmd)

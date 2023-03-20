@@ -6,7 +6,7 @@ import java.sql.Statement;
 import java.sql.PreparedStatement;
 
 public class DB {
-  private String connectionURL = "jdbc:sqlite:db/flugdb.db";
+  private String connectionURL = "jdbc:sqlite:db/flightBooking.db";
   private Connection conn = null;
 
   public void open() {

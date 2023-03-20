@@ -1,4 +1,12 @@
 /*
+    Svo að þetta sé ekki one hit wonder
+*/
+DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS Flight;
+DROP TABLE IF EXISTS Bookings;
+DROP TABLE IF EXISTS Seats;
+
+/*
     Það þarf að uppfæra hvernig við ætlum að halda utanum prev flights og bookings
     UsierID er int fyrir Kt. spurning hvort að við viljum halda því eða gera random
     string id.
