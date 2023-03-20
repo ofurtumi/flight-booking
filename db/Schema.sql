@@ -1,5 +1,5 @@
 /*
-    Svo að þetta sé ekki one hit wonder
+    Drop table þegar það er keyrt upp gagnagrunninn aftur
 */
 DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Flight;
