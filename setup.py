@@ -8,6 +8,6 @@ if not os.path.exists("src/db"):
 if os.name == 'nt':
     cmd = 'cmd /c "sqlite3 src/db/flightBooking.db < db/Schema.sql && sqlite3 src/db/flightBooking.db < db/Insert.sql"'
 else:
-    cmd = "cd db && sqlite3 ../src/db/schema.db < schema.sql"
+    cmd = "cd db && sqlite3 ../src/db/flightBooking.db < schema.sql"
 
 os.system(cmd)
