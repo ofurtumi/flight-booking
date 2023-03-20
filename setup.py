@@ -6,8 +6,8 @@ if not os.path.exists("src/db"):
 
 # execute SQLite commands
 if os.name == 'nt':
-    cmd = 'cmd /c "sqlite3 src/db/flightBooking.db < db/Schema.sql && sqlite3 src/db/flightBooking.db < db/Insert.sql"'
+    cmd = 'cmd /c "sqlite3 src/db/flightBooking.db < db/schema.sql && sqlite3 src/db/flightBooking.db < db/insert.sql"'
 else:
-    cmd = "cd db && sqlite3 ../src/db/flightBooking.db < Schema.sql && sqlite3 ../src/db/flightBooking.db < db/Insert.sql"
+    cmd = "cd db && sqlite3 ../src/db/flightBooking.db < schema.sql && sqlite3 ../src/db/flightBooking.db < insert.sql"
 
 os.system(cmd)
