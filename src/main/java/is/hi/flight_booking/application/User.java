@@ -1,4 +1,4 @@
-package Application;
+package is.hi.flight_booking.application;
 
 public class User {
     private String id;
@@ -7,5 +7,7 @@ public class User {
     public User(String uId, String uName){
         id = uId;
         name = uName;
-    } 
+    }
+
+    public String getName() { return this.name; }
 }

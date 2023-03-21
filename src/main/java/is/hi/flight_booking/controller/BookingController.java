@@ -1,4 +1,4 @@
-import Application.*;
+import is.hi.flight_booking.application.*;
 
 public class BookingController {
 
