@@ -1,4 +1,4 @@
-package Application;
+package is.hi.flight_booking.application;
 import java.util.Date;
 
 public class Flight {
