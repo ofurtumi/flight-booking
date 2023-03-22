@@ -1,5 +1,5 @@
 package Application;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Flight {
 
@@ -10,13 +10,13 @@ public class Flight {
     private int numSeatsReserved;
     private int price;
 
-    private Date arrivalTime;
+    private LocalDate arrivalTime;
     private String arrivalAddress;
 
-    private Date departureTime;
+    private LocalDate departureTime;
     private String departureAddress;
 
-    public Flight(String fId, Seat[] s, int nSA, int nSR,int tprice, Date aT, String aA, Date dT, String dA){
+    public Flight(String fId, Seat[] s, int nSA, int nSR,int tprice, LocalDate aT, String aA, LocalDate dT, String dA){
         flightId = fId;
         seats = s;
 
