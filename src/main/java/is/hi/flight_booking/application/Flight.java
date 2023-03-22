@@ -1,4 +1,4 @@
-package Application;
+package main.java.is.hi.flight_booking.application;
 import java.time.LocalDate;
 
 public class Flight {

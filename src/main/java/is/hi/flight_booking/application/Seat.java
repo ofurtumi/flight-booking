@@ -1,4 +1,4 @@
-package Application;
+package is.hi.flight_booking.application;
 
 public class Seat {
     private String id;
