@@ -20,11 +20,11 @@ public class FlightTest {
     flight = new Flight(
         "F-304",
         seats,
-        24000,
-        LocalDate.of(2023, 3, 21),
+        "Keflavík",
         "Reykjavík",
         LocalDate.now(),
-        "Keflavík");
+        LocalDate.now(),
+        24000);
   }
 
   @After
