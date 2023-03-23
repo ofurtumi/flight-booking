@@ -17,19 +17,20 @@ public class Flight {
   private LocalDate departureTime;
   private String departureAddress;
 
-  public Flight(String fId, Seat[] s, int tprice, LocalDate aT, String aA, LocalDate dT, String dA) {
-    flightId = fId;
-    seats = s;
+  public Flight(String flightId, Seat[] seats, String departureAddress, String arrivalAddress,
+      LocalDate departureTime, LocalDate arrivalTime, int price) {
+    this.flightId = flightId;
+    this.seats = seats;
 
-    numSeatsAvailable = s.length;
+    numSeatsAvailable = seats.length;
     numSeatsReserved = 0;
-    price = tprice;
+    this.price = price;
 
-    arrivalTime = aT;
-    arrivalAddress = aA;
+    this.arrivalTime = arrivalTime;
+    this.arrivalAddress = arrivalAddress;
 
-    departureTime = dT;
-    departureAddress = dA;
+    this.departureTime = departureTime;
+    this.departureAddress = departureAddress;
   }
 
   public String getFlightId() {
