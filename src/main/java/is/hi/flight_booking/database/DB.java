@@ -10,10 +10,10 @@ public class DB {
   private Connection conn;
 
   public void open() {
-    try { 
+    try {
       if (conn == null) {
         conn = DriverManager.getConnection(connectionURL);
-      } 
+      }
     } catch (Exception e) {
       System.err.println(e);
     }
@@ -45,6 +45,29 @@ public class DB {
       for (int v = 0; v < values.length; v++) {
         ps.setString(v + 1, values[v]);
       }
+
+      rs = ps.executeQuery();
+
+    } catch (SQLException e) {
+      System.err.println(e);
+    }
+    return rs;
+  }
+
+  /**
+   * returns a ResultSet containing data from
+   * the database corresponding to the given query and single value string
+   * 
+   * @param query an sqlite querystring
+   * @param value a strings used to add variable data to queries
+   * @return ResultSet for the given query and values
+   */
+  public ResultSet query(String query, String value) {
+    ResultSet rs = null;
+    try {
+      PreparedStatement ps = conn.prepareStatement(query);
+
+      ps.setString(1, value);
 
       rs = ps.executeQuery();
 
