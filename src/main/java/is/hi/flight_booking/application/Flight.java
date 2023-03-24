@@ -2,11 +2,12 @@ package is.hi.flight_booking.application;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Flight {
 
   private String flightId;
-  private final ArrayList<Seat> seats;
+  private final List<Seat> seats;
 
   private int numSeatsAvailable;
   private int numSeatsReserved;
@@ -27,7 +28,7 @@ public class Flight {
    * @param arrivalTime      time of arrival as LocalDate
    * @param price            price of a single seat as an integer
    */
-  public Flight(String flightId, ArrayList<Seat> seats, String departureAddress, String arrivalAddress,
+  public Flight(String flightId, List<Seat> seats, String departureAddress, String arrivalAddress,
       LocalDate departureTime, LocalDate arrivalTime, int price) {
     this.flightId = flightId;
     this.seats = seats;
@@ -47,7 +48,7 @@ public class Flight {
     return flightId;
   }
 
-  public ArrayList<Seat> getSeats() {
+  public List<Seat> getSeats() {
     return seats;
   }
 
