@@ -70,7 +70,7 @@ public class FlightRepository {
     return flights;
   }
 
-  public Flight[] searchFlight(String depAddress, String arrAddress, LocalDate depTime){
+  public Flight[] searchFlight(String depAddress, String arrAddress, LocalDate depTime) {
     try{
       DB db = new DB();
       db.open();
