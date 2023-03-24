@@ -1,8 +1,10 @@
 package is.hi.flight_booking.controller;
 
 import is.hi.flight_booking.application.*;
+import is.hi.flight_booking.repository.FlightRepository;
+import java.time.LocalDate;
 
-public class FlightController {
+public class FlightController implements FlightInterface {
 
   private Flight[] flights;
   // Á eftir að búa til FlightRepository
@@ -11,5 +13,8 @@ public class FlightController {
   public String getFlight(String flightId) {
     // Vantar
     return "Vantar!";
+  }
+  public Flight[] searchFlight(String depAddress, String arrAddress, LocalDate depTime) {
+    return new FlightRepository().searchFlight(depAddress, arrAddress, depTime);
   }
 }

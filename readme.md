@@ -17,11 +17,10 @@ ekki komið, þarf að testa á windows vél en prófið
 python3 setup.py
 ```
 
-### keyrsla
-inn í src er hægt að keyra  
+### testing
+fara í rót og keyra eftirfarandi 
+> gert er ráð fyrir því að maven sé sétt upp á vél
 ```bash
-javac *.java && java -cp .:sqlite-jdbc-3.39.3.0.jar User <id á user>
+mvn test
 ```
 
-til þess að fá einstakan user með id
-> sama hér og fyrir ofan, á eftir að testa á windows vél

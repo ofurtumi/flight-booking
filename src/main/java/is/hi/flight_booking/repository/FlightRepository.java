@@ -70,37 +70,42 @@ public class FlightRepository {
     return flights;
   }
 
-  public Flight[] searchFlight(String depAddress, String arrAddress, LocalDate depTime) throws SQLException {
-    DB db = new DB();
-    db.open();
+  public Flight[] searchFlight(String depAddress, String arrAddress, LocalDate depTime) {
+    try{
+      DB db = new DB();
+      db.open();
 
-    String[] values = new String[2];
-    values[0] = depAddress;
-    values[1] = arrAddress;
-    ArrayList<Flight> flights = new ArrayList<>();
+      String[] values = new String[2];
+      values[0] = depAddress;
+      values[1] = arrAddress;
+      ArrayList<Flight> flights = new ArrayList<>();
 
-    ResultSet rs = db.query("select * from Flight where departureAddress like ?");
-    while (rs.next()) {
-      LocalDate tempDate = rs.getObject("departureTime", LocalDate.class);
-      if (tempDate == depTime) {
-        String flightId = rs.getString("flightId");
-        ArrayList<Seat> seatlist = new ArrayList<>();
+      ResultSet rs = db.query("select * from Flight where departureAddress like ?");
+      while (rs.next()) {
+        LocalDate tempDate = rs.getObject("departureTime", LocalDate.class);
+        if (tempDate == depTime) {
+          String flightId = rs.getString("flightId");
+          ArrayList<Seat> seatlist = new ArrayList<>();
 
-        ResultSet seatResult = db.query("select * from Seats where flightId = ?", flightId);
-        while (seatResult.next()) {
-          seatlist.add(new Seat(seatResult.getString("position"), flightId, seatResult.getBoolean("reserved")));
+          ResultSet seatResult = db.query("select * from Seats where flightId = ?", flightId);
+          while (seatResult.next()) {
+            seatlist.add(new Seat(seatResult.getString("position"), flightId, seatResult.getBoolean("reserved")));
+          }
+
+          flights.add(new Flight(
+              flightId,
+              seatlist.toArray(new Seat[0]),
+              rs.getString("departureAddress"),
+              rs.getString("arrivalAddress"),
+              rs.getObject("departureTime", LocalDate.class),
+              rs.getObject("arrivalTime", LocalDate.class),
+              rs.getInt("price")));
         }
-
-        flights.add(new Flight(
-            flightId,
-            seatlist.toArray(new Seat[0]),
-            rs.getString("departureAddress"),
-            rs.getString("arrivalAddress"),
-            rs.getObject("departureTime", LocalDate.class),
-            rs.getObject("arrivalTime", LocalDate.class),
-            rs.getInt("price")));
       }
+      return flights.toArray(new Flight[0]);
     }
-    return flights.toArray(new Flight[0]);
+    catch (SQLException e){
+      return new Flight[0];
+    }
   }
 }
