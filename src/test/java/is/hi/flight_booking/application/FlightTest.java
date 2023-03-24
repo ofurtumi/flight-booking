@@ -5,17 +5,21 @@ import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class FlightTest {
   Flight flight;
-  Seat[] seats;
+  ArrayList<Seat> seats;
 
   @Before
   public void setUp() {
-    seats = new Seat[]{
-        new Seat("A-1", "F-304", false), new Seat("A-2", "F-304", false),
-        new Seat("A-3", "F-304", false), new Seat("B-1", "F-304", false),
-        new Seat("B-2", "F-304", false), new Seat("B-3", "F-304", false)};
+    seats = new ArrayList<>();
+    seats.add(new Seat("A-1", "F-304", false));
+    seats.add(new Seat("A-2", "F-304", false));
+    seats.add(new Seat("A-3", "F-304", false));
+    seats.add(new Seat("B-1", "F-304", false));
+    seats.add(new Seat("B-2", "F-304", false));
+    seats.add(new Seat("B-3", "F-304", false));
 
     flight = new Flight(
         "F-304",
