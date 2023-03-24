@@ -1,7 +1,7 @@
 package is.hi.flight_booking.application;
 
 public class Seat {
-  private String id;
+  private final String id;
   private String flightId;
   private boolean reserved;
 

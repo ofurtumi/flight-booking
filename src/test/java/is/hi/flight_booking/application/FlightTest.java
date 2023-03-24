@@ -12,10 +12,10 @@ public class FlightTest {
 
   @Before
   public void setUp() {
-    seats = new Seat[] {
+    seats = new Seat[]{
         new Seat("A-1", "F-304", false), new Seat("A-2", "F-304", false),
         new Seat("A-3", "F-304", false), new Seat("B-1", "F-304", false),
-        new Seat("B-2", "F-304", false), new Seat("B-3", "F-304", false) };
+        new Seat("B-2", "F-304", false), new Seat("B-3", "F-304", false)};
 
     flight = new Flight(
         "F-304",
