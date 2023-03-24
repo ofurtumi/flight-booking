@@ -1,12 +1,12 @@
 package is.hi.flight_booking.application;
 
 public class Booking {
-    private Flight flightId;
-    private User userId;
-    private String bookingId;
-    private Seat[] seats;
+    private final Flight flightId;
+    private final User userId;
+    private final String bookingId;
+    private final Seat[] seats;
 
-    public Booking(Flight fId, User uId, String bId, Seat[] s){
+    public Booking(Flight fId, User uId, String bId, Seat[] s) {
         
         flightId = fId;
         userId = uId;
@@ -17,7 +17,7 @@ public class Booking {
 
     /*/Gunnar, Það þarf að úrfæra þetta aðeins betur, finna út hversu mörg sæti bookingið er með og
         hvernig við tökum það inn og hvernig við reiknum kostnaðinn */
-    private int getPrice(){
+    private int getPrice() {
         return 0;
     }
 

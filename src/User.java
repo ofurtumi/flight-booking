@@ -26,7 +26,7 @@ public class User {
   }
 
   public String[] getUserData() {
-    String[] data = { getUserID(), getUserName() };
+    String[] data = {getUserID(), getUserName()};
     return data;
   }
 
