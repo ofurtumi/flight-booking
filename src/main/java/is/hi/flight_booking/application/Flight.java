@@ -3,20 +3,20 @@ import java.util.Date;
 
 public class Flight {
 
-    private String flightId;
-    private Seat[] seats;
+    private final String flightId;
+    private final Seat[] seats;
 
-    private int numSeatsAvailable;
-    private int numSeatsReserved;
-    private int price;
+    private final int numSeatsAvailable;
+    private final int numSeatsReserved;
+    private final int price;
 
-    private Date arrivalTime;
-    private String arrivalAddress;
+    private final Date arrivalTime;
+    private final String arrivalAddress;
 
-    private Date departureTime;
-    private String departureAddress;
+    private final Date departureTime;
+    private final String departureAddress;
 
-    public Flight(String fId, Seat[] s, int nSA, int nSR,int tprice, Date aT, String aA, Date dT, String dA){
+    public Flight(String fId, Seat[] s, int nSA, int nSR, int tprice, Date aT, String aA, Date dT, String dA) {
         flightId = fId;
         seats = s;
 
@@ -32,6 +32,6 @@ public class Flight {
     }
 
     public static void main(String[] args) {
-        Seat seat = new Seat("das","bsl", true);    
+        Seat seat = new Seat("das", "bsl", true);    
     }
 }

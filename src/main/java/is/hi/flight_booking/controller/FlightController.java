@@ -8,7 +8,7 @@ public class FlightController {
 
     // þurfum að finna út hvernig við viljum sækja í Repositoryið
 
-    public String getFlight(String flightId){
+    public String getFlight(String flightId) {
         // Vantar
         return "Vantar!";
     }

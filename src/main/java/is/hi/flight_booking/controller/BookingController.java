@@ -10,59 +10,59 @@ public class BookingController {
     private Seat[] seats;
 
 
-    public BookingController(){
+    public BookingController() {
 
     }
     //Getter og setter fyrir flightId
-    public Flight getFlightId(){
+    public Flight getFlightId() {
         return this.flightId;
     }
-    public void setFlightId(Flight id){
+    public void setFlightId(Flight id) {
         this.flightId=id;
     }
     //getter og setter fyrir userId
-    public User getUserId(){
+    public User getUserId() {
         return this.userId;
     }
-    public void setUserId(User id){
+    public void setUserId(User id) {
         this.userId=id;
     }
     // Getter og setter fyrir bookingId
-    public String getBookingId(){
+    public String getBookingId() {
         return this.bookingId;
     }
-    public void setBookingId(String id){
+    public void setBookingId(String id) {
         this.bookingId=id;
     }
     // getter og setter fyrir seats, gæti þurft að laga return þar sem þetta er fylki
-    public Seat[] getSeats(){
+    public Seat[] getSeats() {
         return this.seats;
     }
-    public void setSeats(Seat[] s){
+    public void setSeats(Seat[] s) {
         this.seats=s;
     }
 
-    public void deleteBooking(String bookingId){
+    public void deleteBooking(String bookingId) {
         // Vantar
     }
 
-    public void createBooking(){
+    public void createBooking() {
         // Vantar
     }
 
-    public void updateBooking(){
+    public void updateBooking() {
         // Vantar
     }
 
-    public void reserveSeat(Seat newSeat){
+    public void reserveSeat(Seat newSeat) {
         // vantar
     }
 
-    public void removeseat(Seat oldSeat){
+    public void removeseat(Seat oldSeat) {
         // Vantar
     }
 
-    public void updateSeat(Seat newSeat, Seat oldSeat){
+    public void updateSeat(Seat newSeat, Seat oldSeat) {
         // Vantar
     }
 
