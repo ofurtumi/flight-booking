@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class FlightRepository {
+public class FlightRepository implements FlightRepositoryInterface {
   private Flight[] sortBy(String comparator) throws SQLException {
     DB db = new DB();
     db.open();
@@ -27,7 +27,7 @@ public class FlightRepository {
 
       flights.add(new Flight(
           flightId,
-          seatlist.toArray(new Seat[0]),
+          seatlist,
           rs.getString("departureAddress"),
           rs.getString("arrivalAddress"),
           rs.getObject("departureTime", LocalDate.class),
@@ -50,7 +50,7 @@ public class FlightRepository {
     return flights;
   }
 
-  public Flight[] getSortedByDepartureTime() {
+  public Flight[] getSortedByTime() {
     Flight[] flights = null;
     try {
       flights = sortBy("departureTime");
@@ -60,7 +60,7 @@ public class FlightRepository {
     return flights;
   }
 
-  public Flight[] getSortedByDepartureAddress() {
+  public Flight[] getSortedByDeparture() {
     Flight[] flights = null;
     try {
       flights = sortBy("departureAddress");
@@ -70,8 +70,18 @@ public class FlightRepository {
     return flights;
   }
 
-  public Flight[] searchFlight(String depAddress, String arrAddress, LocalDate depTime) {
-    try{
+  public Flight[] getSortedByArrival() {
+    Flight[] flights = null;
+    try {
+      flights = sortBy("arrivalAddress");
+    } catch (SQLException e) {
+      System.err.println(e);
+    }
+    return flights;
+  }
+
+  public Flight[] searchFlights(String depAddress, String arrAddress, LocalDate depTime) {
+    try {
       DB db = new DB();
       db.open();
 
@@ -94,7 +104,7 @@ public class FlightRepository {
 
           flights.add(new Flight(
               flightId,
-              seatlist.toArray(new Seat[0]),
+              seatlist,
               rs.getString("departureAddress"),
               rs.getString("arrivalAddress"),
               rs.getObject("departureTime", LocalDate.class),
@@ -103,8 +113,7 @@ public class FlightRepository {
         }
       }
       return flights.toArray(new Flight[0]);
-    }
-    catch (SQLException e){
+    } catch (SQLException e) {
       return new Flight[0];
     }
   }

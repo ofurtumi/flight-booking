@@ -1,11 +1,12 @@
 package is.hi.flight_booking.application;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Flight {
 
   private String flightId;
-  private final Seat[] seats;
+  private final ArrayList<Seat> seats;
 
   private int numSeatsAvailable;
   private int numSeatsReserved;
@@ -17,12 +18,21 @@ public class Flight {
   private LocalDate departureTime;
   private String departureAddress;
 
-  public Flight(String flightId, Seat[] seats, String departureAddress, String arrivalAddress,
+  /**
+   * @param flightId         id of current flight as a String
+   * @param seats            ArrayList of Seat objects
+   * @param departureAddress address of departure as a String
+   * @param arrivalAddress   address of arrival as a String
+   * @param departureTime    time of departure as LocalDate
+   * @param arrivalTime      time of arrival as LocalDate
+   * @param price            price of a single seat as an integer
+   */
+  public Flight(String flightId, ArrayList<Seat> seats, String departureAddress, String arrivalAddress,
       LocalDate departureTime, LocalDate arrivalTime, int price) {
     this.flightId = flightId;
     this.seats = seats;
 
-    numSeatsAvailable = seats.length;
+    numSeatsAvailable = seats.size();
     numSeatsReserved = 0;
     this.price = price;
 
@@ -37,7 +47,7 @@ public class Flight {
     return flightId;
   }
 
-  public Seat[] getSeats() {
+  public ArrayList<Seat> getSeats() {
     return seats;
   }
 
@@ -74,9 +84,9 @@ public class Flight {
   }
 
   public void reserveSeat(String seatId) {
-    for (int i = 0; i < seats.length; i++) {
-      if (seats[i].getId() == seatId && seats[i].isReserved()) {
-        seats[i].setReserved(true);
+    for (int i = 0; i < seats.size(); i++) {
+      if (seats.get(i).getId() == seatId && seats.get(i).isReserved()) {
+        seats.get(i).setReserved(true);
         break;
       }
     }
@@ -108,5 +118,22 @@ public class Flight {
 
   public void setDepartureAddress(String departureAddress) {
     this.departureAddress = departureAddress;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (o == this) {
+      return true;
+    }
+
+    if (!(o instanceof Flight)) {
+      return false;
+    }
+
+    // typecast o to Complex so that we can compare data members
+    Flight f = (Flight) o;
+
+    // Compare the data members and return accordingly
+    return flightId.equals(f.flightId);
   }
 }

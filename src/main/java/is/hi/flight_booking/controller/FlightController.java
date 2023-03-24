@@ -3,10 +3,11 @@ package is.hi.flight_booking.controller;
 import is.hi.flight_booking.application.*;
 import is.hi.flight_booking.repository.FlightRepository;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
-public class FlightController implements FlightInterface {
+public class FlightController implements FlightControllerInterface {
 
-  private Flight[] flights;
+  private ArrayList<Flight> flights;
   // Á eftir að búa til FlightRepository
   // private FlightRepository flightRepository;
 
@@ -14,7 +15,8 @@ public class FlightController implements FlightInterface {
     // Vantar
     return "Vantar!";
   }
-  public Flight[] searchFlight(String depAddress, String arrAddress, LocalDate depTime) {
-    return new FlightRepository().searchFlight(depAddress, arrAddress, depTime);
+
+  public ArrayList<Flight> searchFlights(String depAddress, String arrAddress, LocalDate depTime) {
+    return flights;
   }
 }
