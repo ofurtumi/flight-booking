@@ -2,6 +2,7 @@ package is.hi.flight_booking.controller;
 
 import is.hi.flight_booking.application.*;
 import is.hi.flight_booking.repository.FlightRepository;
+import java.time.LocalDate;
 
 public class FlightController implements FlightInterface {
 
