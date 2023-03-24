@@ -1,3 +1,5 @@
+package is.hi.flight_booking.database;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -6,7 +8,7 @@ import java.sql.Statement;
 import java.sql.PreparedStatement;
 
 public class DB {
-    private final String connectionURL = "jdbc:sqlite:db/flightBooking.db";
+  private final String connectionURL = "jdbc:sqlite:db/flightBooking.db";
   private Connection conn;
 
   public void open() {
