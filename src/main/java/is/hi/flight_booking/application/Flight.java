@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Flight {
 
   private String flightId;
-  private final Seat[] seats;
+  private Seat[] seats;
 
   private int numSeatsAvailable;
   private int numSeatsReserved;
