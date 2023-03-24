@@ -1,4 +1,4 @@
-package is.hi.flight_booking.controller;
+package is.hi.flight_booking.interfaces;
 
 import java.time.LocalDate;
 import java.util.List;

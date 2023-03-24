@@ -1,8 +1,9 @@
 package is.hi.flight_booking.controller;
 
 import is.hi.flight_booking.application.*;
+import is.hi.flight_booking.interfaces.BookingControllerInterface;
 
-public class BookingController implements BookingInterface {
+public class BookingController implements BookingControllerInterface {
 
   /* Það vantar að tengja controlerinn við BookingRepository */
 

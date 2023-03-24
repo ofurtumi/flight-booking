@@ -3,6 +3,7 @@ package is.hi.flight_booking.repository;
 import is.hi.flight_booking.database.*;
 import is.hi.flight_booking.application.Flight;
 import is.hi.flight_booking.application.Seat;
+import is.hi.flight_booking.interfaces.FlightRepositoryInterface;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

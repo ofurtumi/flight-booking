@@ -1,4 +1,4 @@
-package is.hi.flight_booking.repository;
+package is.hi.flight_booking.interfaces;
 
 import java.time.LocalDate;
 
