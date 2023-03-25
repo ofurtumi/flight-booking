@@ -2,8 +2,6 @@ package is.hi.flight_booking.application;
 
 import org.junit.*;
 
-import is.hi.flight_booking.mocks.MockFlightRepository;
-
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
