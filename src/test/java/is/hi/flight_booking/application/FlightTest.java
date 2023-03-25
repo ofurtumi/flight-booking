@@ -9,11 +9,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 public class FlightTest {
   Flight flight;
-  List<Seat> seats;
+  ArrayList<Seat> seats;
 
   @Before
   public void setUp() {
@@ -35,7 +34,6 @@ public class FlightTest {
         24000);
   }
 
-
   @Test
   public void testFlightGetArrivalAddress() {
     assertEquals("Reykjavík", flight.getArrivalAddress());
@@ -52,15 +50,6 @@ public class FlightTest {
     flight.setPrice(30000);
     assertEquals(30000, flight.getPrice());
   }
-  @Test
-  public void testSearchFlight() {
-    String dAddr = "Akureyri";
-    String aAddr = "Keflavík";
-    LocalDate depTime = LocalDate.of(2023, 9, 17);
-    // vantar rétt expected í assert og að klára Mock klasan
-    assertArrayEquals(null, new MockFlightRepository().searchFlights(dAddr, aAddr, depTime));
-  }
-
 
   // verð að hafa þetta aftast til að bjarga geðheilsunni
   @After

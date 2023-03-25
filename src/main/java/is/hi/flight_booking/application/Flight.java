@@ -28,7 +28,7 @@ public class Flight {
    * @param arrivalTime      time of arrival as LocalDate
    * @param price            price of a single seat as an integer
    */
-  public Flight(String flightId, List<Seat> seats, String departureAddress, String arrivalAddress,
+  public Flight(String flightId, ArrayList<Seat> seats, String departureAddress, String arrivalAddress,
       LocalDate departureTime, LocalDate arrivalTime, int price) {
     this.flightId = flightId;
     this.seats = seats;
