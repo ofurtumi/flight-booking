@@ -3,4 +3,5 @@ module is.hi.flight_booking {
 
   exports is.hi.flight_booking.application;
   exports is.hi.flight_booking.controller;
+  exports is.hi.flight_booking.interfaces;
 }
