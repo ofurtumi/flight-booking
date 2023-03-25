@@ -13,7 +13,8 @@ import is.hi.flight_booking.application.Seat;
 public class FlightControllerTest {
 
   private ArrayList<Flight> flights;
-  private final String[] departures = {"Reykjavík", "Keflavík", "Húsavík", "Reykjavík", "Keflavík", "Keflavík", "Keflavík"};
+  private final String[] departures = {"Reykjavík", "Keflavík", "Húsavík", "Reykjavík", "Keflavík", "Keflavík",
+      "Keflavík"};
   private final String[] destinations = {"Egilsstaðir", "Akureyri", "Vestmannaeyjar", "Egilsstaðir", "Akureyri",
       "Vestmannaeyjar", "Egilsstaðir"};
   FlightController fc;
@@ -40,6 +41,7 @@ public class FlightControllerTest {
 
   @After
   public void tearDown() {
+    flights = null;
   }
 
   @Test

@@ -3,6 +3,7 @@ package is.hi.flight_booking.repository;
 import is.hi.flight_booking.database.*;
 import is.hi.flight_booking.application.Flight;
 import is.hi.flight_booking.application.Seat;
+import is.hi.flight_booking.interfaces.FlightRepositoryInterface;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,7 +11,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class FlightRepository implements FlightRepositoryInterface {
-  private Flight[] sortBy(String comparator) throws SQLException {
+  private ArrayList<Flight> sortBy(String comparator) throws SQLException {
     DB db = new DB();
     db.open();
     ResultSet rs = db.query("select * from Flight order by ?;", comparator);
@@ -37,11 +38,11 @@ public class FlightRepository implements FlightRepositoryInterface {
 
     db.close();
 
-    return flights.toArray(new Flight[0]);
+    return flights;
   }
 
-  public Flight[] getSortedByPrice() {
-    Flight[] flights = null;
+  public ArrayList<Flight> getSortedByPrice() {
+    ArrayList<Flight> flights = null;
     try {
       flights = sortBy("price");
     } catch (SQLException e) {
@@ -50,8 +51,8 @@ public class FlightRepository implements FlightRepositoryInterface {
     return flights;
   }
 
-  public Flight[] getSortedByTime() {
-    Flight[] flights = null;
+  public ArrayList<Flight> getSortedByTime() {
+    ArrayList<Flight> flights = null;
     try {
       flights = sortBy("departureTime");
     } catch (SQLException e) {
@@ -60,8 +61,8 @@ public class FlightRepository implements FlightRepositoryInterface {
     return flights;
   }
 
-  public Flight[] getSortedByDeparture() {
-    Flight[] flights = null;
+  public ArrayList<Flight> getSortedByDeparture() {
+    ArrayList<Flight> flights = null;
     try {
       flights = sortBy("departureAddress");
     } catch (SQLException e) {
@@ -70,8 +71,8 @@ public class FlightRepository implements FlightRepositoryInterface {
     return flights;
   }
 
-  public Flight[] getSortedByArrival() {
-    Flight[] flights = null;
+  public ArrayList<Flight> getSortedByArrival() {
+    ArrayList<Flight> flights = null;
     try {
       flights = sortBy("arrivalAddress");
     } catch (SQLException e) {
@@ -80,7 +81,7 @@ public class FlightRepository implements FlightRepositoryInterface {
     return flights;
   }
 
-  public Flight[] searchFlights(String depAddress, String arrAddress, LocalDate depTime) {
+  public ArrayList<Flight> searchFlights(String depAddress, String arrAddress, LocalDate depTime) {
     try {
       DB db = new DB();
       db.open();
@@ -112,9 +113,9 @@ public class FlightRepository implements FlightRepositoryInterface {
               rs.getInt("price")));
         }
       }
-      return flights.toArray(new Flight[0]);
+      return flights;
     } catch (SQLException e) {
-      return new Flight[0];
+      return new ArrayList<Flight>();
     }
   }
 }

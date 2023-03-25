@@ -1,6 +1,9 @@
 package is.hi.flight_booking.application;
 
 import org.junit.*;
+
+import is.hi.flight_booking.mocks.MockFlightRepository;
+
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -31,12 +34,6 @@ public class FlightTest {
         24000);
   }
 
-  @After
-  public void tearDown() {
-    seats = null;
-    flight = null;
-  }
-
   @Test
   public void testFlightGetArrivalAddress() {
     assertEquals("Reykjavík", flight.getArrivalAddress());
@@ -52,5 +49,12 @@ public class FlightTest {
     assertEquals(24000, flight.getPrice());
     flight.setPrice(30000);
     assertEquals(30000, flight.getPrice());
+  }
+
+  // verð að hafa þetta aftast til að bjarga geðheilsunni
+  @After
+  public void tearDown() {
+    seats = null;
+    flight = null;
   }
 }
