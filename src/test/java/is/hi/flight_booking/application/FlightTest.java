@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class FlightTest {
   Flight flight;
@@ -21,15 +22,27 @@ public class FlightTest {
     seats.add(new Seat("B-1", "F-304", false));
     seats.add(new Seat("B-2", "F-304", false));
     seats.add(new Seat("B-3", "F-304", false));
-
+    seats.add(new Seat("B-4", "F-304", true));
     flight = new Flight(
         "F-304",
         seats,
         "Keflavík",
         "Reykjavík",
-        LocalDate.now(),
-        LocalDate.now(),
+        LocalDate.of(2023,10,19),
+        LocalDate.of(2023, 10, 20),
         24000);
+  }
+
+  @Test
+  public void testFlightGetFlightId() {
+    assertEquals("F-304", flight.getFlightId());
+  }
+
+  
+  @Test
+  public void testFlightGetSeats(){
+    List retuningSeats = flight.getSeats(); 
+    assertEquals(seats, retuningSeats);
   }
 
   @Test
@@ -47,6 +60,26 @@ public class FlightTest {
     assertEquals(24000, flight.getPrice());
     flight.setPrice(30000);
     assertEquals(30000, flight.getPrice());
+  }
+ 
+  @Test
+  public void testGetDepartureTime(){
+    assertEquals(LocalDate.of(2023,10,19),flight.getDepartureTime());
+  }
+
+  @Test
+  public void testGetArrivalTime(){
+    assertEquals(LocalDate.of(2023,10,20),flight.getArrivalTime());
+  }
+
+  @Test
+  public void testFlightNumSeatsAvailable() {
+    assertEquals(6, flight.getNumSeatsAvailable());
+  }
+
+  @Test
+  public void testFlightNumSeatsReserved() {
+    assertEquals(1, flight.getNumSeatsReserved());
   }
 
   // verð að hafa þetta aftast til að bjarga geðheilsunni

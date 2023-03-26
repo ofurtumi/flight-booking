@@ -32,9 +32,15 @@ public class Flight {
       LocalDate departureTime, LocalDate arrivalTime, int price) {
     this.flightId = flightId;
     this.seats = seats;
-
-    numSeatsAvailable = seats.size();
     numSeatsReserved = 0;
+    for (int i = 0;i < seats.size();i++) {
+      if (seats.get(i).isReserved() == true) {
+        numSeatsReserved++;
+      }
+    }
+
+    numSeatsAvailable = seats.size()-numSeatsReserved;
+
     this.price = price;
 
     this.arrivalTime = arrivalTime;
@@ -85,7 +91,7 @@ public class Flight {
   }
 
   public void reserveSeat(String seatId) {
-    for (int i = 0; i < seats.size(); i++) {
+    for (int i = 0;i < seats.size();i++) {
       if (seats.get(i).getId() == seatId && seats.get(i).isReserved()) {
         seats.get(i).setReserved(true);
         break;
