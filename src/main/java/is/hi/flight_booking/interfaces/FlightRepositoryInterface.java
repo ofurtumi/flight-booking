@@ -11,9 +11,8 @@ public interface FlightRepositoryInterface {
    * Takes in a reference to a flight ID and returns a {@link Flight} object with
    * the same flight ID
    *
-   * @param flightId a string containing a flight ID
-   * @return the flight with the specified ID
-   * @see Flight
+   * @param flightId  a string containing a flight ID
+   * @return          a {@link Flight} object with the specified ID
    */
   public Flight getFlight(String flightId);
 
