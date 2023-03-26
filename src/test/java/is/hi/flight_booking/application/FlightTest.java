@@ -82,6 +82,13 @@ public class FlightTest {
     assertEquals(1, flight.getNumSeatsReserved());
   }
 
+  @Test
+  public void reserveSeat(){
+    flight.reserveSeat("A-3");
+    assertTrue(seats.get(2).isReserved());
+
+  }
+
   // verð að hafa þetta aftast til að bjarga geðheilsunni
   @After
   public void tearDown() {

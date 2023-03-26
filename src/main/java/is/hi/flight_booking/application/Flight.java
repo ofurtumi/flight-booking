@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Flight {
 
   private String flightId;
@@ -82,6 +83,7 @@ public class Flight {
     return departureTime;
   }
 
+
   public String getDepartureAddress() {
     return departureAddress;
   }
@@ -91,8 +93,9 @@ public class Flight {
   }
 
   public void reserveSeat(String seatId) {
-    for (int i = 0;i < seats.size();i++) {
-      if (seats.get(i).getId() == seatId && seats.get(i).isReserved()) {
+    for (int i = 0; i < seats.size(); i++) {
+      if (seats.get(i).getId() == seatId && !seats.get(i).isReserved()) { // bera saman id og ef einhver er ekki í sæti
+
         seats.get(i).setReserved(true);
         break;
       }
