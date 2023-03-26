@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import is.hi.flight_booking.application.Flight;
 
 public interface FlightRepositoryInterface {
+  public Flight getFlight(String flightId);
+
   public ArrayList<Flight> searchFlights(String depAddress, String arrAddrss, LocalDate depTime);
 
   public ArrayList<Flight> getSortedByPrice();

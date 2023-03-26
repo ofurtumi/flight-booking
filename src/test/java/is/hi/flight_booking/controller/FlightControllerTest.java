@@ -44,6 +44,12 @@ public class FlightControllerTest {
   }
 
   @Test
+  public void GetFlight() {
+    Flight expected = flights.get(3);
+    assertEquals(expected, MFR.getFlight("F-103"));
+  }
+
+  @Test
   public void SortByTime() {
     ArrayList<Flight> sorted = MFR.getSortedByTime();
     assertEquals(flights, sorted);

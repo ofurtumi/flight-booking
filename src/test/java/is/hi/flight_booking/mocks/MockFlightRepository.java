@@ -40,6 +40,11 @@ public class MockFlightRepository implements FlightRepositoryInterface {
   }
 
   @Override
+  public Flight getFlight(String flightId) {
+    return flights.get(3);
+  }
+
+  @Override
   public ArrayList<Flight> getSortedByPrice() {
     ArrayList<Flight> sorted = flights;
     sorted.sort(new Comparator<Flight>() {
