@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 package is.hi.flight_booking.application;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+=======
+package main.java.is.hi.flight_booking.application;
+import java.time.LocalDate;
+>>>>>>> Hakon
 
 public class Flight {
 
@@ -64,6 +69,7 @@ public class Flight {
     return price;
   }
 
+<<<<<<< HEAD
   public LocalDate getArrivalTime() {
     return arrivalTime;
   }
@@ -75,6 +81,17 @@ public class Flight {
   public LocalDate getDepartureTime() {
     return departureTime;
   }
+=======
+    private LocalDate arrivalTime;
+    private String arrivalAddress;
+
+    private LocalDate departureTime;
+    private String departureAddress;
+
+    public Flight(String fId, Seat[] s, int nSA, int nSR,int tprice, LocalDate aT, String aA, LocalDate dT, String dA){
+        flightId = fId;
+        seats = s;
+>>>>>>> Hakon
 
   public String getDepartureAddress() {
     return departureAddress;
