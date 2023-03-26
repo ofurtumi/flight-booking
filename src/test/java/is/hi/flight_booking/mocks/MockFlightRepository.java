@@ -126,12 +126,12 @@ public class MockFlightRepository implements FlightRepositoryInterface {
   /*
    * searchFlight
    * 
-   * Leiatar að flugi/flugum úr lista af flugum
+   * Leitar að flugi/flugum úr lista af flugum
    * 
    * @param departureAddress  Hvaðan flugið fer frá
    * @param arrivalAddress    Hvert flugið er að fara
-   * @param departureTime     Klukkan hvað flugið fer
-   * @return filteredFlights  Flug sem passa inn í leitarskilirðin
+   * @param departureTime     Hvaða dagsetningu flugið fer
+   * @return filteredFlights  Flug sem uppfylla leitarskilirðin
    * 
    */
   @Override
