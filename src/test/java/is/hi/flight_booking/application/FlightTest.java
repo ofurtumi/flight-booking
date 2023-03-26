@@ -28,7 +28,7 @@ public class FlightTest {
         seats,
         "Keflavík",
         "Reykjavík",
-        LocalDate.of(2023,10,19),
+        LocalDate.of(2023, 10, 19),
         LocalDate.of(2023, 10, 20),
         24000);
   }
@@ -40,7 +40,7 @@ public class FlightTest {
 
   
   @Test
-  public void testFlightGetSeats(){
+  public void testFlightGetSeats() {
     List retuningSeats = flight.getSeats(); 
     assertEquals(seats, retuningSeats);
   }
@@ -63,13 +63,13 @@ public class FlightTest {
   }
  
   @Test
-  public void testGetDepartureTime(){
-    assertEquals(LocalDate.of(2023,10,19),flight.getDepartureTime());
+  public void testGetDepartureTime() {
+    assertEquals(LocalDate.of(2023, 10, 19), flight.getDepartureTime());
   }
 
   @Test
-  public void testGetArrivalTime(){
-    assertEquals(LocalDate.of(2023,10,20),flight.getArrivalTime());
+  public void testGetArrivalTime() {
+    assertEquals(LocalDate.of(2023, 10, 20), flight.getArrivalTime());
   }
 
   @Test
