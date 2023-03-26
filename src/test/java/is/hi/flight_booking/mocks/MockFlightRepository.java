@@ -14,10 +14,10 @@ public class MockFlightRepository implements FlightRepositoryInterface {
 
   // private Flight[] mockFlights;
   private final ArrayList<Flight> flights;
-  private final String[] departures = {"Reykjavík", "Keflavík", "Húsavík", "Reykjavík", "Keflavík", "Keflavík",
-      "Keflavík"};
-  private final String[] destinations = {"Egilsstaðir", "Akureyri", "Vestmannaeyjar", "Egilsstaðir", "Akureyri",
-      "Vestmannaeyjar", "Egilsstaðir"};
+  private final String[] departures = { "Reykjavík", "Keflavík", "Húsavík", "Reykjavík", "Keflavík", "Keflavík",
+      "Keflavík" };
+  private final String[] destinations = { "Egilsstaðir", "Akureyri", "Vestmannaeyjar", "Egilsstaðir", "Akureyri",
+      "Vestmannaeyjar", "Egilsstaðir" };
 
   public MockFlightRepository() {
     // notum hér sömu gögn og voru skilgrein í testinu
@@ -37,6 +37,11 @@ public class MockFlightRepository implements FlightRepositoryInterface {
           new Flight(id, seats, departures[i], destinations[i], LocalDate.of(2023, 4, i + 1),
               LocalDate.of(2023, 4, i + 1), 1000 * (i + 2)));
     }
+  }
+
+  @Override
+  public Flight getFlight(String flightId) {
+    return flights.get(3);
   }
 
   @Override

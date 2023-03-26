@@ -11,6 +11,36 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class FlightRepository implements FlightRepositoryInterface {
+  public Flight getFlight(String flightId) {
+    Flight found = null;
+    try {
+      DB db = new DB();
+      db.open();
+      ResultSet flightRS = db.query("select * from Flight where flightId = ?", flightId);
+      ResultSet seatRS = db.query("select * from Seats where flightId = ?", flightId);
+
+      ArrayList<Seat> seatlist = new ArrayList<>();
+      while (seatRS.next()) {
+        seatlist
+            .add(new Seat(seatRS.getString("position"), seatRS.getString("flightId"), seatRS.getBoolean("reserved")));
+      }
+
+      found = new Flight(
+          flightId,
+          seatlist,
+          flightRS.getString("departureAddress"),
+          flightRS.getString("arrivalAddress"),
+          flightRS.getObject("departureTime", LocalDate.class),
+          flightRS.getObject("arrivalTime", LocalDate.class),
+          flightRS.getInt("price"));
+
+      db.close();
+    } catch (SQLException e) {
+      System.err.println(e);
+    }
+    return found;
+  }
+
   private ArrayList<Flight> sortBy(String comparator) throws SQLException {
     DB db = new DB();
     db.open();

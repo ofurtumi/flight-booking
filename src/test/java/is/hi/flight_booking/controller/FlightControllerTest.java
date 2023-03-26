@@ -16,10 +16,10 @@ import is.hi.flight_booking.mocks.MockFlightRepository;
 public class FlightControllerTest {
 
   private ArrayList<Flight> flights;
-  private final String[] departures = {"Reykjavík", "Keflavík", "Húsavík", "Reykjavík", "Keflavík", "Keflavík",
-      "Keflavík"};
-  private final String[] destinations = {"Egilsstaðir", "Akureyri", "Vestmannaeyjar", "Egilsstaðir", "Akureyri",
-      "Vestmannaeyjar", "Egilsstaðir"};
+  private final String[] departures = { "Reykjavík", "Keflavík", "Húsavík", "Reykjavík", "Keflavík", "Keflavík",
+      "Keflavík" };
+  private final String[] destinations = { "Egilsstaðir", "Akureyri", "Vestmannaeyjar", "Egilsstaðir", "Akureyri",
+      "Vestmannaeyjar", "Egilsstaðir" };
   MockFlightRepository MFR;
 
   @Before
@@ -41,6 +41,12 @@ public class FlightControllerTest {
           new Flight(id, seats, departures[i], destinations[i], LocalDate.of(2023, 4, i + 1),
               LocalDate.of(2023, 4, i + 1), 1000 * (i + 2)));
     }
+  }
+
+  @Test
+  public void GetFlight() {
+    Flight expected = flights.get(3);
+    assertEquals(expected, MFR.getFlight("F-103"));
   }
 
   @Test
