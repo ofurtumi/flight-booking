@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class FlightTest {
   Flight flight;
@@ -37,13 +38,13 @@ public class FlightTest {
     assertEquals("F-304", flight.getFlightId());
   }
 
-  /* 
+  
   @Test
   public void testFlightGetSeats(){
-    List<String> expectedList = seats.asList();
-    assertEquals(seats, flight.getSeats());
+    List retuningSeats = flight.getSeats(); 
+    assertEquals(seats, retuningSeats);
   }
-*/
+
   @Test
   public void testFlightGetArrivalAddress() {
     assertEquals("Reykjavík", flight.getArrivalAddress());
