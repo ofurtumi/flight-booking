@@ -13,7 +13,6 @@ import is.hi.flight_booking.interfaces.FlightRepositoryInterface;
 
 public class MockFlightRepository implements FlightRepositoryInterface {
 
-  // private Flight[] mockFlights;
   private final ArrayList<Flight> flights;
   private final String[] departures = {"Reykjavík", "Keflavík", "Húsavík", "Reykjavík", "Keflavík", "Keflavík",
       "Keflavík"};
@@ -21,7 +20,6 @@ public class MockFlightRepository implements FlightRepositoryInterface {
       "Vestmannaeyjar", "Egilsstaðir"};
 
   public MockFlightRepository() {
-    // notum hér sömu gögn og voru skilgrein í testinu
     flights = new ArrayList<>();
     for (int i = 0; i < departures.length; i++) {
       String id = "F-" + (100 + i);
@@ -40,20 +38,10 @@ public class MockFlightRepository implements FlightRepositoryInterface {
     }
   }
 
-      /*
-   * getSortedByPrice
-   * 
-   * Raðar lista af flugum eftir verði
-   * 
-   * @return sorted listi af flugum sem er raðað eftir verði
-   * 
-   */
-  @Override
   public Flight getFlight(String flightId) {
     return flights.get(3);
   }
 
-  @Override
   public ArrayList<Flight> getSortedByPrice() {
     ArrayList<Flight> sorted = flights;
     sorted.sort(new Comparator<Flight>() {
@@ -67,15 +55,6 @@ public class MockFlightRepository implements FlightRepositoryInterface {
 
   }
 
-    /*
-   * getSortedByTime
-   * 
-   * Raðar lista af flugum eftir tímaröð
-   * 
-   * @return sorted listi af flugum sem er raðað í tímaröð
-   * 
-   */
-  @Override
   public ArrayList<Flight> getSortedByTime() {
     ArrayList<Flight> sorted = flights;
     sorted.sort(new Comparator<Flight>() {
@@ -87,15 +66,6 @@ public class MockFlightRepository implements FlightRepositoryInterface {
     return sorted;
   }
 
-    /*
-   * getSortedByDeparture
-   * 
-   * Raðar lista af flugum eftir hvaðan flugin koma
-   * 
-   * @return sorted listi af flugum sem er raðað eftir hvaðan þau koma 
-   * 
-   */
-  @Override
   public ArrayList<Flight> getSortedByDeparture() {
     ArrayList<Flight> sorted = flights;
     sorted.sort(new Comparator<Flight>() {
@@ -107,15 +77,6 @@ public class MockFlightRepository implements FlightRepositoryInterface {
     return sorted;
   }
 
-  /*
-   * getSortedByArrival
-   * 
-   * Raðar lista af flugum eftir hvert flugin fara
-   * 
-   * @return sorted listi af flugum sem er raðað eftir hvert þau fara 
-   * 
-   */
-  @Override
   public ArrayList<Flight> getSortedByArrival() {
     ArrayList<Flight> sorted = flights;
     sorted.sort(new Comparator<Flight>() {
@@ -127,19 +88,6 @@ public class MockFlightRepository implements FlightRepositoryInterface {
     return sorted;
   }
 
-
-  /*
-   * searchFlight
-   * 
-   * Leitar að flugi/flugum úr lista af flugum
-   * 
-   * @param departureAddress  Hvaðan flugið fer frá
-   * @param arrivalAddress    Hvert flugið er að fara
-   * @param departureTime     Hvaða dagsetningu flugið fer
-   * @return filteredFlights  Flug sem uppfylla leitarskilirðin
-   * 
-   */
-  @Override
   public ArrayList<Flight> searchFlights(String departureAddress, String arrivalAddress, LocalDate departureTime) {
     ArrayList<Flight> filteredFlights = new ArrayList<>();
 
