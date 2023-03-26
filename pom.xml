@@ -47,6 +47,9 @@
           <activeRecipes>
             <recipe>org.openrewrite.java.cleanup.Cleanup</recipe>
           </activeRecipes>
+          <exclusions>
+            <exclude>src/main/java/module-info.java</exclude>
+          </exclusions>
         </configuration>
       </plugin>
       <plugin>
