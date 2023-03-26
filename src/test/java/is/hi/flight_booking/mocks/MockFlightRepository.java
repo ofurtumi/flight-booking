@@ -14,10 +14,10 @@ public class MockFlightRepository implements FlightRepositoryInterface {
 
   // private Flight[] mockFlights;
   private final ArrayList<Flight> flights;
-  private final String[] departures = { "Reykjavík", "Keflavík", "Húsavík", "Reykjavík", "Keflavík", "Keflavík",
-      "Keflavík" };
-  private final String[] destinations = { "Egilsstaðir", "Akureyri", "Vestmannaeyjar", "Egilsstaðir", "Akureyri",
-      "Vestmannaeyjar", "Egilsstaðir" };
+  private final String[] departures = {"Reykjavík", "Keflavík", "Húsavík", "Reykjavík", "Keflavík", "Keflavík",
+      "Keflavík"};
+  private final String[] destinations = {"Egilsstaðir", "Akureyri", "Vestmannaeyjar", "Egilsstaðir", "Akureyri",
+      "Vestmannaeyjar", "Egilsstaðir"};
 
   public MockFlightRepository() {
     // notum hér sömu gögn og voru skilgrein í testinu
