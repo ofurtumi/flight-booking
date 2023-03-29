@@ -25,3 +25,6 @@ fara í rót og keyra eftirfarandi
 mvn clean test
 ```
 
+# Uppbygging skráa
+
+![Visualization of the codebase](./diagram.svg)
