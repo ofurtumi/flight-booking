@@ -1,7 +1,8 @@
-# flight bookin
-## þróun hugbúnaðar - 2023 - hópur 3f
+Flugbókunarkerfi
+---
+> Þróun hugbúnaðar - 2023 - hópur 3f
 
-### uppsetning á gagnagrunni
+# Uppsetning á gagnagrunni
 gert er ráð fyrir því að búið sé að setja upp sqlite3 á vél og að skipunin sé í path
 
 **linux**
@@ -17,10 +18,13 @@ ekki komið, þarf að testa á windows vél en prófið
 python3 setup.py
 ```
 
-### testing
+# testing
 fara í rót og keyra eftirfarandi 
 > gert er ráð fyrir því að maven sé sétt upp á vél
 ```bash
-mvn test
+mvn clean test
 ```
 
+# Uppbygging skráa
+
+![Visualization of the codebase](./diagram.svg)
