@@ -7,89 +7,101 @@ import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import is.hi.flight_booking.application.Flight;
 import is.hi.flight_booking.application.Seat;
-import is.hi.flight_booking.mocks.MockFlightRepository;
+import is.hi.flight_booking.repository.FlightRepository;
 
 public class FlightControllerTest {
 
   private ArrayList<Flight> flights;
-  private final String[] departures = {"Reykjavík", "Keflavík", "Húsavík", "Reykjavík", "Keflavík", "Keflavík",
-      "Keflavík"};
-  private final String[] destinations = {"Egilsstaðir", "Akureyri", "Vestmannaeyjar", "Egilsstaðir", "Akureyri",
-      "Vestmannaeyjar", "Egilsstaðir"};
-  MockFlightRepository MFR;
+  private String[] seatnumlist = { "A1", "A2", "B1", "B2", "C1", "C3" };
+  private final String[] departures = { "Egilsstaðir", "Reykjavík", "Keflavík", "Akureyri", "Ísafjörður",
+      "Vestmannaeyjar" };
+  private final String[] destinations = { "Akureyri", "Ísafjörður", "Vestmannaeyjar", "Egilsstaðir", "Reykjavík",
+      "Keflavík" };
+  FlightRepository flightRepo;
 
   @Before
   public void setUp() {
-    MFR = new MockFlightRepository();
+    flightRepo = new FlightRepository("db/test.db");
     flights = new ArrayList<>();
     for (int i = 0; i < departures.length; i++) {
-      String id = "F-" + (100 + i);
+      String id = "F-" + String.format("%03d", i);
       ArrayList<Seat> seats = new ArrayList<>();
-      seats.add(new Seat("A-1", id, false));
-      seats.add(new Seat("A-2", id, false));
-      seats.add(new Seat("A-3", id, false));
-      seats.add(new Seat("A-4", id, false));
-      seats.add(new Seat("B-1", id, false));
-      seats.add(new Seat("B-2", id, false));
-      seats.add(new Seat("B-3", id, false));
-      seats.add(new Seat("B-4", id, false));
+      for (String seatNum : seatnumlist) {
+        seats.add(new Seat(seatNum, id, false));
+      }
+
+      int day;
+      if (i < 3) {
+        day = 5;
+      } else {
+        day = 6;
+      }
+
+      LocalDate date = LocalDate.of(2023, 2, day);
+
       flights.add(
-          new Flight(id, seats, departures[i], destinations[i], LocalDate.of(2023, 4, i + 1),
-              LocalDate.of(2023, 4, i + 1), 1000 * (i + 2)));
+          new Flight(
+              id,
+              seats,
+              departures[i],
+              destinations[i],
+              date,
+              date,
+              15000 + (i * 1000)));
     }
   }
 
   @Test
   public void GetFlight() {
-    Flight expected = flights.get(3);
-    assertEquals(expected, MFR.getFlight("F-103"));
+    Flight expected = flights.get(0);
+    assertEquals(expected, flightRepo.getFlight("F-000"));
   }
 
   @Test
   public void SortByTime() {
-    ArrayList<Flight> sorted = MFR.getSortedByTime();
+    ArrayList<Flight> sorted = flightRepo.getSortedByTime();
     assertEquals(flights, sorted);
   }
 
   @Test
   public void SortByArrival() {
-    ArrayList<Flight> sorted = MFR.getSortedByArrival();
+    ArrayList<Flight> sorted = flightRepo.getSortedByArrival();
 
     // þetta eru svo fá flug að þægilegast að raða bara í höndunum
     ArrayList<Flight> correct = new ArrayList<>();
-    correct.add(flights.get(1));
-    correct.add(flights.get(4));
-    correct.add(flights.get(0));
-    correct.add(flights.get(3));
-    correct.add(flights.get(6));
-    correct.add(flights.get(2));
-    correct.add(flights.get(5));
+    correct.add(flights.get(0)); // Akureyri
+    correct.add(flights.get(3)); // Egilsstaðir
+    correct.add(flights.get(5)); // Keflavík
+    correct.add(flights.get(4)); // Reykjavík
+    correct.add(flights.get(2)); // Vestmannaeyjar
+    correct.add(flights.get(1)); // Ísafjörður
 
-    assertEquals(correct, sorted);
+    for (int i = 0; i < correct.size(); i++) {
+      assertEquals(correct.get(i).getFlightId(), sorted.get(i).getFlightId());
+    }
   }
 
   @Test
   public void SortByPrice() {
-    ArrayList<Flight> sorted = MFR.getSortedByPrice();
+    ArrayList<Flight> sorted = flightRepo.getSortedByPrice();
     assertEquals(flights, sorted);
   }
 
   @Test
   public void SearchForFlight() {
-    ArrayList<Flight> filtered = MFR.searchFlights("Keflavík", "Akureyri", LocalDate.of(2023, 4, 2));
-    ArrayList<Flight> correct = new ArrayList<>();
-    correct.add(flights.get(1));
+    ArrayList<Flight> filtered = flightRepo.searchFlights("Egilsstaðir", "Akureyri", LocalDate.of(2023, 2, 5));
 
-    assertEquals(correct, filtered);
+    assertEquals(flights.get(0).getFlightId(), filtered.get(0).getFlightId());
   }
 
   @After
   public void tearDown() {
     flights = null;
-    MFR = null;
+    flightRepo = null;
   }
 }

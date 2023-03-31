@@ -8,8 +8,12 @@ import java.sql.Statement;
 import java.sql.PreparedStatement;
 
 public class DB {
-  private final String connectionURL = "jdbc:sqlite:db/flightBooking.db";
   private Connection conn;
+  private String connectionURL;
+
+  public DB(String URL) {
+    connectionURL = String.format("jdbc:sqlite:%s", URL);
+  }
 
   public void open() {
     try {
@@ -44,7 +48,7 @@ public class DB {
     try {
       PreparedStatement ps = conn.prepareStatement(query);
 
-      for (int v = 0;v < values.length;v++) {
+      for (int v = 0; v < values.length; v++) {
         ps.setString(v + 1, values[v]);
       }
 
@@ -108,7 +112,7 @@ public class DB {
   public void execute(String query, String[] values) {
     try {
       PreparedStatement ps = conn.prepareStatement(query);
-      for (int i = 0;i < values.length;i++) {
+      for (int i = 0; i < values.length; i++) {
         ps.setString(i + 1, values[i]);
       }
       ps.executeUpdate();

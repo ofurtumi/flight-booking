@@ -19,11 +19,11 @@ CREATE TABLE Users (
 /* Gæti þurft að laga date */
 /* Tumi: tók út seats úr single flight, setti frekar Seat upp með primary key sem notar flight_id og position, þannig hægt að reffa það frekar*/
 CREATE TABLE Flight (
-    flightId VARCHAR(30) PRIMARY KEY,
+    flightId VARCHAR(5) PRIMARY KEY,
     departureAddress VARCHAR(50),
     arrivalAddress VARCHAR(50),
-    departureTime DATETIME,
-    arrivalTime DATETIME,
+    departureTime DATE,
+    arrivalTime DATE,
     price INT
 );
 
