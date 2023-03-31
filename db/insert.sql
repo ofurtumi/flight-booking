@@ -22,7 +22,7 @@ INSERT INTO Bookings (
     userId,
     flightId,
     bookingId
-) VALUES (0609013170, "F-001", "B-1010012260-000");
+) VALUES (0609013170, "F-002", "B-1010012260-000"), (0609013170, "F-001", "B-1010012260-000");
 
 INSERT INTO Seats (
     flightId,
