@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class FlightRepository implements FlightRepositoryInterface {
-  private String connectionURL;
+  private final String connectionURL;
 
   public FlightRepository(String connectionURL) {
     this.connectionURL = connectionURL;

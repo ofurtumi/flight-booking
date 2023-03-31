@@ -14,10 +14,10 @@ import is.hi.flight_booking.interfaces.FlightRepositoryInterface;
 public class MockFlightRepository implements FlightRepositoryInterface {
 
   private final ArrayList<Flight> flights;
-  private final String[] departures = { "Reykjavík", "Keflavík", "Húsavík", "Reykjavík", "Keflavík", "Keflavík",
-      "Keflavík" };
-  private final String[] destinations = { "Egilsstaðir", "Akureyri", "Vestmannaeyjar", "Egilsstaðir", "Akureyri",
-      "Vestmannaeyjar", "Egilsstaðir" };
+  private final String[] departures = {"Reykjavík", "Keflavík", "Húsavík", "Reykjavík", "Keflavík", "Keflavík",
+      "Keflavík"};
+  private final String[] destinations = {"Egilsstaðir", "Akureyri", "Vestmannaeyjar", "Egilsstaðir", "Akureyri",
+      "Vestmannaeyjar", "Egilsstaðir"};
 
   public MockFlightRepository() {
     flights = new ArrayList<>();

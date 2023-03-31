@@ -1,7 +1,13 @@
 #!/bin/bash
 set -e
 
-mvn rewrite:run
+if mvn rewrite:run; then
+	printf "\e[1;32mSuccessful:\e[0m rewrite\n"
+else
+	printf "\e[1;31mError:\e[0m rewrite\n"
+	exit 1
+fi
+
 # mvn test
 printf "\e[1;33mpre-push:\e[0m: mvn test\n"
 if mvn clean test; then
