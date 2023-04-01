@@ -28,6 +28,17 @@
       <version>1.2.0</version>
       <scope>test</scope>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>6.0.7</version>
+      </dependency>-->
+    <dependency>
+      <groupId>org.xerial</groupId>
+      <artifactId>sqlite-jdbc</artifactId>
+      <version>3.39.3.0</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
@@ -70,6 +81,27 @@
           <failsOnError>true</failsOnError>
           <linkXRef>false</linkXRef>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.rudikershaw.gitbuildhook</groupId>
+        <artifactId>git-build-hook-maven-plugin</artifactId>
+        <version>3.4.1</version>
+        <configuration>
+          <gitConfig>
+            <!-- The location of the directory you are using to store the Git hooks in your project. -->
+            <core.hooksPath>.githooks/</core.hooksPath>
+            <!-- Some other project specific git config that you want to set. -->
+            <hooks.allownonascii>false</hooks.allownonascii>
+          </gitConfig>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <!-- Sets git config specified under configuration > gitConfig. -->
+              <goal>configure</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

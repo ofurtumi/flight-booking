@@ -8,8 +8,12 @@ import java.sql.Statement;
 import java.sql.PreparedStatement;
 
 public class DB {
-  private final String connectionURL = "jdbc:sqlite:db/flightBooking.db";
   private Connection conn;
+  private final String connectionURL;
+
+  public DB(String URL) {
+    connectionURL = String.format("jdbc:sqlite:%s", URL);
+  }
 
   public void open() {
     try {

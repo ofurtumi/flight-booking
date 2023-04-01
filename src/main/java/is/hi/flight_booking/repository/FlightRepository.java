@@ -11,10 +11,18 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class FlightRepository implements FlightRepositoryInterface {
+  private final String connectionURL;
+
+  public FlightRepository(String connectionURL) {
+    this.connectionURL = connectionURL;
+  }
+
   public Flight getFlight(String flightId) {
     Flight found = null;
     try {
-      DB db = new DB();
+      DB db = new DB(connectionURL);
+      // todo - útfæra þessi skil fyrir öll DB connections
+
       db.open();
       ResultSet flightRS = db.query("select * from Flight where flightId = ?", flightId);
       ResultSet seatRS = db.query("select * from Seats where flightId = ?", flightId);
@@ -22,29 +30,38 @@ public class FlightRepository implements FlightRepositoryInterface {
       ArrayList<Seat> seatlist = new ArrayList<>();
       while (seatRS.next()) {
         seatlist
-            .add(new Seat(seatRS.getString("position"), seatRS.getString("flightId"), seatRS.getBoolean("reserved")));
+            .add(new Seat(seatRS.getString(2), seatRS.getString(1), seatRS.getBoolean(3)));
       }
+
+      String departureAddress = flightRS.getString("departureAddress");
+      String arrivalAddress = flightRS.getString("arrivalAddress");
+      LocalDate departureTime = LocalDate.parse(flightRS.getString("departureTime"));
+      LocalDate arrivalTime = LocalDate.parse(flightRS.getString("arrivalTime"));
+
+      int price = flightRS.getInt("price");
 
       found = new Flight(
           flightId,
           seatlist,
-          flightRS.getString("departureAddress"),
-          flightRS.getString("arrivalAddress"),
-          flightRS.getObject("departureTime", LocalDate.class),
-          flightRS.getObject("arrivalTime", LocalDate.class),
-          flightRS.getInt("price"));
+          departureAddress,
+          arrivalAddress,
+          departureTime,
+          arrivalTime,
+          price);
 
       db.close();
     } catch (SQLException e) {
-      System.err.println(e);
+      System.err.println(e.getSQLState());
+      System.err.println(e.getMessage());
+      System.err.println(e.getErrorCode());
     }
     return found;
   }
 
   private ArrayList<Flight> sortBy(String comparator) throws SQLException {
-    DB db = new DB();
+    DB db = new DB(connectionURL);
     db.open();
-    ResultSet rs = db.query("select * from Flight order by ?;", comparator);
+    ResultSet rs = db.query(String.format("select * from Flight order by %s;", comparator));
 
     ArrayList<Flight> flights = new ArrayList<>();
     while (rs.next()) {
@@ -61,8 +78,8 @@ public class FlightRepository implements FlightRepositoryInterface {
           seatlist,
           rs.getString("departureAddress"),
           rs.getString("arrivalAddress"),
-          rs.getObject("departureTime", LocalDate.class),
-          rs.getObject("arrivalTime", LocalDate.class),
+          LocalDate.parse(rs.getString("departureTime")),
+          LocalDate.parse(rs.getString("arrivalTime")),
           rs.getInt("price")));
     }
 
@@ -113,7 +130,7 @@ public class FlightRepository implements FlightRepositoryInterface {
 
   public ArrayList<Flight> searchFlights(String depAddress, String arrAddress, LocalDate depTime) {
     try {
-      DB db = new DB();
+      DB db = new DB(connectionURL);
       db.open();
 
       String[] values = new String[2];
@@ -121,10 +138,12 @@ public class FlightRepository implements FlightRepositoryInterface {
       values[1] = arrAddress;
       ArrayList<Flight> flights = new ArrayList<>();
 
-      ResultSet rs = db.query("select * from Flight where departureAddress like ?");
+      ResultSet rs = db.query("select * from Flight where departureAddress = ?", depAddress);
       while (rs.next()) {
-        LocalDate tempDate = rs.getObject("departureTime", LocalDate.class);
-        if (tempDate == depTime) {
+        LocalDate tempDate = LocalDate.parse(rs.getString("departureTime"));
+        System.err.println(tempDate);
+        System.err.println(depTime);
+        if (tempDate.equals(depTime)) {
           String flightId = rs.getString("flightId");
           ArrayList<Seat> seatlist = new ArrayList<>();
 
@@ -138,8 +157,8 @@ public class FlightRepository implements FlightRepositoryInterface {
               seatlist,
               rs.getString("departureAddress"),
               rs.getString("arrivalAddress"),
-              rs.getObject("departureTime", LocalDate.class),
-              rs.getObject("arrivalTime", LocalDate.class),
+              LocalDate.parse(rs.getString("departureTime")),
+              LocalDate.parse(rs.getString("arrivalTime")),
               rs.getInt("price")));
         }
       }
