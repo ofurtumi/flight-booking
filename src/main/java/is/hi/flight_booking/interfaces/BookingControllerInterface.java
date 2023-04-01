@@ -16,4 +16,5 @@ public interface BookingControllerInterface {
    * @param booking Booking object with all the relevant info
    */
   public void deleteBooking(Booking booking);
+
 }

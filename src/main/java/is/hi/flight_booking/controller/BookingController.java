@@ -77,4 +77,16 @@ public class BookingController implements BookingControllerInterface {
     // Vantar
   }
 
+  @Override
+  public void createBooking(Booking booking) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'createBooking'");
+  }
+
+  @Override
+  public void deleteBooking(Booking booking) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'deleteBooking'");
+  }
+
 }
