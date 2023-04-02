@@ -24,7 +24,7 @@ public class FlightRepository implements FlightRepositoryInterface {
       // todo - útfæra þessi skil fyrir öll DB connections
 
       db.open();
-      ResultSet flightRS = db.query("select * from Flight where flightId = ?", flightId);
+      ResultSet flightRS = db.query("select * from Flights where flightId = ?", flightId);
       ResultSet seatRS = db.query("select * from Seats where flightId = ?", flightId);
 
       ArrayList<Seat> seatlist = new ArrayList<>();
@@ -61,7 +61,7 @@ public class FlightRepository implements FlightRepositoryInterface {
   private ArrayList<Flight> sortBy(String comparator) throws SQLException {
     DB db = new DB(connectionURL);
     db.open();
-    ResultSet rs = db.query(String.format("select * from Flight order by %s;", comparator));
+    ResultSet rs = db.query(String.format("select * from Flights order by %s;", comparator));
 
     ArrayList<Flight> flights = new ArrayList<>();
     while (rs.next()) {
@@ -138,7 +138,7 @@ public class FlightRepository implements FlightRepositoryInterface {
       values[1] = arrAddress;
       ArrayList<Flight> flights = new ArrayList<>();
 
-      ResultSet rs = db.query("select * from Flight where departureAddress = ?", depAddress);
+      ResultSet rs = db.query("select * from Flights where departureAddress = ?", depAddress);
       while (rs.next()) {
         LocalDate tempDate = LocalDate.parse(rs.getString("departureTime"));
         System.err.println(tempDate);
