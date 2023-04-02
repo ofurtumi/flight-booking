@@ -6,7 +6,7 @@ public class Booking {
   private final Flight flight;
   private final User user;
   private final String bookingID;
-  private ArrayList<Seat> seats;
+  private final ArrayList<Seat> seats;
 
   public Booking(Flight flightID, User user, String bookingID, ArrayList<Seat> s) {
     this.flight = flightID;
