@@ -29,7 +29,7 @@ CREATE TABLE Flights (
 
 /*Tumi: svipað hér og með Single_flight, tók út vísun í Seat num, þá getum við haft mörg sæti fyrir hverja bókun, vitnar bara í Seat.booking_id til að fá upp öll sæti tengd þeirri bókun*/
 CREATE TABLE Bookings (
-    userId VARCHAR(30) REFERENCES User(id),
+    userId VARCHAR(30) REFERENCES User(userId),
     flightId VARCHAR(30) REFERENCES Flights(flightId),
     bookingId VARCHAR(30)
 );
