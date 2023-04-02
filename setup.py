@@ -1,9 +1,5 @@
 import os
 
-# create directory if it doesn't exist
-if not os.path.exists("src/db"):
-    os.makedirs("src/db")
-
 path="flightBooking.db"
 testpath = "test.db"
 
