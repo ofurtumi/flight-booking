@@ -15,9 +15,10 @@ public class BookingController implements BookingControllerInterface {
     Booking booking = new Booking(flight, user, bookingID, seats);
 
     try {
+      // TODO láta virka með repo sem @hakoningir er að útfæra
       // BR.createBooking(booking);
       // hér þarf að uppfæra stöðu á sætum ásamt því að búa til nýja bókun
-    } catch (SQLException e) {
+    } catch (Exception e) {
       System.err.println(e);
     }
 
@@ -27,8 +28,9 @@ public class BookingController implements BookingControllerInterface {
   @Override
   public void deleteBooking(Booking booking) {
     try {
+      // TODO láta virka með repo sem @hakoningir er að útfæra
       // BR.deleteBooking(booking);
-    } catch (SQLException e) {
+    } catch (Exception e) {
       System.err.println(e);
     }
   }
@@ -36,8 +38,9 @@ public class BookingController implements BookingControllerInterface {
   @Override
   public void updateBooking(Booking booking) {
     try {
+      // TODO láta virka með repo sem @hakoningir er að útfæra
       // BR.updateBooking(booking);
-    } catch (SQLException e) {
+    } catch (Exception e) {
       System.err.println(e);
     }
   }
@@ -46,6 +49,7 @@ public class BookingController implements BookingControllerInterface {
   public void reserveSeat(Booking booking, Seat seat) {
     try {
       booking.addSeats(seat);
+      // TODO láta virka með repo sem @hakoningir er að útfæra
       // BR.reserveSeat(booking, seat);
     } catch (Exception e) {
       // TODO: handle exception
@@ -57,6 +61,7 @@ public class BookingController implements BookingControllerInterface {
 
     try {
       booking.removeSeats(seat);
+      // TODO láta virka með repo sem @hakoningir er að útfæra
       // BR.removeSeat(booking, seat);
     } catch (Exception e) {
       // TODO: handle exception
@@ -68,6 +73,8 @@ public class BookingController implements BookingControllerInterface {
     try {
       booking.removeSeats(oldSeat);
       booking.addSeats(newSeat);
+      // TODO láta virka með repo sem @hakoningir er að útfæra
+      // BR.updateSeat(booking, oldSeat, newSeat);
     } catch (Exception e) {
       // TODO: handle exception
     }
