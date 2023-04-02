@@ -1,92 +1,62 @@
 package is.hi.flight_booking.controller;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import is.hi.flight_booking.application.*;
 import is.hi.flight_booking.interfaces.BookingControllerInterface;
 
 public class BookingController implements BookingControllerInterface {
-
-  /* Það vantar að tengja controlerinn við BookingRepository */
-
-  private Flight flightId;
-  private User userId;
-  private String bookingId;
-  private Seat[] seats;
-
-  public BookingController() {
-
-  }
-
-  // Getter og setter fyrir flightId
-  public Flight getFlightId() {
-    return this.flightId;
-  }
-
-  public void setFlightId(Flight id) {
-    this.flightId = id;
-  }
-
-  // getter og setter fyrir userId
-  public User getUserId() {
-    return this.userId;
-  }
-
-  public void setUserId(User id) {
-    this.userId = id;
-  }
-
-  // Getter og setter fyrir bookingId
-  public String getBookingId() {
-    return this.bookingId;
-  }
-
-  public void setBookingId(String id) {
-    this.bookingId = id;
-  }
-
-  // getter og setter fyrir seats, gæti þurft að laga return þar sem þetta er
-  // fylki
-  public Seat[] getSeats() {
-    return this.seats;
-  }
-
-  public void setSeats(Seat[] s) {
-    this.seats = s;
-  }
-
-  public void deleteBooking(String bookingId) {
-    // Vantar
-  }
-
-  public void createBooking() {
-    // Vantar
-  }
-
-  public void updateBooking() {
-    // Vantar
-  }
-
-  public void reserveSeat(Seat newSeat) {
-    // vantar
-  }
-
-  public void removeseat(Seat oldSeat) {
-    // Vantar
-  }
-
-  public void updateSeat(Seat newSeat, Seat oldSeat) {
-    // Vantar
-  }
+  // private BookingRepository BR;
 
   @Override
-  public void createBooking(Booking booking) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'createBooking'");
+  public Booking createBooking(Flight flight, User user, ArrayList<Seat> seats) {
+    String bookingID = String.format("B-%s-%s", user.getId(), flight.getFlightId().substring(2));
+    Booking booking = new Booking(flight, user, bookingID, seats);
+
+    try {
+      // BR.createBooking(booking);
+      // hér þarf að uppfæra stöðu á sætum ásamt því að búa til nýja bókun
+    } catch (SQLException e) {
+      System.err.println(e);
+    }
+
+    return booking;
   }
 
   @Override
   public void deleteBooking(Booking booking) {
+    try {
+      // BR.deleteBooking(booking);
+    } catch (SQLException e) {
+      System.err.println(e);
+    }
+  }
+
+  @Override
+  public void updateBooking(Booking booking) {
+    try {
+      // BR.(booking);
+    } catch (SQLException e) {
+      System.err.println(e);
+    }
+  }
+
+  @Override
+  public void reserveSeat(Booking booking, Seat seat) {
+
+  }
+
+  @Override
+  public void removeSeat(Booking booking, Seat seat) {
     // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'deleteBooking'");
+    throw new UnsupportedOperationException("Unimplemented method 'removeSeat'");
+  }
+
+  @Override
+  public void updateSeat(Booking booking, Seat oldSeat, Seat newSeat) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'updateSeat'");
   }
 
 }
