@@ -1,13 +1,13 @@
 package is.hi.flight_booking.controller;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import is.hi.flight_booking.application.*;
 import is.hi.flight_booking.interfaces.BookingControllerInterface;
+import is.hi.flight_booking.repository.BookingRepository;
 
 public class BookingController implements BookingControllerInterface {
-  // private BookingRepository BR;
+  private BookingRepository BR;
 
   @Override
   public Booking createBooking(Flight flight, User user, ArrayList<Seat> seats) {
@@ -15,8 +15,7 @@ public class BookingController implements BookingControllerInterface {
     Booking booking = new Booking(flight, user, bookingID, seats);
 
     try {
-      // TODO láta virka með repo sem @hakoningir er að útfæra
-      // BR.createBooking(booking);
+      BR.createBooking(booking);
       // hér þarf að uppfæra stöðu á sætum ásamt því að búa til nýja bókun
     } catch (Exception e) {
       System.err.println(e);
@@ -28,8 +27,7 @@ public class BookingController implements BookingControllerInterface {
   @Override
   public void deleteBooking(Booking booking) {
     try {
-      // TODO láta virka með repo sem @hakoningir er að útfæra
-      // BR.deleteBooking(booking);
+      BR.deleteBooking(booking);
     } catch (Exception e) {
       System.err.println(e);
     }
@@ -38,8 +36,7 @@ public class BookingController implements BookingControllerInterface {
   @Override
   public void updateBooking(Booking booking) {
     try {
-      // TODO láta virka með repo sem @hakoningir er að útfæra
-      // BR.updateBooking(booking);
+      BR.updateBooking(booking);
     } catch (Exception e) {
       System.err.println(e);
     }
@@ -49,8 +46,7 @@ public class BookingController implements BookingControllerInterface {
   public void reserveSeat(Booking booking, Seat seat) {
     try {
       booking.addSeats(seat);
-      // TODO láta virka með repo sem @hakoningir er að útfæra
-      // BR.reserveSeat(booking, seat);
+      BR.reserveSeat(booking, seat);
     } catch (Exception e) {
       // TODO: handle exception
     }
@@ -61,8 +57,7 @@ public class BookingController implements BookingControllerInterface {
 
     try {
       booking.removeSeats(seat);
-      // TODO láta virka með repo sem @hakoningir er að útfæra
-      // BR.removeSeat(booking, seat);
+      BR.removeSeat(booking, seat);
     } catch (Exception e) {
       // TODO: handle exception
     }
@@ -73,8 +68,7 @@ public class BookingController implements BookingControllerInterface {
     try {
       booking.removeSeats(oldSeat);
       booking.addSeats(newSeat);
-      // TODO láta virka með repo sem @hakoningir er að útfæra
-      // BR.updateSeat(booking, oldSeat, newSeat);
+      BR.updateSeat(booking, oldSeat, newSeat);
     } catch (Exception e) {
       // TODO: handle exception
     }
