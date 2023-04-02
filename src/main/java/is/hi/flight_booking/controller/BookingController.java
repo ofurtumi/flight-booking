@@ -36,7 +36,7 @@ public class BookingController implements BookingControllerInterface {
   @Override
   public void updateBooking(Booking booking) {
     try {
-      // BR.(booking);
+      // BR.updateBooking(booking);
     } catch (SQLException e) {
       System.err.println(e);
     }
@@ -44,19 +44,33 @@ public class BookingController implements BookingControllerInterface {
 
   @Override
   public void reserveSeat(Booking booking, Seat seat) {
-
+    try {
+      booking.addSeats(seat);
+      // BR.reserveSeat(booking, seat);
+    } catch (Exception e) {
+      // TODO: handle exception
+    }
   }
 
   @Override
   public void removeSeat(Booking booking, Seat seat) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'removeSeat'");
+
+    try {
+      booking.removeSeats(seat);
+      // BR.removeSeat(booking, seat);
+    } catch (Exception e) {
+      // TODO: handle exception
+    }
   }
 
   @Override
   public void updateSeat(Booking booking, Seat oldSeat, Seat newSeat) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'updateSeat'");
+    try {
+      booking.removeSeats(oldSeat);
+      booking.addSeats(newSeat);
+    } catch (Exception e) {
+      // TODO: handle exception
+    }
   }
 
 }
