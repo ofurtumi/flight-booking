@@ -1,7 +1,6 @@
 package is.hi.flight_booking.controller;
 
 import java.util.ArrayList;
-
 import is.hi.flight_booking.application.Booking;
 import is.hi.flight_booking.application.Flight;
 import is.hi.flight_booking.application.Seat;
