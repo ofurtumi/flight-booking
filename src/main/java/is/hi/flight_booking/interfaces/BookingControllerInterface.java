@@ -32,7 +32,12 @@ public interface BookingControllerInterface {
    * Updates a booking on the database
    * 
    * @param booking Booking object that has already been put on the databse
+   * 
+   * @deprecated
+   *             since april 3. 9:43 AM, will not be used by T-group, do not
+   *             implement
    */
+  @Deprecated
   public void updateBooking(Booking booking);
 
   /**
@@ -53,11 +58,17 @@ public interface BookingControllerInterface {
   public void removeSeat(Booking booking, Seat seat);
 
   /**
-   * Takes a booking and changes an already chosen seat to another new seat
+   * Takes a booking and changes an already chosen seat to another new
+   * seat
    * 
    * @param booking Booking object which will have its seat changed
    * @param oldSeat Seat object that will be removed from the booking
    * @param newSeat Seat object that will be added to the booking
+   *
+   * @deprecated
+   *             since april 3. 9:43 AM, will not be used by T-group, do not
+   *             implement
    */
+  @Deprecated
   public void updateSeat(Booking booking, Seat oldSeat, Seat newSeat);
 }
