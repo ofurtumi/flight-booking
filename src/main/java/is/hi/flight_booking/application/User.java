@@ -4,9 +4,9 @@ public class User {
   private final String id;
   private final String name;
 
-  public User(String uId, String uName) {
-    id = uId;
-    name = uName;
+  public User(String userID, String userName) {
+    id = userID;
+    name = userName;
   }
 
   public String getName() {

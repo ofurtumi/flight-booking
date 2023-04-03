@@ -1,80 +1,62 @@
 package is.hi.flight_booking.controller;
 
-import is.hi.flight_booking.application.*;
+import java.util.ArrayList;
+import is.hi.flight_booking.application.Booking;
+import is.hi.flight_booking.application.Flight;
+import is.hi.flight_booking.application.Seat;
+import is.hi.flight_booking.application.User;
 import is.hi.flight_booking.interfaces.BookingControllerInterface;
+import is.hi.flight_booking.repository.BookingRepository;
 
 public class BookingController implements BookingControllerInterface {
+  private BookingRepository BR;
 
-  /* Það vantar að tengja controlerinn við BookingRepository */
+  public Booking createBooking(Flight flight, User user, ArrayList<Seat> seats) {
+    String bookingID = String.format("B-%s-%s", user.getId(), flight.getFlightId().substring(2));
+    Booking booking = new Booking(flight, user, bookingID, seats);
 
-  private Flight flightId;
-  private User userId;
-  private String bookingId;
-  private Seat[] seats;
+    try {
+      BR.createBooking(booking);
+      // hér þarf að uppfæra stöðu á sætum ásamt því að búa til nýja bókun
+    } catch (Exception e) {
+      System.err.println(e);
+    }
 
-  public BookingController() {
-
+    return booking;
   }
 
-  // Getter og setter fyrir flightId
-  public Flight getFlightId() {
-    return this.flightId;
+  public void deleteBooking(Booking booking) {
+    try {
+      BR.deleteBooking(booking);
+    } catch (Exception e) {
+      System.err.println(e);
+    }
   }
 
-  public void setFlightId(Flight id) {
-    this.flightId = id;
+  public void updateBooking(Booking booking) {
+    throw new UnsupportedOperationException("Unimplemented method 'updateBooking', fuck you");
   }
 
-  // getter og setter fyrir userId
-  public User getUserId() {
-    return this.userId;
+  public void reserveSeat(Booking booking, Seat seat) {
+    try {
+      booking.addSeats(seat);
+      BR.reserveSeat(booking, seat);
+    } catch (Exception e) {
+      // TODO: handle exception
+    }
   }
 
-  public void setUserId(User id) {
-    this.userId = id;
+  public void removeSeat(Booking booking, Seat seat) {
+
+    try {
+      booking.removeSeats(seat);
+      BR.removeSeat(booking, seat);
+    } catch (Exception e) {
+      // TODO: handle exception
+    }
   }
 
-  // Getter og setter fyrir bookingId
-  public String getBookingId() {
-    return this.bookingId;
+  public void updateSeat(Booking booking, Seat oldSeat, Seat newSeat) {
+    throw new UnsupportedOperationException("Unimplemented method 'updateSeat', fuck you");
   }
-
-  public void setBookingId(String id) {
-    this.bookingId = id;
-  }
-
-  // getter og setter fyrir seats, gæti þurft að laga return þar sem þetta er
-  // fylki
-  public Seat[] getSeats() {
-    return this.seats;
-  }
-
-  public void setSeats(Seat[] s) {
-    this.seats = s;
-  }
-
-  public void deleteBooking(String bookingId) {
-    // Vantar
-  }
-
-  public void createBooking() {
-    // Vantar
-  }
-
-  public void updateBooking() {
-    // Vantar
-  }
-
-  public void reserveSeat(Seat newSeat) {
-    // vantar
-  }
-
-  public void removeseat(Seat oldSeat) {
-    // Vantar
-  }
-
-  public void updateSeat(Seat newSeat, Seat oldSeat) {
-    // Vantar
-  }
-
 }
