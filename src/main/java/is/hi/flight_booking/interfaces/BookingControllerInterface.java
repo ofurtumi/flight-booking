@@ -1,6 +1,6 @@
 package is.hi.flight_booking.interfaces;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import is.hi.flight_booking.application.Booking;
 import is.hi.flight_booking.application.Flight;
@@ -15,11 +15,11 @@ public interface BookingControllerInterface {
    * 
    * @param flightID ID of the flight
    * @param userID   ID of the user - follows the standard for icelandic SSN
-   * @param seats    An ArrayList of {@link Seat} objects corresponding to the
+   * @param seats    A List of {@link Seat} objects corresponding to the
    *                 current flight
    * @return {@link Booking} object holding the current booking info
    */
-  public Booking createBooking(Flight flight, User user, ArrayList<Seat> seats);
+  public Booking createBooking(Flight flight, User user, List<Seat> seats);
 
   /**
    * Deletes a booking from the database
