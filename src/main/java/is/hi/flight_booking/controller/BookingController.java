@@ -1,6 +1,6 @@
 package is.hi.flight_booking.controller;
 
-import java.util.ArrayList;
+import java.util.List;
 import is.hi.flight_booking.application.Booking;
 import is.hi.flight_booking.application.Flight;
 import is.hi.flight_booking.application.Seat;
@@ -11,7 +11,7 @@ import is.hi.flight_booking.repository.BookingRepository;
 public class BookingController implements BookingControllerInterface {
   private BookingRepository BR;
 
-  public Booking createBooking(Flight flight, User user, ArrayList<Seat> seats) {
+  public Booking createBooking(Flight flight, User user, List<Seat> seats) {
     String bookingID = String.format("B-%s-%s", user.getId(), flight.getFlightId().substring(2));
     Booking booking = new Booking(flight, user, bookingID, seats);
 
