@@ -128,7 +128,7 @@ public class BookingRepository implements BookingRepositoryInterface {
 
     db.execute("insert or ignore into Users (userId, name) values (?, ?)", booking.getUser().getInfo());
 
-    String[] values = { booking.getBookingID(), booking.getFlightID(), booking.getUserID() };
+    String[] values = {booking.getBookingID(), booking.getFlightID(), booking.getUserID()};
     db.execute("insert into Bookings (bookingId, flightId, userId) values (?, ?, ?)", values);
 
     for (Seat seat : booking.getSeats()) {
@@ -168,12 +168,12 @@ public class BookingRepository implements BookingRepositoryInterface {
   }
 
   private void reserveSeat(DB db, Booking booking, Seat seat) {
-    String[] values = { booking.getBookingID(), booking.getFlightID(), seat.getId() };
+    String[] values = {booking.getBookingID(), booking.getFlightID(), seat.getId()};
     db.execute("update Seats set reserved = true, bookingId = ? where flightId = ? and position = ?", values);
   }
 
   private void removeSeat(DB db, Booking booking, Seat seat) {
-    String[] values = { booking.getFlightID(), seat.getId() };
+    String[] values = {booking.getFlightID(), seat.getId()};
     db.execute("update Seats set reserved = false, bookingId = '' where flightId = ? and position = ?", values);
   }
 

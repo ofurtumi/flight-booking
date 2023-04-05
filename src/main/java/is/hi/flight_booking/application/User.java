@@ -18,6 +18,6 @@ public class User {
   }
 
   public String[] getInfo() {
-    return new String[] { this.id, this.name };
+    return new String[]{this.id, this.name};
   }
 }
