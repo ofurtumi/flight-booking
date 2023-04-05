@@ -70,6 +70,8 @@ public class BookingRepository implements BookingRepositoryInterface {
       ResultSet userRS = db.query("select * from Users where userId = ?", booking.getUserID());
       User dbUser = new User(userRS.getString("userId"), userRS.getString("name"));
       if (!booking.getUser().equals(dbUser)) {
+        System.err.println("Booking does not exist");
+        db.close();
         throw new SQLException();
       }
 
@@ -81,6 +83,8 @@ public class BookingRepository implements BookingRepositoryInterface {
         dbSeats.add(tempSeat);
       }
       if (!booking.getSeats().equals(dbSeats)) {
+        System.err.println("Seats does not exist");
+        db.close();
         throw new SQLException();
 
       }
@@ -94,21 +98,24 @@ public class BookingRepository implements BookingRepositoryInterface {
           LocalDate.parse(flightRS.getString("departureTime")),
           LocalDate.parse(flightRS.getString("arrivalTime")),
           flightRS.getInt("price"));
+
       if (!booking.getFlight().equals(dbFlight)) {
-
+        System.err.println("Flight does not exist");
+        db.close();
         throw new SQLException();
-
       }
 
       ResultSet bookingRS = db.query("select * from Bookings where bookingId = ?", booking.getBookingID());
       Booking dbBooking = new Booking(dbFlight, dbUser, bookingRS.getString("bookingId"), dbSeats);
       if (!booking.equals(dbBooking)) {
+        db.close();
         throw new SQLException();
       }
 
       db.close();
     } catch (SQLException e) {
       System.err.println(e);
+      return false;
     }
 
     return true;
@@ -119,8 +126,10 @@ public class BookingRepository implements BookingRepositoryInterface {
     DB db = new DB(connectionURL);
     db.open();
 
-    String[] values = {booking.getBookingID(), booking.getFlightID(), booking.getUserID()};
-    db.execute("insert into Bookings (userId, flightId, bookingId) values (?, ?, ?)", values);
+    db.execute("insert or ignore into Users (userId, name) values (?, ?)", booking.getUser().getInfo());
+
+    String[] values = { booking.getBookingID(), booking.getFlightID(), booking.getUserID() };
+    db.execute("insert into Bookings (bookingId, flightId, userId) values (?, ?, ?)", values);
 
     for (Seat seat : booking.getSeats()) {
       reserveSeat(db, booking, seat);
@@ -159,12 +168,12 @@ public class BookingRepository implements BookingRepositoryInterface {
   }
 
   private void reserveSeat(DB db, Booking booking, Seat seat) {
-    String[] values = {booking.getBookingID(), booking.getFlightID(), seat.getId()};
+    String[] values = { booking.getBookingID(), booking.getFlightID(), seat.getId() };
     db.execute("update Seats set reserved = true, bookingId = ? where flightId = ? and position = ?", values);
   }
 
   private void removeSeat(DB db, Booking booking, Seat seat) {
-    String[] values = {booking.getFlightID(), seat.getId()};
+    String[] values = { booking.getFlightID(), seat.getId() };
     db.execute("update Seats set reserved = false, bookingId = '' where flightId = ? and position = ?", values);
   }
 

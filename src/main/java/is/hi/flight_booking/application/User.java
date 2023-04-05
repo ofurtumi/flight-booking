@@ -16,4 +16,8 @@ public class User {
   public String getId() {
     return this.id;
   }
+
+  public String[] getInfo() {
+    return new String[] { this.id, this.name };
+  }
 }
