@@ -103,8 +103,26 @@ public class DB {
   }
 
   /**
+   * executes a given sqlite query on the database using one external value given
+   * as a parameter, does not return anything
+   * 
+   * @param query  an sqlite querystring
+   * @param values a string used to add variable data to query
+   */
+  public void execute(String query, String value) {
+    try {
+      PreparedStatement ps = conn.prepareStatement(query);
+      ps.setString(1, value);
+      ps.executeUpdate();
+      ps.close();
+    } catch (SQLException e) {
+      System.err.println(e);
+    }
+  }
+
+  /**
    * executes a given sqlite query on the database using external values given as
-   * a parametr, does not return anything
+   * a parameter, does not return anything
    * 
    * @param query  an sqlite querystring
    * @param values an array of strings used to add variable data to query

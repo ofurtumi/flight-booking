@@ -1,11 +1,10 @@
 package is.hi.flight_booking.interfaces;
 
+import java.sql.SQLException;
+
 import is.hi.flight_booking.application.Booking;
 import is.hi.flight_booking.application.Seat;
 
-/**
- * BookingRepositoryInterface
- */
 public interface BookingRepositoryInterface {
 
   /**
@@ -13,7 +12,7 @@ public interface BookingRepositoryInterface {
    * 
    * @param booking Booking object to be created on the database
    */
-  public void createBooking(Booking booking);
+  public void createBooking(Booking booking) throws SQLException;
 
   /**
    * Takes a {@link Booking} object and deletes it from the database
@@ -22,7 +21,7 @@ public interface BookingRepositoryInterface {
    * 
    * @param booking Booking object to be deleted from the database
    */
-  public void deleteBooking(Booking booking);
+  public void deleteBooking(Booking booking) throws SQLException;
 
   /**
    * Ease of access method, implements both {@link deletebooking} and
@@ -38,7 +37,7 @@ public interface BookingRepositoryInterface {
    *             implement
    */
   @Deprecated
-  public void updateBooking(Booking booking);
+  public void updateBooking(Booking booking) throws SQLException;
 
   /**
    * Searches the database for a reference of the given {@link Seat} object and
@@ -47,7 +46,7 @@ public interface BookingRepositoryInterface {
    * @param booking {@link Booking} object to be updated on the database
    * @param seat    {@link Seat} object to be updated on the database
    */
-  public void reserveSeat(Booking booking, Seat seat);
+  public void reserveSeat(Booking booking, Seat seat) throws SQLException;
 
   /**
    * Searches the database for a reference to the given {@link Seat} object and
@@ -57,7 +56,7 @@ public interface BookingRepositoryInterface {
    * @param booking {@link Booking} object to be updated on the database
    * @param seat    {@link Seat} object to be updated on the database
    */
-  public void removeSeat(Booking booking, Seat seat);
+  public void removeSeat(Booking booking, Seat seat) throws SQLException;
 
   /**
    * Uses a combination of {@link removeSeat} and {@link reserveSeat}
@@ -72,6 +71,7 @@ public interface BookingRepositoryInterface {
    *             since april 3. 9:43 AM, will not be used by T-group, do not
    *             implement
    */
+
   @Deprecated
-  public void updateSeat(Booking booking, Seat oldSeat, Seat newSeat);
+  public void updateSeat(Booking booking, Seat oldSeat, Seat newSeat) throws SQLException;
 }
