@@ -8,11 +8,19 @@ public class Booking {
   private final String bookingID;
   private final List<Seat> seats;
 
-  public Booking(Flight flightID, User user, String bookingID, List<Seat> s) {
-    this.flight = flightID;
+  public Booking(Flight flight, User user, String bookingID, List<Seat> s) {
+    this.flight = flight;
     this.user = user;
     this.bookingID = bookingID;
     this.seats = s;
+  }
+
+  public String getFlightID() {
+    return flight.getFlightId();
+  }
+
+  public String getUserID() {
+    return user.getId();
   }
 
   public int getPrice() {
@@ -21,6 +29,10 @@ public class Booking {
 
   public User getUser() {
     return user;
+  }
+
+  public Flight getFlight() {
+    return flight;
   }
 
   public String getBookingID() {
