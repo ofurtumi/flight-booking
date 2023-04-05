@@ -10,7 +10,7 @@ public interface BookingRepositoryInterface {
   /**
    * Takes a {@link Booking} object and creates a version of it on the database
    * 
-   * @param booking {@link Booking} object to be created on the database
+   * @param booking Booking object to be created on the database
    */
   public void createBooking(Booking booking) throws SQLException;
 
@@ -19,18 +19,24 @@ public interface BookingRepositoryInterface {
    * needs to recursively remove seat reservations, can be implemented with
    * {@link removeSeat}
    * 
-   * @param booking {@link Booking} object to be deleted from the database
+   * @param booking Booking object to be deleted from the database
    */
   public void deleteBooking(Booking booking) throws SQLException;
 
   /**
    * Ease of access method, implements both {@link deletebooking} and
    * {@link createBooking}
-   * does not actually update booking rather removes it from the databse and
+   * does not actually update booking rather removes it from the
+   * databse and
    * creates it again with minor changes little different
    *
-   * @param booking {@link Booking} object to be updated on the database
+   * @param booking Booking object to be updated on the database
+   *
+   * @deprecated
+   *             since april 3. 9:43 AM, will not be used by T-group, do not
+   *             implement
    */
+  @Deprecated
   public void updateBooking(Booking booking) throws SQLException;
 
   /**
@@ -53,12 +59,19 @@ public interface BookingRepositoryInterface {
   public void removeSeat(Booking booking, Seat seat) throws SQLException;
 
   /**
-   * Uses a combination of {@link removeSeat} and {@link reserveSeat} to update
+   * Uses a combination of {@link removeSeat} and {@link reserveSeat}
+   * to update
    * seats to fit the given {@link Bookings}
    *
    * @param booking {@link Booking} object to be updated on the database
    * @param oldSeat {@link Seat} object to be updated on the database
    * @param newSeat {@link Seat} object to be updated on the database
+   *
+   * @deprecated
+   *             since april 3. 9:43 AM, will not be used by T-group, do not
+   *             implement
    */
+
+  @Deprecated
   public void updateSeat(Booking booking, Seat oldSeat, Seat newSeat) throws SQLException;
 }

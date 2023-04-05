@@ -1,14 +1,14 @@
 package is.hi.flight_booking.application;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Booking {
   private final Flight flight;
   private final User user;
   private final String bookingID;
-  private final ArrayList<Seat> seats;
+  private final List<Seat> seats;
 
-  public Booking(Flight flightID, User user, String bookingID, ArrayList<Seat> s) {
+  public Booking(Flight flightID, User user, String bookingID, List<Seat> s) {
     this.flight = flightID;
     this.user = user;
     this.bookingID = bookingID;
@@ -27,7 +27,7 @@ public class Booking {
     return bookingID;
   }
 
-  public ArrayList<Seat> getSeats() {
+  public List<Seat> getSeats() {
     return seats;
   }
 
