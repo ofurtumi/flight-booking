@@ -9,7 +9,7 @@ import is.hi.flight_booking.interfaces.BookingControllerInterface;
 import is.hi.flight_booking.repository.BookingRepository;
 
 public class BookingController implements BookingControllerInterface {
-  private BookingRepository BR;
+  private final BookingRepository BR;
 
   public BookingController(String URL) {
     BR = new BookingRepository(URL);
