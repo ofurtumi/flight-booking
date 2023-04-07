@@ -34,14 +34,16 @@ public class Seat {
   // equals method that checks if id, flightId and reservation is the same
   @Override
   public boolean equals(Object o) {
-    if (this == o)
+    if (this == o) {
       return true;
-    if (!(o instanceof Seat))
+    }
+    if (!(o instanceof Seat)) {
       return false;
+    }
     Seat s = (Seat) o;
-    return this.id.equals(s.getId()) &&
-        this.flightId.equals(s.getFlightId()) &&
-        this.reserved == s.isReserved();
+    return this.id.equals(s.getId())
+        && this.flightId.equals(s.getFlightId())
+        && this.reserved == s.isReserved();
   }
 
   @Override

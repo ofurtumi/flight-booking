@@ -8,7 +8,7 @@ import is.hi.flight_booking.repository.FlightRepository;
 
 public class FlightController implements FlightControllerInterface {
 
-  private FlightRepository FR;
+  private final FlightRepository FR;
 
   public FlightController(String URL) {
     FR = new FlightRepository(URL);

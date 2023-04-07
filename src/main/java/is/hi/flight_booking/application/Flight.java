@@ -33,7 +33,7 @@ public class Flight {
     this.flightId = flightId;
     this.seats = seats;
     numSeatsReserved = 0;
-    for (int i = 0; i < seats.size(); i++) {
+    for (int i = 0;i < seats.size();i++) {
       if (seats.get(i).isReserved() == true) {
         numSeatsReserved++;
       }
@@ -91,7 +91,7 @@ public class Flight {
   }
 
   public void reserveSeat(String seatId) {
-    for (int i = 0; i < seats.size(); i++) {
+    for (int i = 0;i < seats.size();i++) {
       if (seats.get(i).getId() == seatId && !seats.get(i).isReserved()) { // bera saman id og ef einhver er ekki í sæti
 
         seats.get(i).setReserved(true);
