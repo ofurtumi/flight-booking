@@ -82,7 +82,7 @@ public class FlightTest {
 
   @Test
   public void reserveSeat() {
-    flight.reserveSeat("A-3");
+    flight.reserveSeat("A3");
     assertTrue(seats.get(2).isReserved());
 
   }
