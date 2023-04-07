@@ -23,7 +23,7 @@ public class BookingController implements BookingControllerInterface {
       BR.createBooking(booking);
       // hér þarf að uppfæra stöðu á sætum ásamt því að búa til nýja bókun
     } catch (Exception e) {
-      System.err.println(e);
+      System.err.println("Tókst ekki að bóka flug " + e);
     }
 
     return booking;
@@ -33,7 +33,7 @@ public class BookingController implements BookingControllerInterface {
     try {
       BR.deleteBooking(booking);
     } catch (Exception e) {
-      System.err.println(e);
+      System.err.println("Tókst ekki að afbóka flug " + e);
     }
   }
 
@@ -46,7 +46,7 @@ public class BookingController implements BookingControllerInterface {
       booking.addSeats(seat);
       BR.reserveSeat(booking, seat);
     } catch (Exception e) {
-      // TODO: handle exception
+      System.err.println("Tókst ekki að taka frá sæti " + e);
     }
   }
 
@@ -56,7 +56,7 @@ public class BookingController implements BookingControllerInterface {
       booking.removeSeats(seat);
       BR.removeSeat(booking, seat);
     } catch (Exception e) {
-      // TODO: handle exception
+      System.err.println("Tókst ekki að afbóka sæti " + e);
     }
   }
 
