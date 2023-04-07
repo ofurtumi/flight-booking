@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Flight {
 
   private String flightId;
@@ -34,13 +33,13 @@ public class Flight {
     this.flightId = flightId;
     this.seats = seats;
     numSeatsReserved = 0;
-    for (int i = 0;i < seats.size();i++) {
+    for (int i = 0; i < seats.size(); i++) {
       if (seats.get(i).isReserved() == true) {
         numSeatsReserved++;
       }
     }
 
-    numSeatsAvailable = seats.size()-numSeatsReserved;
+    numSeatsAvailable = seats.size() - numSeatsReserved;
 
     this.price = price;
 
@@ -83,7 +82,6 @@ public class Flight {
     return departureTime;
   }
 
-
   public String getDepartureAddress() {
     return departureAddress;
   }
@@ -93,7 +91,7 @@ public class Flight {
   }
 
   public void reserveSeat(String seatId) {
-    for (int i = 0;i < seats.size();i++) {
+    for (int i = 0; i < seats.size(); i++) {
       if (seats.get(i).getId() == seatId && !seats.get(i).isReserved()) { // bera saman id og ef einhver er ekki í sæti
 
         seats.get(i).setReserved(true);
@@ -145,5 +143,11 @@ public class Flight {
 
     // Compare the data members and return accordingly
     return flightId.equals(f.flightId);
+  }
+
+  @Override
+  public String toString() {
+    return String.format("Flight: %s\nDeparture: %s | %s\nArrival: %s | %s\nPrice: %s",
+        flightId, departureAddress, departureTime, arrivalAddress, arrivalTime, price);
   }
 }

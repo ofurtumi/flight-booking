@@ -19,7 +19,6 @@ public class BookingRepository implements BookingRepositoryInterface {
     this.connectionURL = connectionURL;
   }
 
-
   public boolean checkIfExists(Booking booking) {
     try {
       DB db = new DB(connectionURL);
@@ -28,7 +27,7 @@ public class BookingRepository implements BookingRepositoryInterface {
       ResultSet userRS = db.query("SELECT * FROM Users WHERE userId = ?", booking.getUserID());
       User dbUser = new User(userRS.getString("userId"), userRS.getString("name"));
       if (!booking.getUser().equals(dbUser)) {
-        System.err.println("Booking does not exist");
+        System.err.println("User does not exist");
         db.close();
         throw new SQLException();
       }
@@ -36,18 +35,19 @@ public class BookingRepository implements BookingRepositoryInterface {
       ResultSet seatRS = db.query("SELECT * FROM Seats WHERE bookingId = ?", booking.getBookingID());
       ArrayList<Seat> dbSeats = new ArrayList<>();
       while (seatRS.next()) {
-        Seat tempSeat = new Seat(seatRS.getString("seatId"), seatRS.getString("flightId"),
+        Seat tempSeat = new Seat(seatRS.getString("position"), seatRS.getString("flightId"),
             seatRS.getBoolean("reserved"));
         dbSeats.add(tempSeat);
       }
-      if (!booking.getSeats().equals(dbSeats)) {
-        System.err.println("Seats does not exist");
+
+      if (!dbSeats.equals(booking.getSeats())) {
+        System.err.println("Seats do not exist");
         db.close();
         throw new SQLException();
-
       }
 
       ResultSet flightRS = db.query("SELECT * FROM Flights WHERE flightId = ?", booking.getFlightID());
+
       Flight dbFlight = new Flight(
           flightRS.getString("flightId"),
           dbSeats,
@@ -64,14 +64,17 @@ public class BookingRepository implements BookingRepositoryInterface {
       }
 
       ResultSet bookingRS = db.query("SELECT * FROM Bookings WHERE bookingId = ?", booking.getBookingID());
+
       Booking dbBooking = new Booking(dbFlight, dbUser, bookingRS.getString("bookingId"), dbSeats);
+
       if (!booking.equals(dbBooking)) {
         db.close();
         throw new SQLException();
       }
-
       db.close();
-    } catch (SQLException e) {
+    } catch (
+
+    SQLException e) {
       System.err.println(e);
       return false;
     }
@@ -86,8 +89,8 @@ public class BookingRepository implements BookingRepositoryInterface {
 
     db.execute("insert or ignore into Users (userId, name) values (?, ?)", booking.getUser().getInfo());
 
-    String[] values = {booking.getBookingID(), booking.getFlightID(), booking.getUserID()};
-    db.execute("INSERT INTO Bookings (userId, flightId, bookingId) VALUES (?, ?, ?)", values);
+    String[] values = { booking.getBookingID(), booking.getFlightID(), booking.getUserID() };
+    db.execute("INSERT INTO Bookings (bookingId, flightId, userId) VALUES (?, ?, ?)", values);
 
     for (Seat seat : booking.getSeats()) {
       reserveSeat(db, booking, seat);
@@ -126,12 +129,12 @@ public class BookingRepository implements BookingRepositoryInterface {
   }
 
   private void reserveSeat(DB db, Booking booking, Seat seat) {
-    String[] values = {booking.getBookingID(), booking.getFlightID(), seat.getId()};
+    String[] values = { booking.getBookingID(), booking.getFlightID(), seat.getId() };
     db.execute("UPDATE Seats set reserved = true, bookingId = ? WHERE flightId = ? and position = ?", values);
   }
 
   private void removeSeat(DB db, Booking booking, Seat seat) {
-    String[] values = {booking.getFlightID(), seat.getId()};
+    String[] values = { booking.getFlightID(), seat.getId() };
     db.execute("UPDATE Seats set reserved = false, bookingId = '' WHERE flightId = ? and position = ?", values);
   }
 

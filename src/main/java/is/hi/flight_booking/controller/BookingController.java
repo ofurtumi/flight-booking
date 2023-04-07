@@ -1,6 +1,5 @@
 package is.hi.flight_booking.controller;
 
-import java.sql.SQLException;
 import java.util.List;
 import is.hi.flight_booking.application.Booking;
 import is.hi.flight_booking.application.Flight;

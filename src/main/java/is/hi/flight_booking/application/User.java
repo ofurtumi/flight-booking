@@ -18,6 +18,24 @@ public class User {
   }
 
   public String[] getInfo() {
-    return new String[]{this.id, this.name};
+    return new String[] { this.id, this.name };
+  }
+
+  @Override
+  public String toString() {
+    return String.format("User: %s | Name: %s", this.id, this.name);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (o == this) {
+      return true;
+    }
+    if (!(o instanceof User)) {
+      return false;
+    }
+
+    User u = (User) o;
+    return this.id.equals(u.getId()) && this.name.equals(u.getName());
   }
 }

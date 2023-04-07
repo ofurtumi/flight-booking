@@ -70,4 +70,14 @@ public class Booking {
         && seats.equals(b.getSeats())
         && this.getPrice() == b.getPrice();
   }
+
+  @Override
+  public String toString() {
+    String outString = "Booking: " + bookingID + "\n" + user.toString() + "\n";
+    outString += "FLIGHT:\n" + flight.toString() + "\nSeats\n";
+    for (Seat seat : seats) {
+      outString += "\n" + seat.toString();
+    }
+    return outString;
+  }
 }
