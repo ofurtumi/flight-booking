@@ -23,6 +23,11 @@ public class FlightController implements FlightControllerInterface {
     return found;
   }
 
+  public List<Flight> searchFlights(String depAddress, String arrAddress) {
+    List<Flight> found = FR.searchFlights(depAddress, arrAddress);
+    return found;
+  }
+
   public List<Flight> getSortedByPrice() {
     return FR.getSortedByPrice();
   }

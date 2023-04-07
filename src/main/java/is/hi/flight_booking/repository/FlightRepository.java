@@ -141,9 +141,7 @@ public class FlightRepository implements FlightRepositoryInterface {
       ResultSet rs = db.query("select * from Flights where departureAddress = ?", depAddress);
       while (rs.next()) {
         LocalDate tempDate = LocalDate.parse(rs.getString("departureTime"));
-        System.err.println(tempDate);
-        System.err.println(depTime);
-        if (tempDate.equals(depTime)) {
+        if (depTime == null || tempDate.equals(depTime)) {
           String flightId = rs.getString("flightId");
           ArrayList<Seat> seatlist = new ArrayList<>();
 
@@ -161,6 +159,41 @@ public class FlightRepository implements FlightRepositoryInterface {
               LocalDate.parse(rs.getString("arrivalTime")),
               rs.getInt("price")));
         }
+      }
+      return flights;
+    } catch (SQLException e) {
+      return new ArrayList<Flight>();
+    }
+  }
+
+  public ArrayList<Flight> searchFlights(String depAddress, String arrAddress) {
+    try {
+      DB db = new DB(connectionURL);
+      db.open();
+
+      String[] values = new String[2];
+      values[0] = depAddress;
+      values[1] = arrAddress;
+      ArrayList<Flight> flights = new ArrayList<>();
+
+      ResultSet rs = db.query("select * from Flights where departureAddress = ?", depAddress);
+      while (rs.next()) {
+        String flightId = rs.getString("flightId");
+        ArrayList<Seat> seatlist = new ArrayList<>();
+
+        ResultSet seatResult = db.query("select * from Seats where flightId = ?", flightId);
+        while (seatResult.next()) {
+          seatlist.add(new Seat(seatResult.getString("position"), flightId, seatResult.getBoolean("reserved")));
+        }
+
+        flights.add(new Flight(
+            flightId,
+            seatlist,
+            rs.getString("departureAddress"),
+            rs.getString("arrivalAddress"),
+            LocalDate.parse(rs.getString("departureTime")),
+            LocalDate.parse(rs.getString("arrivalTime")),
+            rs.getInt("price")));
       }
       return flights;
     } catch (SQLException e) {
