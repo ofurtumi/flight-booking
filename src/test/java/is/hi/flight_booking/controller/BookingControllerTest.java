@@ -72,6 +72,7 @@ public class BookingControllerTest {
   @Test
   public void DisOnDB() {
     try {
+      System.out.println("Á að koma Seats do not exist");
       assertFalse(BC.exists(ref));
     } catch (Exception e) {
       System.err.printf("Klikkaði að finna á DB: \n%s", e);
