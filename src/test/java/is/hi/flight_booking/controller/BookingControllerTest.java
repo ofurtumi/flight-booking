@@ -1,5 +1,6 @@
 package is.hi.flight_booking.controller;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -63,10 +64,18 @@ public class BookingControllerTest {
     }
   }
 
-  @Ignore
   @Test
   public void CTestDelete() {
     BC.deleteBooking(ref);
+  }
+
+  @Test
+  public void DisOnDB() {
+    try {
+      assertFalse(BC.exists(ref));
+    } catch (Exception e) {
+      System.err.printf("Klikkaði að finna á DB: \n%s", e);
+    }
   }
 
   @After
