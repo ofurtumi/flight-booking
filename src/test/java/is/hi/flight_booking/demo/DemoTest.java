@@ -2,6 +2,7 @@ package is.hi.flight_booking.demo;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -71,12 +72,19 @@ public class DemoTest {
   public void C_MakeUser() {
     assertEquals("0000006969", user.getId());
     assertEquals("Testur", user.getName());
-    assertArrayEquals(new String[]{"0000006969", "Testur"}, user.getInfo());
+    assertArrayEquals(new String[] { "0000006969", "Testur" }, user.getInfo());
   }
 
   @Test
   public void D_CreateBooking() {
     assertTrue(BC.exists(booking));
+  }
+
+  @Test
+  public void E_DeleteBooking() {
+    BC.deleteBooking(booking);
+    System.err.println("Á að koma Seats do not exist");
+    assertFalse(BC.exists(booking));
   }
 
   @After
