@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 public class FlightTest {
   Flight flight;
@@ -16,15 +15,15 @@ public class FlightTest {
   @Before
   public void setUp() {
     seats = new ArrayList<>();
-    seats.add(new Seat("A-1", "F-304", false));
-    seats.add(new Seat("A-2", "F-304", false));
-    seats.add(new Seat("A-3", "F-304", false));
-    seats.add(new Seat("B-1", "F-304", false));
-    seats.add(new Seat("B-2", "F-304", false));
-    seats.add(new Seat("B-3", "F-304", false));
-    seats.add(new Seat("B-4", "F-304", true));
+    seats.add(new Seat("A1", "F-004", false));
+    seats.add(new Seat("A2", "F-004", false));
+    seats.add(new Seat("A3", "F-004", false));
+    seats.add(new Seat("B1", "F-004", false));
+    seats.add(new Seat("B2", "F-004", false));
+    seats.add(new Seat("B3", "F-004", false));
+    seats.add(new Seat("B4", "F-004", true));
     flight = new Flight(
-        "F-304",
+        "F-004",
         seats,
         "Keflavík",
         "Reykjavík",
@@ -35,14 +34,13 @@ public class FlightTest {
 
   @Test
   public void testFlightGetFlightId() {
-    assertEquals("F-304", flight.getFlightId());
+    assertEquals("F-004", flight.getFlightId());
   }
 
-  
   @Test
   public void testFlightGetSeats() {
-    List retuningSeats = flight.getSeats(); 
-    assertEquals(seats, retuningSeats);
+    ArrayList<Seat> DBSeats = new ArrayList<>(flight.getSeats());
+    assertEquals(seats, DBSeats);
   }
 
   @Test
@@ -61,7 +59,7 @@ public class FlightTest {
     flight.setPrice(30000);
     assertEquals(30000, flight.getPrice());
   }
- 
+
   @Test
   public void testGetDepartureTime() {
     assertEquals(LocalDate.of(2023, 10, 19), flight.getDepartureTime());
@@ -84,7 +82,7 @@ public class FlightTest {
 
   @Test
   public void reserveSeat() {
-    flight.reserveSeat("A-3");
+    flight.reserveSeat("A3");
     assertTrue(seats.get(2).isReserved());
 
   }

@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Flight {
 
   private String flightId;
@@ -40,7 +39,7 @@ public class Flight {
       }
     }
 
-    numSeatsAvailable = seats.size()-numSeatsReserved;
+    numSeatsAvailable = seats.size() - numSeatsReserved;
 
     this.price = price;
 
@@ -82,7 +81,6 @@ public class Flight {
   public LocalDate getDepartureTime() {
     return departureTime;
   }
-
 
   public String getDepartureAddress() {
     return departureAddress;
@@ -145,5 +143,11 @@ public class Flight {
 
     // Compare the data members and return accordingly
     return flightId.equals(f.flightId);
+  }
+
+  @Override
+  public String toString() {
+    return String.format("Flight: %s\nDeparture: %s | %s\nArrival: %s | %s\nPrice: %s",
+        flightId, departureAddress, departureTime, arrivalAddress, arrivalTime, price);
   }
 }

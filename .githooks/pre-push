@@ -2,6 +2,7 @@
 set -e
 
 if mvn rewrite:run; then
+	git add . && git commit -m "Automated: Linter"
 	printf "\e[1;32mSuccessful:\e[0m rewrite\n"
 else
 	printf "\e[1;31mError:\e[0m rewrite\n"

@@ -22,8 +22,8 @@ CREATE TABLE Flights (
     flightId VARCHAR(5) PRIMARY KEY,
     departureAddress VARCHAR(50),
     arrivalAddress VARCHAR(50),
-    departureTime DATE,
-    arrivalTime DATE,
+    departureTime VARCHAR(20),
+    arrivalTime VARCHAR(20),
     price INT
 );
 

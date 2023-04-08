@@ -35,6 +35,10 @@ public class DB {
     }
   }
 
+  public boolean isOpen() {
+    return conn != null;
+  }
+
   /**
    * returns a ResultSet containing data from
    * the database corresponding to the given query and values

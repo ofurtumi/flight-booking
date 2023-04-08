@@ -21,9 +21,8 @@ public class BookingController implements BookingControllerInterface {
 
     try {
       BR.createBooking(booking);
-      // hér þarf að uppfæra stöðu á sætum ásamt því að búa til nýja bókun
     } catch (Exception e) {
-      System.err.println(e);
+      System.err.println("Tókst ekki að bóka flug " + e);
     }
 
     return booking;
@@ -33,7 +32,7 @@ public class BookingController implements BookingControllerInterface {
     try {
       BR.deleteBooking(booking);
     } catch (Exception e) {
-      System.err.println(e);
+      System.err.println("Tókst ekki að afbóka flug " + e);
     }
   }
 
@@ -46,21 +45,24 @@ public class BookingController implements BookingControllerInterface {
       booking.addSeats(seat);
       BR.reserveSeat(booking, seat);
     } catch (Exception e) {
-      // TODO: handle exception
+      System.err.println("Tókst ekki að taka frá sæti " + e);
     }
   }
 
   public void removeSeat(Booking booking, Seat seat) {
-
     try {
       booking.removeSeats(seat);
       BR.removeSeat(booking, seat);
     } catch (Exception e) {
-      // TODO: handle exception
+      System.err.println("Tókst ekki að afbóka sæti " + e);
     }
   }
 
   public void updateSeat(Booking booking, Seat oldSeat, Seat newSeat) {
     throw new UnsupportedOperationException("Unimplemented method 'updateSeat', fuck you");
+  }
+
+  public boolean exists(Booking booking) {
+    return BR.checkIfExists(booking);
   }
 }

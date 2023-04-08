@@ -11,10 +11,6 @@ public class Seat {
     reserved = res;
   }
 
-  public String toString() {
-    return "ID: " + id + " reserved: " + reserved;
-  }
-
   public String getId() {
     return id;
   }
@@ -33,5 +29,25 @@ public class Seat {
 
   public void setReserved(boolean reserved) {
     this.reserved = reserved;
+  }
+
+  // equals method that checks if id, flightId and reservation is the same
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof Seat)) {
+      return false;
+    }
+    Seat s = (Seat) o;
+    return this.id.equals(s.getId())
+        && this.flightId.equals(s.getFlightId())
+        && this.reserved == s.isReserved();
+  }
+
+  @Override
+  public String toString() {
+    return String.format("Flight: %s, Seat: %s, Reserved: %b", this.flightId, this.id, this.reserved);
   }
 }

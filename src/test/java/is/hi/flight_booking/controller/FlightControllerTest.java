@@ -22,11 +22,11 @@ public class FlightControllerTest {
       "Vestmannaeyjar"};
   private final String[] destinations = {"Akureyri", "Ísafjörður", "Vestmannaeyjar", "Egilsstaðir", "Reykjavík",
       "Keflavík"};
-  FlightRepository flightRepo;
+  private FlightController FC;
 
   @Before
   public void setUp() {
-    flightRepo = new FlightRepository("db/test.db");
+    FC = new FlightController("db/test.db");
     flights = new ArrayList<>();
     for (int i = 0; i < departures.length; i++) {
       String id = "F-" + String.format("%03d", i);
@@ -59,18 +59,18 @@ public class FlightControllerTest {
   @Test
   public void GetFlight() {
     Flight expected = flights.get(0);
-    assertEquals(expected, flightRepo.getFlight("F-000"));
+    assertEquals(expected, FC.getFlight("F-000"));
   }
 
   @Test
   public void SortByTime() {
-    ArrayList<Flight> sorted = flightRepo.getSortedByTime();
+    ArrayList<Flight> sorted = new ArrayList<Flight>(FC.getSortedByTime());
     assertEquals(flights, sorted);
   }
 
   @Test
   public void SortByArrival() {
-    ArrayList<Flight> sorted = flightRepo.getSortedByArrival();
+    ArrayList<Flight> sorted = new ArrayList<Flight>(FC.getSortedByArrival());
 
     // þetta eru svo fá flug að þægilegast að raða bara í höndunum
     ArrayList<Flight> correct = new ArrayList<>();
@@ -88,13 +88,14 @@ public class FlightControllerTest {
 
   @Test
   public void SortByPrice() {
-    ArrayList<Flight> sorted = flightRepo.getSortedByPrice();
+    ArrayList<Flight> sorted = new ArrayList<Flight>(FC.getSortedByPrice());
     assertEquals(flights, sorted);
   }
 
   @Test
   public void SearchForFlight() {
-    ArrayList<Flight> filtered = flightRepo.searchFlights("Egilsstaðir", "Akureyri", LocalDate.of(2023, 2, 5));
+    ArrayList<Flight> filtered = new ArrayList<Flight>(
+        FC.searchFlights("Egilsstaðir", "Akureyri", LocalDate.of(2023, 2, 5)));
 
     assertEquals(flights.get(0).getFlightId(), filtered.get(0).getFlightId());
   }
@@ -102,6 +103,6 @@ public class FlightControllerTest {
   @After
   public void tearDown() {
     flights = null;
-    flightRepo = null;
+    FC = null;
   }
 }
