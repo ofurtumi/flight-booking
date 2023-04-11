@@ -19,6 +19,8 @@ public class SelectFlightsBothWaysController implements Initializable {
     @FXML
     private VBox fxReturnFlightsList;
 
+    private Flight selectedDepartureFlight;
+    private Flight selectedReturnFlightID;
     private BAppController flightListsBAppController;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -67,7 +69,7 @@ public class SelectFlightsBothWaysController implements Initializable {
         }
         fxReturnFlightsList.getChildren().clear();
         for(Flight flight : retFlights) {
-            FlightView newListedRetFlight = new FlightView(flight, false, null, this);
+            FlightView newListedRetFlight = new FlightView(flight, true, null, this);
             fxReturnFlightsList.getChildren().add(newListedRetFlight);
         }
 
@@ -79,5 +81,21 @@ public class SelectFlightsBothWaysController implements Initializable {
 
     public BAppController getFlightListsBAppController() {
         return flightListsBAppController;
+    }
+
+    public Flight getSelectedDepartureFlight() {
+        return selectedDepartureFlight;
+    }
+
+    public void setSelectedDepartureFlight(Flight selectedDepartureFlight) {
+        this.selectedDepartureFlight = selectedDepartureFlight;
+    }
+
+    public Flight getSelectedReturnFlightID() {
+        return selectedReturnFlightID;
+    }
+
+    public void setSelectedReturnFlightID(Flight selectedReturnFlightID) {
+        this.selectedReturnFlightID = selectedReturnFlightID;
     }
 }
