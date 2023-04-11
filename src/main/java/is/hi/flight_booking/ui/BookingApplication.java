@@ -17,6 +17,8 @@ public class BookingApplication extends Application {
   private BAppController storedBAppController;
   private SelectFlightsOneWayController storedOneWayController;
   private SelectFlightsBothWaysController storedBothWaysController;
+
+  private boolean useStored = false;
   @Override
     public void start(Stage stage) throws IOException {
     mainStage = stage;
@@ -66,6 +68,17 @@ public class BookingApplication extends Application {
 
     public void setStoredBothWaysController(SelectFlightsBothWaysController BothWaysControllerToStore) {
         this.storedBothWaysController = BothWaysControllerToStore;
+    }
+
+    public boolean getUseStored() {
+      return useStored;
+    }
+    
+    public void setUseStoredFalse() {
+      useStored = false;
+    }
+    public void setUseStoredTrue() {
+        useStored = true;
     }
 
     public static void main(String[] args) {
