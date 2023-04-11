@@ -13,6 +13,10 @@ public class BookingApplication extends Application {
   private static BookingApplication thisApplication;
   private Stage mainStage;
   private Scene mainScene;
+
+  private BAppController storedBAppController;
+  private SelectFlightsOneWayController storedOneWayController;
+  private SelectFlightsBothWaysController storedBothWaysController;
   @Override
     public void start(Stage stage) throws IOException {
     mainStage = stage;
@@ -39,7 +43,32 @@ public class BookingApplication extends Application {
   private void mySetScene(Parent newRoot) {
     mainScene = new Scene(newRoot, 1280, 720);
   }
-  public static void main(String[] args) {
+
+    public BAppController getStoredBAppController() {
+        return storedBAppController;
+    }
+
+    public void setStoredBAppController(BAppController BAppControllerToStore) {
+        this.storedBAppController = BAppControllerToStore;
+    }
+
+    public SelectFlightsOneWayController getStoredOneWayController() {
+        return storedOneWayController;
+    }
+
+    public void setStoredOneWayController(SelectFlightsOneWayController OneWayControllerToStore) {
+        this.storedOneWayController = OneWayControllerToStore;
+    }
+
+    public SelectFlightsBothWaysController getStoredBothWaysController() {
+        return storedBothWaysController;
+    }
+
+    public void setStoredBothWaysController(SelectFlightsBothWaysController BothWaysControllerToStore) {
+        this.storedBothWaysController = BothWaysControllerToStore;
+    }
+
+    public static void main(String[] args) {
     launch();
   }
 }
