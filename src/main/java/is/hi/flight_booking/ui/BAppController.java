@@ -129,7 +129,7 @@ public class BAppController implements Initializable {
                     actionEvent.consume();
                 }
             }
-        } else {
+        } else { // Það sem gerist ef ekki er hakað í "Báðar leiðir:" checkbox-ið
             if (fxFromDest.getValue() == null || fxToDest.getValue() == null
                     || fxDepDate.getValue() == null) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -156,7 +156,7 @@ public class BAppController implements Initializable {
                         }
                     }
                 }
-                if (fromFlightWithSeats) { // Ef næg sæti og flug á báðum listum
+                if (fromFlightWithSeats) { // Ef næg sæti í einhverju flugi í lista
                     BookingApplication bAppInstance = BookingApplication.getApplicationInstance();
                     bAppInstance.setStoredBAppController(this); // Þessi controller geymdur
                     bAppInstance.setUseStoredTrue(); // Til að vita hvort eigi að endurnýta valinn gildi ef hætt er við

@@ -8,6 +8,7 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.Locale;
 
 import is.hi.flight_booking.application.Flight;
 
@@ -33,13 +34,23 @@ public class FlightView extends HBox {
   private final Flight storedFlight;
   private final boolean isReturnFlight;
 
+  private SelectFlightsOneWayController sFOneWayController;
+  private SelectFlightsBothWaysController sFBothWaysController;
+
+
   // Flug tekið inn og geymt auk þess sem uppl. eru settar inn
-  public FlightView(Flight flight, boolean isRetFlight) {
+  public FlightView(Flight flight, boolean isRetFlight,
+            SelectFlightsOneWayController SFOWC, SelectFlightsBothWaysController SFBWC) {
+    if(SFOWC != null) {
+        sFOneWayController = SFOWC;
+    } else {
+        sFBothWaysController = SFBWC;
+    }
     readFlightView();
     storedFlight = flight;
     isReturnFlight = isRetFlight;
-    NumberFormat numberFormat = new DecimalFormat("#.###.-");
-    String formattedPrice = numberFormat.format((long) storedFlight.getPrice());
+    NumberFormat numberFormat = NumberFormat.getInstance(Locale.GERMANY);
+    String formattedPrice = numberFormat.format(storedFlight.getPrice());
     fxListedFlightID.setText(storedFlight.getFlightId());
     fxListedFlightFrom.setText(storedFlight.getDepartureAddress());
     fxListedFlightDest.setText(storedFlight.getArrivalAddress());
@@ -51,7 +62,7 @@ public class FlightView extends HBox {
   }
 
   private void readFlightView() {
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("flight_view.fxml"));
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/flight_view.fxml"));
     fxmlLoader.setRoot(this);
     fxmlLoader.setController(this);
 
