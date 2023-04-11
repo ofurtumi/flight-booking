@@ -7,7 +7,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 
@@ -83,7 +82,7 @@ public class BAppController implements Initializable {
         // uppfyllt
         System.out.println("Allir reitir úfyllitir / Halda áfram");
         BookingApplication bAppInstance = BookingApplication.getApplicationInstance();
-        bAppInstance.changeScene("/fxml/selectFlight_View.fxml");
+        bAppInstance.changeScene("/fxml/selectBothWays_View.fxml");
         actionEvent.consume();
       }
     } else {
@@ -98,7 +97,7 @@ public class BAppController implements Initializable {
         // Hér á auðvitað að eftir að græja það sem gerist þegar leitarskilyrði eru
         // uppfyllt
         BookingApplication bAppInstance = BookingApplication.getApplicationInstance();
-        bAppInstance.changeScene("/fxml/selectFlight_View.fxml");
+        bAppInstance.changeScene("/fxml/selectBothWays_View.fxml");
         actionEvent.consume();
         System.out.println("Allir reitir úfyllitir / Halda áfram");
       }
