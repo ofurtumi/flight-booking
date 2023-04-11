@@ -11,7 +11,7 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
   prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19"
-  xmlns:fx="http://javafx.com/fxml/1">
+  xmlns:fx="http://javafx.com/fxml/1" fx:controller="is.hi.flight_booking.ui.SelectFlightController">
   <children>
     <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0"
       style="-fx-background-color: #3d5a81;">
