@@ -69,7 +69,7 @@ public class BAppController implements Initializable {
   }
 
   @FXML // Það sem gerist þegar ýtt er á "LEITA" takkann
-  public void fxSearchButton(ActionEvent actionEvent) {
+  public void fxSearchButton(ActionEvent actionEvent) throws IOException {
     if (getFxBothWays()) {
       if (fxFromDest.getValue() == null || fxToDest.getValue() == null
           || fxDepDate.getValue() == null || fxRetDate.getValue() == null) {
@@ -82,6 +82,9 @@ public class BAppController implements Initializable {
         // Hér á auðvitað að eftir að græja það sem gerist þegar leitarskilyrði eru
         // uppfyllt
         System.out.println("Allir reitir úfyllitir / Halda áfram");
+        BookingApplication bAppInstance = BookingApplication.getApplicationInstance();
+        bAppInstance.changeScene("/fxml/selectFlight_View.fxml");
+        actionEvent.consume();
       }
     } else {
       if (fxFromDest.getValue() == null || fxToDest.getValue() == null
@@ -94,6 +97,9 @@ public class BAppController implements Initializable {
       } else {
         // Hér á auðvitað að eftir að græja það sem gerist þegar leitarskilyrði eru
         // uppfyllt
+        BookingApplication bAppInstance = BookingApplication.getApplicationInstance();
+        bAppInstance.changeScene("/fxml/selectFlight_View.fxml");
+        actionEvent.consume();
         System.out.println("Allir reitir úfyllitir / Halda áfram");
       }
     }
