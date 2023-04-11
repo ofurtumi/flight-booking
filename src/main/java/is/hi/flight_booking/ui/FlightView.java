@@ -34,6 +34,8 @@ public class FlightView extends HBox {
 
     private final Flight storedFlight;
     private final boolean isReturnFlight;
+    private final boolean isOneWay;
+    private boolean isSelected = false;
 
     private SelectFlightsOneWayController sFOneWayController;
     private SelectFlightsBothWaysController sFBothWaysController;
@@ -44,8 +46,10 @@ public class FlightView extends HBox {
                       SelectFlightsOneWayController SFOWC, SelectFlightsBothWaysController SFBWC) {
         if(SFOWC != null) {
             sFOneWayController = SFOWC;
+            isOneWay = true;
         } else {
             sFBothWaysController = SFBWC;
+            isOneWay = false;
         }
         readFlightView();
         storedFlight = flight;
@@ -76,10 +80,37 @@ public class FlightView extends HBox {
 
     @FXML
     public void fxListedFlightClickedHandler(MouseEvent e) {
-        System.out.println("Smellt á flug!");
+        if(getIsOneWay()) {
+            //Hér á eftir að útfæara oneWay
+            return;
+        } else {
+            if(isReturnFlight()){
+            //Hér á eftir að útfæra
+            }
+
+        }
         e.consume();
     }
 
+    private boolean getIsOneWay(){
+        return isOneWay;
+    }
+
+    public boolean isReturnFlight() {
+        return isReturnFlight;
+    }
+
+    public Flight getStoredFlight() {
+        return storedFlight;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
     // Hér á eftir að bæta við virkni. Þ.e.a.s hvað gerist þegar það er smellt á
     // FlightView.
 }
