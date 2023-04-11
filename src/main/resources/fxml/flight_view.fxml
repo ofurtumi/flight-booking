@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<fx:root alignment="CENTER" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="60.0" prefWidth="1185.0" style="-fx-background-radius: 10px; -fx-border-color: #3d5a81; -fx-border-width: 1; -fx-border-radius: 10px;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="120.0" HBox.hgrow="NEVER">
+         <children>
+            <Text fill="#3d5a80" strokeType="OUTSIDE" strokeWidth="0.0" text="Flug nr.:">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Text>
+            <Text fx:id="fxListedFlightID" strokeType="OUTSIDE" strokeWidth="0.0" text="XXXXX">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Text>
+         </children>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+         <children>
+            <Text fx:id="fxListedFlightFrom" fill="#3d5a80" strokeType="OUTSIDE" strokeWidth="0.0" text="HeitiBrottfararstaðar">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="&gt;&gt;&gt;">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </Text>
+            <Text fx:id="fxListedFlightDest" fill="#3d5a80" strokeType="OUTSIDE" strokeWidth="0.0" text="HeitiÁfangastaðar">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </Text>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+         <children>
+            <Text fill="#3d5a80" strokeType="OUTSIDE" strokeWidth="0.0" text="Laus sæti:">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </Text>
+            <Text fx:id="fxListedFlightSeatsAvailable" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="/">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="fxListedFlightTotalSeats" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Text>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+         <children>
+            <Text fill="#3d5a80" strokeType="OUTSIDE" strokeWidth="0.0" text="Dags:">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Text>
+            <Text fx:id="fxListedFlightDate" strokeType="OUTSIDE" strokeWidth="0.0" text="00.00.00">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Text>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+         <children>
+            <Text fill="#3d5a80" strokeType="OUTSIDE" strokeWidth="0.0" text="Verð pr. farþ.:">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </Text>
+            <Text fx:id="fxListedFlightPrice" strokeType="OUTSIDE" strokeWidth="0.0" text="999.999.-">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Text>
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets left="20.0" right="20.0" />
+   </padding>
+</fx:root>
