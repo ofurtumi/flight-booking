@@ -118,7 +118,7 @@
         <artifactId>javafx-maven-plugin</artifactId>
         <version>0.0.8</version>
         <configuration>
-          <mainClass>BookingApplication</mainClass>
+          <mainClass>is.hi.flight_booking.ui.BookingApplication</mainClass>
         </configuration>
       </plugin>
     </plugins>
