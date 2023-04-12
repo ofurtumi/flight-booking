@@ -18,11 +18,11 @@ import is.hi.flight_booking.repository.FlightRepository;
 public class FlightControllerTest {
 
   private ArrayList<Flight> flights;
-  private final String[] seatnumlist = { "A1", "A2", "B1", "B2", "C1", "C3" };
-  private final String[] departures = { "Egilsstaðir", "Reykjavík", "Keflavík", "Akureyri", "Ísafjörður",
-      "Vestmannaeyjar" };
-  private final String[] destinations = { "Akureyri", "Ísafjörður", "Vestmannaeyjar", "Egilsstaðir", "Reykjavík",
-      "Keflavík" };
+  private final String[] seatnumlist = {"A1", "A2", "B1", "B2", "C1", "C3"};
+  private final String[] departures = {"Egilsstaðir", "Reykjavík", "Keflavík", "Akureyri", "Ísafjörður",
+      "Vestmannaeyjar"};
+  private final String[] destinations = {"Akureyri", "Ísafjörður", "Vestmannaeyjar", "Egilsstaðir", "Reykjavík",
+      "Keflavík"};
   private FlightController FC;
 
   @Before
