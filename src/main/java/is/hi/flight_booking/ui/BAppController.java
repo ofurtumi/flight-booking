@@ -75,7 +75,7 @@ public class BAppController implements Initializable {
     }
 
     @FXML // Það sem gerist þegar ýtt er á "Báðar leiðir:" check-boxið
-    public void fxBothWaysCheckbox(ActionEvent actionEvent) throws IOException {
+    public void fxBothWaysCheckbox(ActionEvent actionEvent) {
         if (fxBothWays.isSelected()) {
             fxHeimkomaTxt.setVisible(true);
             fxRetDate.setVisible(true);
@@ -155,7 +155,7 @@ public class BAppController implements Initializable {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Misheppnuð leit");
                     alert.setHeaderText("Engar niðurstöður");
-                    alert.setContentText("Engin flug fundust sem passa við valda möguleika.");
+                    alert.setContentText("Engin flug fundust sem passa við valda möguleika eða þá að engin heimflug eru eftir brottför");
                     alert.showAndWait();
                     actionEvent.consume();
                 }
@@ -207,103 +207,6 @@ public class BAppController implements Initializable {
             }
         }
     }
-/*    @FXML // Það sem gerist þegar ýtt er á "LEITA" takkann
-    public void fxSearchButton(ActionEvent actionEvent) throws IOException {
-        if (getFxBothWays()) { // Það sem gerist ef hakað er í "Báðar leiðir" þegar ýtt er á "LEITA" takkann
-            if (getFxFromDest() == null || getFxToDest() == null // ef reitir ekki útfylltir
-                    || getFxDepDate() == null || getFxRetDate() == null) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Villa við leit");
-                alert.setHeaderText("Óútfylltir reitir");
-                alert.setContentText("Vinsamlegast kláraðu val í alla viðeigandi reiti.");
-                alert.showAndWait();
-                actionEvent.consume();
-            } else { // ef reitir eru útfylltir
-                // Leitað af flugum eftir útfylltum reitum og athugað hvort að flug finnist með nægum sætum.
-                flightController = new FlightController("db/test.db");
-                List<Flight> fromFlights = flightController.searchFlights(getFxFromDest(),
-                        getFxToDest(), getFxDepDate());
-                List<Flight> retFlights = flightController.searchFlights(getFxToDest(),
-                        getFxFromDest(), getFxRetDate());
-
-                System.out.println("fromFlights found: " + fromFlights.size());
-                System.out.println("destFlights found: " + retFlights.size());
-
-                boolean fromFlightWithSeats = false;
-                boolean retFlightWithSeats = false;
-                if (fromFlights.size() != 0 && retFlights.size() != 0) {
-                    for (Flight flight : fromFlights) { // Athuga hvort að næg sæti séu í boði frá brottfararstað
-                        if (flight.getNumSeatsAvailable() >= getFxNumPassengers()) {
-                            fromFlightWithSeats = true;
-                            break;
-                        }
-                    }
-                    for (Flight flight : retFlights) { // Athuga hvort að næg sæti séu í boði frá áfangastað
-                        if (flight.getNumSeatsAvailable() >= getFxNumPassengers()) {
-                            retFlightWithSeats = true;
-                            break;
-                        }
-                    }
-                }
-                if (fromFlightWithSeats && retFlightWithSeats) { // Ef næg sæti og flug á báðum listum
-                    BookingApplication bAppInstance = BookingApplication.getApplicationInstance();
-                    bAppInstance.setStoredBAppController(this); // Þessi controller geymdur
-                    bAppInstance.setUseStoredTrue(); // Til að vita hvort eigi að endurnýta valinn gildi ef hætt er við
-                    bAppInstance.changeScene("/fxml/selectBothWays_View.fxml");
-                    actionEvent.consume();
-                } else { // Ef annar hvor listinn var ekki með nægum sætum
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Misheppnuð leit");
-                    alert.setHeaderText("Engar niðurstöður");
-                    alert.setContentText("Engin flug fundust sem passa við valda möguleika.");
-                    alert.showAndWait();
-                    actionEvent.consume();
-                }
-            }
-        } else { // Það sem gerist ef ekki er hakað í "Báðar leiðir:" checkbox-ið
-            if (fxFromDest.getValue() == null || fxToDest.getValue() == null
-                    || fxDepDate.getValue() == null) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Villa við leit");
-                alert.setHeaderText("Óútfylltir reitir");
-                alert.setContentText("Vinsamlegast kláraðu val í alla viðeigandi reiti.");
-                alert.showAndWait();
-                actionEvent.consume();
-            } else { // ef reitir eru útfylltir
-                // Leitað af flugum eftir útfylltum reitum og athugað hvort að flug finnist með nægum sætum.
-                flightController = new FlightController("db/test.db");
-                List<Flight> fromFlights = flightController.searchFlights(getFxFromDest(),
-                        getFxToDest(), getFxDepDate());
-
-                System.out.println("fromFlights found: " + fromFlights.size());
-
-                boolean fromFlightWithSeats = false;
-
-                if (fromFlights.size() != 0) {
-                    for (Flight flight : fromFlights) { // Athuga hvort að næg sæti séu í boði frá brottfararstað
-                        if (flight.getNumSeatsAvailable() >= getFxNumPassengers()) {
-                            fromFlightWithSeats = true;
-                            break;
-                        }
-                    }
-                }
-                if (fromFlightWithSeats) { // Ef næg sæti í einhverju flugi í lista
-                    BookingApplication bAppInstance = BookingApplication.getApplicationInstance();
-                    bAppInstance.setStoredBAppController(this); // Þessi controller geymdur
-                    bAppInstance.setUseStoredTrue(); // Til að vita hvort eigi að endurnýta valinn gildi ef hætt er við
-                    bAppInstance.changeScene("/fxml/selectOneWay_View.fxml");
-                    actionEvent.consume();
-                } else { // Ef listinn var ekki með nægum sætum
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Misheppnuð leit");
-                    alert.setHeaderText("Engar niðurstöður");
-                    alert.setContentText("Engin flug fundust sem passa við valda möguleika.");
-                    alert.showAndWait();
-                    actionEvent.consume();
-                }
-            }
-        }
-    }*/
 
     @FXML // Það sem gerist þegar ýtt er á "Finna bókun" takkann
     public void fxSearchForBooking(ActionEvent actionEvent) {
