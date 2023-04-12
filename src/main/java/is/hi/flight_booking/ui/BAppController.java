@@ -34,10 +34,6 @@ public class BAppController implements Initializable {
     private DatePicker fxRetDate;
     @FXML
     private Text fxHeimkomaTxt;
-    @FXML
-    private Button fxFindBooking;
-    @FXML
-    private Button fxSearchFlights;
 
     private final String[] destinations = {"Akureyri", "Egilsstaðir", "Ísafjörður", "Keflavík", "Reykjavík",
             "Vestmannaeyjar"};
@@ -49,18 +45,29 @@ public class BAppController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // "Báðar leiðir:" stillt á sjálfvalið
         BookingApplication theApplication = BookingApplication.getApplicationInstance();
+        fxBothWays.setAllowIndeterminate(false);
+        ObservableList<String> numberOfPassengersList = FXCollections.observableArrayList(numberOfPassengers);
+        fxNumPassengers.setItems(numberOfPassengersList);
+        ObservableList<String> destinationsList = FXCollections.observableArrayList(destinations);
+        fxFromDest.setItems(destinationsList);
+        fxToDest.setItems(destinationsList);
 
         if(!theApplication.getUseStored()) { // Fyrir fyrstu ræsingu og ef bókun tókst
-            fxBothWays.setAllowIndeterminate(false);
             fxBothWays.setSelected(true);
-
-            // Dropdown menu stillt
-            ObservableList<String> numberOfPassengersList = FXCollections.observableArrayList(numberOfPassengers);
-            fxNumPassengers.setItems(numberOfPassengersList);
             fxNumPassengers.getSelectionModel().selectFirst();
-            ObservableList<String> destinationsList = FXCollections.observableArrayList(destinations);
-            fxFromDest.setItems(destinationsList);
-            fxToDest.setItems(destinationsList);
+
+        } else {
+            fxNumPassengers.getSelectionModel().select(
+                    Integer.toString(theApplication.getStoredBAppController().getFxNumPassengers()));
+            fxBothWays.setSelected(theApplication.getStoredBAppController().getFxBothWays());
+            fxFromDest.getSelectionModel().select(theApplication.getStoredBAppController().getFxFromDest());
+            fxToDest.getSelectionModel().select(theApplication.getStoredBAppController().getFxToDest());
+            if(theApplication.getStoredBAppController().getFxDepDate() != null) {
+                fxDepDate.setValue(theApplication.getStoredBAppController().getFxDepDate());
+            }
+            if(theApplication.getStoredBAppController().getFxRetDate() != null) {
+                fxRetDate.setValue(theApplication.getStoredBAppController().getFxRetDate());
+            }
         }
     }
 

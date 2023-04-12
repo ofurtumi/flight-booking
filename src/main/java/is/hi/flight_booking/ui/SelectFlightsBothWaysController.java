@@ -2,13 +2,12 @@ package is.hi.flight_booking.ui;
 
 import is.hi.flight_booking.application.Flight;
 import is.hi.flight_booking.controller.FlightController;
-import javafx.collections.ObservableArray;
-import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -61,6 +60,12 @@ public class SelectFlightsBothWaysController implements Initializable {
         }
         listFlights(updatedDepartureFlights, updatedReturnFlights);
 
+    }
+    @FXML
+    public void fxBack(ActionEvent backPressed) throws IOException {
+        BookingApplication application = BookingApplication.getApplicationInstance();
+        application.changeScene("/fxml/bookingApplication_View.fxml");
+        backPressed.consume();
     }
 
     //Aðferðin sem býr til viðmóts elementið fyrir hvert flug

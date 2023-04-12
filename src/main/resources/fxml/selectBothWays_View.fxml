@@ -56,7 +56,7 @@
     </ScrollPane>
     <HBox alignment="CENTER_RIGHT" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0">
       <children>
-        <Button fx:id="fxBackToSearch" mnemonicParsing="false" prefHeight="60.0" prefWidth="200.0" text="TIL BAKA">
+        <Button fx:id="fxBackToSearch" mnemonicParsing="false" onAction="#fxBack" prefHeight="60.0" prefWidth="200.0" text="TIL BAKA">
           <font>
             <Font name="Arial Bold" size="16.0" />
           </font>
