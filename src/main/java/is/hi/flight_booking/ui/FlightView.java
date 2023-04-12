@@ -42,7 +42,6 @@ public class FlightView extends HBox {
     private final boolean isReturnFlight;
     private final boolean isOneWay;
     private BooleanProperty selected = new SimpleBooleanProperty(false);
-
     private SelectFlightsOneWayController sFOneWayController;
     private SelectFlightsBothWaysController sFBothWaysController;
 
@@ -158,7 +157,7 @@ public class FlightView extends HBox {
         flightView.setBackground(new Background(
                 new BackgroundFill(Color.web("#F4F4F4"), new CornerRadii(10.0), null)));
     }
-    private boolean getIsOneWay(){
+    private boolean getIsOneWay() {
         return isOneWay;
     }
 
