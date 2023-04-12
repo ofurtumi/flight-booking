@@ -1,5 +1,6 @@
 package is.hi.flight_booking.controller;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
@@ -98,6 +99,12 @@ public class FlightControllerTest {
         FC.searchFlights("Egilsstaðir", "Akureyri", LocalDate.of(2023, 2, 5)));
 
     assertEquals(flights.get(0).getFlightId(), filtered.get(0).getFlightId());
+  }
+
+  @Test
+  public void actualSearch() {
+    ArrayList<Flight> filtered = new ArrayList<>(FC.searchFlights("Reykjavík", "Akureyri", LocalDate.of(2023, 2, 5)));
+    assertTrue(filtered.isEmpty());
   }
 
   @After
