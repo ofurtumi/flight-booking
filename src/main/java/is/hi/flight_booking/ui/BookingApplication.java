@@ -18,7 +18,7 @@ public class BookingApplication extends Application {
   private SelectFlightsOneWayController storedOneWayController;
   private SelectFlightsBothWaysController storedBothWaysController;
 
-  private boolean useStored = false;
+  private boolean useStored;
   @Override
     public void start(Stage stage) throws IOException {
     mainStage = stage;
