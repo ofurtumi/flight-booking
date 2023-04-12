@@ -94,6 +94,8 @@ public class FlightView extends HBox {
         } else {
             if(this.isReturnFlight()){
                 if(this.isSelected()){
+                    System.out.println("Already selected. Currently stored ret. fligth id: "
+                            + SFBWC.getSelectedReturnFlight().getStoredFlight().getFlightId());
                     e.consume();
                 } else {
                     FlightView oldReturnFW = SFBWC.getSelectedReturnFlight();
@@ -116,6 +118,8 @@ public class FlightView extends HBox {
 
             } else {
                 if(this.isSelected()){
+                    System.out.println("Already selected. Currently stored dep. fligth id: "
+                            + SFBWC.getSelectedDepartureFlight().getStoredFlight().getFlightId());
                     e.consume();
                 } else {
                     FlightView oldDepartureFW = SFBWC.getSelectedDepartureFlight();
