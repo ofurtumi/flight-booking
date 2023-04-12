@@ -1,5 +1,7 @@
 package is.hi.flight_booking.ui;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
@@ -39,7 +41,7 @@ public class FlightView extends HBox {
     private final Flight storedFlight;
     private final boolean isReturnFlight;
     private final boolean isOneWay;
-    private boolean isSelected = false;
+    private BooleanProperty selected = new SimpleBooleanProperty(false);
 
     private SelectFlightsOneWayController sFOneWayController;
     private SelectFlightsBothWaysController sFBothWaysController;
@@ -85,37 +87,71 @@ public class FlightView extends HBox {
     @FXML
     public void fxListedFlightClickedHandler(MouseEvent e) {
         SelectFlightsBothWaysController SFBWC = getsFBothWaysController();
-        if(getIsOneWay()) {
+        if(this.getIsOneWay()) {
+            e.consume();
             //Hér á eftir að útfæara oneWay
             return;
         } else {
-            if(isReturnFlight()){
-                if(isSelected()){
+            if(this.isReturnFlight()){
+                if(this.isSelected()){
                     e.consume();
-                    return;
                 } else {
-                    SFBWC.deselect(true);
-                    this.setSelected(true);
-                    this.setSelectedBG();
-                    SFBWC.setSelectedReturnFlight(this.getStoredFlight());
-                    e.consume();
+                    FlightView oldReturnFW = SFBWC.getSelectedReturnFlight();
+                    if(oldReturnFW != null) {
+                        oldReturnFW.setSelected(false);
+                        setUnselectedBG(oldReturnFW);
+                        this.setSelected(true);
+                        setSelectedBG(this);
+                        SFBWC.setSelectedReturnFlight(this);
+                        System.out.println("Stored return fligth id: " + SFBWC.getSelectedReturnFlight().getStoredFlight().getFlightId());
+                        e.consume();
+                    } else {
+                        this.setSelected(true);
+                        setSelectedBG(this);
+                        SFBWC.setSelectedReturnFlight(this);
+                        System.out.println("Stored return fligth id: " + SFBWC.getSelectedReturnFlight().getStoredFlight().getFlightId());
+                        e.consume();
+                    }
                 }
 
             } else {
-                SFBWC.deselect(false);
-                this.setSelected(true);
-                this.setSelectedBG();
-                SFBWC.setSelectedDepartureFlight(this.getStoredFlight());
-                e.consume();
+                if(this.isSelected()){
+                    e.consume();
+                } else {
+                    FlightView oldDepartureFW = SFBWC.getSelectedDepartureFlight();
+                    if (oldDepartureFW != null) {
+                        oldDepartureFW.setSelected(false);
+                        setUnselectedBG(oldDepartureFW);
+                        this.setSelected(true);
+                        setSelectedBG(this);
+                        SFBWC.setSelectedDepartureFlight(this);
+                        System.out.println("Stored departure fligth id: " + SFBWC.getSelectedDepartureFlight().getStoredFlight().getFlightId());
+                        e.consume();
+                    } else {
+                        this.setSelected(true);
+                        setSelectedBG(this);
+                        SFBWC.setSelectedDepartureFlight(this);
+                        System.out.println("Stored departure fligth id: " + SFBWC.getSelectedDepartureFlight().getStoredFlight().getFlightId());
+                        e.consume();
+                    }
+                }
             }
         }
+        if(SFBWC.getSelectedDepartureFlight() != null){
+            setSelectedBG(SFBWC.getSelectedDepartureFlight());
+            SFBWC.getSelectedDepartureFlight().setSelected(true);
+        }
+        if(SFBWC.getSelectedReturnFlight() != null){
+            setSelectedBG(SFBWC.getSelectedReturnFlight());
+            SFBWC.getSelectedReturnFlight().setSelected(true);
+        }
     }
-    public void setSelectedBG() {
-        this.setBackground(new Background(
+    public void setSelectedBG(FlightView flightView) {
+        flightView.setBackground(new Background(
                 new BackgroundFill(Color.LIGHTSTEELBLUE, new CornerRadii(10.0), null)));
     }
-    public void setUnselectedBG() {
-        this.setBackground(new Background(
+    public void setUnselectedBG(FlightView flightView) {
+        flightView.setBackground(new Background(
                 new BackgroundFill(Color.web("#F4F4F4"), new CornerRadii(10.0), null)));
     }
     private boolean getIsOneWay(){
@@ -131,11 +167,15 @@ public class FlightView extends HBox {
     }
 
     public boolean isSelected() {
-        return isSelected;
+        return selected.get();
+    }
+
+    public BooleanProperty selectedProperty() {
+        return selected;
     }
 
     public void setSelected(boolean selected) {
-        isSelected = selected;
+        this.selected.set(selected);
     }
 
     public SelectFlightsOneWayController getsFOneWayController() {
