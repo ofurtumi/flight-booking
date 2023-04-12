@@ -2,8 +2,10 @@ package is.hi.flight_booking.ui;
 
 import is.hi.flight_booking.application.Flight;
 import is.hi.flight_booking.controller.FlightController;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
@@ -20,7 +22,7 @@ public class SelectFlightsBothWaysController implements Initializable {
     private VBox fxReturnFlightsList;
 
     private Flight selectedDepartureFlight;
-    private Flight selectedReturnFlightID;
+    private Flight selectedReturnFlight;
     private BAppController flightListsBAppController;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -75,6 +77,30 @@ public class SelectFlightsBothWaysController implements Initializable {
 
     }
 
+    public void deselect(boolean isReturnList) {
+        if(isReturnList) {
+            ObservableList<Node> listedRetFlights = fxReturnFlightsList.getChildren();
+            for(Node node : listedRetFlights) {
+                FlightView fw = (FlightView) node;
+                if(fw.isSelected()) {
+                    fw.setSelected(false);
+                    setSelectedReturnFlight(null);
+                    fw.setUnselectedBG();
+                }
+            }
+        } else {
+            ObservableList<Node> listedDepFlights = fxTakeoffFlightsList.getChildren();
+            for(Node node : listedDepFlights) {
+                FlightView fw = (FlightView) node;
+                if(fw.isSelected()) {
+                    fw.setSelected(false);
+                    setSelectedDepartureFlight(null);
+                    fw.setUnselectedBG();
+                }
+            }
+        }
+    }
+
     public void setFlightListsBAppController(BAppController theFlightListsBAppController) {
         flightListsBAppController = theFlightListsBAppController;
     }
@@ -91,11 +117,11 @@ public class SelectFlightsBothWaysController implements Initializable {
         this.selectedDepartureFlight = selectedDepartureFlight;
     }
 
-    public Flight getSelectedReturnFlightID() {
-        return selectedReturnFlightID;
+    public Flight getSelectedReturnFlight() {
+        return selectedReturnFlight;
     }
 
-    public void setSelectedReturnFlightID(Flight selectedReturnFlightID) {
-        this.selectedReturnFlightID = selectedReturnFlightID;
+    public void setSelectedReturnFlight(Flight selectedReturnFlight) {
+        this.selectedReturnFlight = selectedReturnFlight;
     }
 }

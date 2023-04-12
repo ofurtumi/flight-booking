@@ -3,7 +3,11 @@ package is.hi.flight_booking.ui;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -80,18 +84,40 @@ public class FlightView extends HBox {
 
     @FXML
     public void fxListedFlightClickedHandler(MouseEvent e) {
+        SelectFlightsBothWaysController SFBWC = getsFBothWaysController();
         if(getIsOneWay()) {
             //Hér á eftir að útfæara oneWay
             return;
         } else {
             if(isReturnFlight()){
-            //Hér á eftir að útfæra
+                if(isSelected()){
+                    e.consume();
+                    return;
+                } else {
+                    SFBWC.deselect(true);
+                    this.setSelected(true);
+                    this.setSelectedBG();
+                    SFBWC.setSelectedReturnFlight(this.getStoredFlight());
+                    e.consume();
+                }
+
+            } else {
+                SFBWC.deselect(false);
+                this.setSelected(true);
+                this.setSelectedBG();
+                SFBWC.setSelectedDepartureFlight(this.getStoredFlight());
+                e.consume();
             }
-
         }
-        e.consume();
     }
-
+    public void setSelectedBG() {
+        this.setBackground(new Background(
+                new BackgroundFill(Color.LIGHTSTEELBLUE, new CornerRadii(10.0), null)));
+    }
+    public void setUnselectedBG() {
+        this.setBackground(new Background(
+                new BackgroundFill(Color.web("#F4F4F4"), new CornerRadii(10.0), null)));
+    }
     private boolean getIsOneWay(){
         return isOneWay;
     }
@@ -110,6 +136,14 @@ public class FlightView extends HBox {
 
     public void setSelected(boolean selected) {
         isSelected = selected;
+    }
+
+    public SelectFlightsOneWayController getsFOneWayController() {
+        return sFOneWayController;
+    }
+
+    public SelectFlightsBothWaysController getsFBothWaysController() {
+        return sFBothWaysController;
     }
     // Hér á eftir að bæta við virkni. Þ.e.a.s hvað gerist þegar það er smellt á
     // FlightView.
