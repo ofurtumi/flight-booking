@@ -138,7 +138,8 @@ public class FlightRepository implements FlightRepositoryInterface {
       values[1] = arrAddress;
       ArrayList<Flight> flights = new ArrayList<>();
 
-      ResultSet rs = db.query("select * from Flights where departureAddress = ? and arrivalAddress = ?", values);
+      ResultSet rs = db.query("select * from Flights where departureAddress = ? and arrivalAddress = ? order by price",
+          values);
       while (rs.next()) {
         LocalDate tempDate = LocalDate.parse(rs.getString("departureTime"));
         if (depTime == null || tempDate.equals(depTime)) {
@@ -176,7 +177,7 @@ public class FlightRepository implements FlightRepositoryInterface {
       values[1] = arrAddress;
       ArrayList<Flight> flights = new ArrayList<>();
 
-      ResultSet rs = db.query("select * from Flights where departureAddress = ?", depAddress);
+      ResultSet rs = db.query("select * from Flights where departureAddress = ? order by price", depAddress);
       while (rs.next()) {
         String flightId = rs.getString("flightId");
         ArrayList<Seat> seatlist = new ArrayList<>();

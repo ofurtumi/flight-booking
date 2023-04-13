@@ -41,7 +41,7 @@ public class FlightView extends HBox {
     private final Flight storedFlight;
     private final boolean isReturnFlight;
     private final boolean isOneWay;
-    private BooleanProperty selected = new SimpleBooleanProperty(false);
+  private final BooleanProperty selected = new SimpleBooleanProperty(false);
     private SelectFlightsOneWayController sFOneWayController;
     private SelectFlightsBothWaysController sFBothWaysController;
 
