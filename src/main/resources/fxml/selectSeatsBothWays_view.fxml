@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="is.hi.flight_booking.ui.SelectSeatsBothWaysController">
    <children>
       <HBox pickOnBounds="false" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
@@ -24,12 +24,12 @@
                            <children>
                               <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Veldu sæti fyrir flug  ">
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Brottför - flug: ">
                                        <font>
                                           <Font name="Arial Bold" size="36.0" />
                                        </font>
                                     </Text>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="XXXXX">
+                                    <Text fx:id="fxDepHeaderFlightNum" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="XXXXX">
                                        <font>
                                           <Font name="Arial Bold" size="36.0" />
                                        </font>
@@ -38,7 +38,7 @@
                               </HBox>
                               <HBox minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
                                  <children>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="departure">
+                                    <Text fx:id="fxDepFromLocation" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="departure">
                                        <font>
                                           <Font name="Arial Bold" size="24.0" />
                                        </font>
@@ -48,7 +48,7 @@
                                           <Font name="Arial Bold" size="24.0" />
                                        </font>
                                     </Text>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="destination">
+                                    <Text fx:id="fxDepToLocation" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="destination">
                                        <font>
                                           <Font name="Arial Bold" size="24.0" />
                                        </font>
@@ -58,7 +58,7 @@
                                           <Font name="Arial Bold" size="24.0" />
                                        </font>
                                     </Text>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Date">
+                                    <Text fx:id="fxDepDate" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Date">
                                        <font>
                                           <Font name="Arial Bold" size="24.0" />
                                        </font>
@@ -86,7 +86,7 @@
                                           <Insets right="5.0" />
                                        </HBox.margin>
                                     </Text>
-                                    <Text fill="#3d5a80" strokeType="OUTSIDE" strokeWidth="0.0" text="9">
+                                    <Text fx:id="fxDepSeatsSelected" fill="#3d5a80" strokeType="OUTSIDE" strokeWidth="0.0" text="9">
                                        <font>
                                           <Font name="Arial Bold" size="18.0" />
                                        </font>
@@ -102,7 +102,7 @@
                                           <Insets right="3.0" />
                                        </HBox.margin>
                                     </Text>
-                                    <Text fill="#3d5a80" strokeType="OUTSIDE" strokeWidth="0.0" text="9">
+                                    <Text fx:id="fxDepSeatsTotal" fill="#3d5a80" strokeType="OUTSIDE" strokeWidth="0.0" text="9">
                                        <font>
                                           <Font name="Arial Bold" size="18.0" />
                                        </font>
@@ -111,7 +111,7 @@
                               </HBox>
                               <HBox alignment="CENTER" maxWidth="-Infinity" prefHeight="100.0" prefWidth="240.0" spacing="20.0" style="-fx-background-color: #3d5a81;" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #ffffff; -fx-border-width: 3px;">
+                                    <VBox fx:id="fxDepA1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#fxDepA1Click" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #ffffff; -fx-border-width: 3px;">
                                        <children>
                                           <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="A1">
                                              <font>
@@ -120,7 +120,7 @@
                                           </Text>
                                        </children>
                                     </VBox>
-                                    <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #ffffff; -fx-border-width: 3px;">
+                                    <VBox fx:id="fxDepA2" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#fxDepA2Click" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #ffffff; -fx-border-width: 3px;">
                                        <children>
                                           <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="A2">
                                              <font>
@@ -136,7 +136,7 @@
                               </HBox>
                               <HBox alignment="CENTER" maxWidth="-Infinity" pickOnBounds="false" prefHeight="100.0" prefWidth="240.0" spacing="20.0" style="-fx-background-color: #3d5a81;" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #ffffff; -fx-border-width: 3px;">
+                                    <VBox fx:id="fxDepB1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#fxDepB1Click" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #ffffff; -fx-border-width: 3px;">
                                        <children>
                                           <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="B1">
                                              <font>
@@ -145,7 +145,7 @@
                                           </Text>
                                        </children>
                                     </VBox>
-                                    <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #ffffff; -fx-border-width: 3px;">
+                                    <VBox fx:id="fxDepB2" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#fxDepB2Click" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #ffffff; -fx-border-width: 3px;">
                                        <children>
                                           <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="B2">
                                              <font>
@@ -161,7 +161,7 @@
                               </HBox>
                               <HBox alignment="CENTER" maxWidth="-Infinity" pickOnBounds="false" prefHeight="100.0" prefWidth="240.0" spacing="20.0" style="-fx-background-color: #3d5a81;" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #ffffff; -fx-border-width: 3px;">
+                                    <VBox fx:id="fxDepC1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#fxDepC1Click" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #ffffff; -fx-border-width: 3px;">
                                        <children>
                                           <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="C1">
                                              <font>
@@ -170,7 +170,7 @@
                                           </Text>
                                        </children>
                                     </VBox>
-                                    <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #ffffff; -fx-border-width: 3px;">
+                                    <VBox fx:id="fxDepC2" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#fxDepC2Click" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #ffffff; -fx-border-width: 3px;">
                                        <children>
                                           <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="C2">
                                              <font>
@@ -248,7 +248,7 @@
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>
                               </Text>
-                              <TextField maxWidth="-Infinity" prefWidth="200.0" promptText="ddmmááxxxx" />
+                              <TextField fx:id="fxDepUserID" maxWidth="-Infinity" prefWidth="200.0" promptText="ddmmááxxxx" />
                               <Text fill="#404040" strokeType="OUTSIDE" strokeWidth="0.0" text="A.T.H. kennitala verður að vera án bilstafa og merkja">
                                  <VBox.margin>
                                     <Insets bottom="40.0" />
@@ -261,7 +261,7 @@
                                           <Font name="Arial Bold" size="18.0" />
                                        </font>
                                     </Text>
-                                    <Text fill="#3d5a80" strokeType="OUTSIDE" strokeWidth="0.0" text="XXXXX">
+                                    <Text fx:id="fxDepMinorFlightNum" fill="#3d5a80" strokeType="OUTSIDE" strokeWidth="0.0" text="XXXXX">
                                        <font>
                                           <Font name="Arial Bold" size="18.0" />
                                        </font>
@@ -275,7 +275,7 @@
                               </HBox>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Text fill="#3d5a80" strokeType="OUTSIDE" strokeWidth="0.0" text="999.999">
+                                    <Text fx:id="fxDepTotalPrice" fill="#3d5a80" strokeType="OUTSIDE" strokeWidth="0.0" text="999.999">
                                        <font>
                                           <Font name="Arial Bold" size="36.0" />
                                        </font>
@@ -307,12 +307,12 @@
                            <children>
                               <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Veldu sæti fyrir flug  ">
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Heimkoma - flug: ">
                                        <font>
                                           <Font name="Arial Bold" size="36.0" />
                                        </font>
                                     </Text>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="XXXXX">
+                                    <Text fx:id="fxRetHeaderFlightNum" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="XXXXX">
                                        <font>
                                           <Font name="Arial Bold" size="36.0" />
                                        </font>
@@ -321,7 +321,7 @@
                               </HBox>
                               <HBox minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
                                  <children>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="departure">
+                                    <Text fx:id="fxRetFromLocation" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="departure">
                                        <font>
                                           <Font name="Arial Bold" size="24.0" />
                                        </font>
@@ -331,7 +331,7 @@
                                           <Font name="Arial Bold" size="24.0" />
                                        </font>
                                     </Text>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="destination">
+                                    <Text fx:id="fxRetToLocation" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="destination">
                                        <font>
                                           <Font name="Arial Bold" size="24.0" />
                                        </font>
@@ -341,7 +341,7 @@
                                           <Font name="Arial Bold" size="24.0" />
                                        </font>
                                     </Text>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Date">
+                                    <Text fx:id="fxRetDate" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Date">
                                        <font>
                                           <Font name="Arial Bold" size="24.0" />
                                        </font>
@@ -369,7 +369,7 @@
                                           <Insets right="5.0" />
                                        </HBox.margin>
                                     </Text>
-                                    <Text fill="#3d5a80" strokeType="OUTSIDE" strokeWidth="0.0" text="9">
+                                    <Text fx:id="fxRetSeatsSelected" fill="#3d5a80" strokeType="OUTSIDE" strokeWidth="0.0" text="9">
                                        <font>
                                           <Font name="Arial Bold" size="18.0" />
                                        </font>
@@ -385,7 +385,7 @@
                                           <Insets right="3.0" />
                                        </HBox.margin>
                                     </Text>
-                                    <Text fill="#3d5a80" strokeType="OUTSIDE" strokeWidth="0.0" text="9">
+                                    <Text fx:id="fxRetSeatsTotal" fill="#3d5a80" strokeType="OUTSIDE" strokeWidth="0.0" text="9">
                                        <font>
                                           <Font name="Arial Bold" size="18.0" />
                                        </font>
@@ -394,7 +394,7 @@
                               </HBox>
                               <HBox alignment="CENTER" maxWidth="-Infinity" prefHeight="100.0" prefWidth="240.0" spacing="20.0" style="-fx-background-color: #3d5a81;" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #ffffff; -fx-border-width: 3px;">
+                                    <VBox fx:id="fxRetA1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#fxRetA1Click" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #ffffff; -fx-border-width: 3px;">
                                        <children>
                                           <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="A1">
                                              <font>
@@ -403,7 +403,7 @@
                                           </Text>
                                        </children>
                                     </VBox>
-                                    <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #ffffff; -fx-border-width: 3px;">
+                                    <VBox fx:id="fxRetA2" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#fxRetA2Click" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #ffffff; -fx-border-width: 3px;">
                                        <children>
                                           <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="A2">
                                              <font>
@@ -419,7 +419,7 @@
                               </HBox>
                               <HBox alignment="CENTER" maxWidth="-Infinity" pickOnBounds="false" prefHeight="100.0" prefWidth="240.0" spacing="20.0" style="-fx-background-color: #3d5a81;" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #ffffff; -fx-border-width: 3px;">
+                                    <VBox fx:id="fxRetB1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#fxRetB1Click" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #ffffff; -fx-border-width: 3px;">
                                        <children>
                                           <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="B1">
                                              <font>
@@ -428,7 +428,7 @@
                                           </Text>
                                        </children>
                                     </VBox>
-                                    <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #ffffff; -fx-border-width: 3px;">
+                                    <VBox fx:id="fxRetB2" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#fxRetB2Click" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #ffffff; -fx-border-width: 3px;">
                                        <children>
                                           <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="B2">
                                              <font>
@@ -444,7 +444,7 @@
                               </HBox>
                               <HBox alignment="CENTER" maxWidth="-Infinity" pickOnBounds="false" prefHeight="100.0" prefWidth="240.0" spacing="20.0" style="-fx-background-color: #3d5a81;" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #ffffff; -fx-border-width: 3px;">
+                                    <VBox fx:id="fxRetC1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#fxRetC1Click" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #ffffff; -fx-border-width: 3px;">
                                        <children>
                                           <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="C1">
                                              <font>
@@ -453,7 +453,7 @@
                                           </Text>
                                        </children>
                                     </VBox>
-                                    <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #ffffff; -fx-border-width: 3px;">
+                                    <VBox fx:id="fxRetC2" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#fxRetC2Click" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #ffffff; -fx-border-width: 3px;">
                                        <children>
                                           <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="C2">
                                              <font>
@@ -531,7 +531,7 @@
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>
                               </Text>
-                              <TextField maxWidth="-Infinity" prefWidth="200.0" promptText="ddmmááxxxx" />
+                              <TextField fx:id="fxRetUserID" maxWidth="-Infinity" prefWidth="200.0" promptText="ddmmááxxxx" />
                               <Text fill="#404040" strokeType="OUTSIDE" strokeWidth="0.0" text="A.T.H. kennitala verður að vera án bilstafa og merkja">
                                  <VBox.margin>
                                     <Insets bottom="40.0" />
@@ -544,7 +544,7 @@
                                           <Font name="Arial Bold" size="18.0" />
                                        </font>
                                     </Text>
-                                    <Text fill="#3d5a80" strokeType="OUTSIDE" strokeWidth="0.0" text="XXXXX">
+                                    <Text fx:id="fxRetMinorFlightNum" fill="#3d5a80" strokeType="OUTSIDE" strokeWidth="0.0" text="XXXXX">
                                        <font>
                                           <Font name="Arial Bold" size="18.0" />
                                        </font>
@@ -558,7 +558,7 @@
                               </HBox>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Text fill="#3d5a80" strokeType="OUTSIDE" strokeWidth="0.0" text="999.999">
+                                    <Text fx:id="fxRetTotalPrice" fill="#3d5a80" strokeType="OUTSIDE" strokeWidth="0.0" text="999.999">
                                        <font>
                                           <Font name="Arial Bold" size="36.0" />
                                        </font>
@@ -585,7 +585,7 @@
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="300.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="220.0" text="TIL BAKA">
+                  <Button fx:id="fxBackButton" mnemonicParsing="false" onAction="#fxBackHandler" prefHeight="70.0" prefWidth="220.0" text="TIL BAKA">
                      <font>
                         <Font name="Arial Bold" size="28.0" />
                      </font>
@@ -599,7 +599,7 @@
                         <Font name="Arial Bold" size="48.0" />
                      </font>
                   </Text>
-                  <Text fill="#3d5a81" strokeType="OUTSIDE" strokeWidth="0.0" text="999.999">
+                  <Text fx:id="fxFinalPrice" fill="#3d5a81" strokeType="OUTSIDE" strokeWidth="0.0" text="999.999">
                      <font>
                         <Font name="Arial Bold" size="48.0" />
                      </font>
@@ -609,7 +609,7 @@
                         <Font name="Arial Bold" size="48.0" />
                      </font>
                   </Text>
-                  <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="220.0" text="BÓKA">
+                  <Button fx:id="fxBookButton" mnemonicParsing="false" onAction="#fxMakeBookingHandler" prefHeight="70.0" prefWidth="220.0" text="BÓKA">
                      <HBox.margin>
                         <Insets left="40.0" />
                      </HBox.margin>
