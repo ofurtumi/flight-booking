@@ -48,22 +48,56 @@ public class SelectFlightsBothWaysController implements Initializable {
         //Listarnir rúnir flugum sem ekki eru með næg sæti (ef þau skyldu vera til staðar)
         List<Flight> updatedDepartureFlights = new ArrayList<>();
         List<Flight> updatedReturnFlights = new ArrayList<>();
+
+        // Flug með ekki næg sæti filteruð út
         for (Flight flight : departureFlights) {
             if(flight.getNumSeatsAvailable() >= numberOfPassenger) {
                 updatedDepartureFlights.add(flight);
             }
         }
-        LocalDate fromFlightMinDate = null;
-        for (Flight flight : updatedDepartureFlights) {
-            if(fromFlightMinDate == null || flight.getArrivalTime().isBefore(fromFlightMinDate)) {
-                fromFlightMinDate = flight.getArrivalTime();
-            }
-        }
         for (Flight flight : returnFlights) {
-            if(flight.getNumSeatsAvailable() >= numberOfPassenger
-                    && flight.getArrivalTime().isAfter(fromFlightMinDate)) {
+            if(flight.getNumSeatsAvailable() >= numberOfPassenger) {
                 updatedReturnFlights.add(flight);
             }
+        }
+        // ---------------------------
+
+        // Passað upp á að ekki séu birt flug sem ekki passa saman (ef dags er valin fyrir aðra leiðina)
+        if((updatedDepartureFlights.size() == 1 && updatedReturnFlights.size() > 1)
+                || (updatedReturnFlights.size() == 1 && updatedDepartureFlights.size() > 1)) {
+            if(updatedDepartureFlights.size() == 1) {
+                LocalDate fromFlightDate = updatedDepartureFlights.get(0).getArrivalTime();
+                List<Flight> newRetList = new ArrayList<>();
+                for(Flight flight : updatedReturnFlights){
+                    if(flight.getArrivalTime().isAfter(fromFlightDate)) {
+                        newRetList.add(flight);
+                    }
+                }
+                updatedReturnFlights = newRetList;
+            } else {
+                LocalDate retFlightDate = updatedReturnFlights.get(0).getArrivalTime();
+                List<Flight> newDepList = new ArrayList<>();
+                for(Flight flight : updatedDepartureFlights){
+                    if(flight.getArrivalTime().isBefore(retFlightDate)) {
+                        newDepList.add(flight);
+                    }
+                }
+                updatedDepartureFlights = newDepList;
+            }
+        } else { // passað að ekki séu bakaflug með dagsetningu sem er >= dagsetning fyrsta brottfaraflugs
+            LocalDate fromFlightMinDate = null;
+            List<Flight> newRetList = new ArrayList<>();
+            for (Flight flight : updatedDepartureFlights) {
+                if (fromFlightMinDate == null || flight.getArrivalTime().isBefore(fromFlightMinDate)) {
+                    fromFlightMinDate = flight.getArrivalTime();
+                }
+            }
+            for (Flight flight : updatedReturnFlights) {
+                if (flight.getArrivalTime().isAfter(fromFlightMinDate)) {
+                    newRetList.add(flight);
+                }
+            }
+            updatedReturnFlights = newRetList;
         }
         listFlights(updatedDepartureFlights, updatedReturnFlights);
 
@@ -89,32 +123,6 @@ public class SelectFlightsBothWaysController implements Initializable {
         }
 
     }
-
-    /*
-    public void deselect(boolean isReturnList) {
-        if(isReturnList) {
-            ObservableList<Node> listedRetFlights = fxReturnFlightsList.getChildren();
-            for(Node node : listedRetFlights) {
-                FlightView fw = (FlightView) node;
-                if(fw.isSelected()) {
-                    fw.setSelected(false);
-                    setSelectedReturnFlight(null);
-                    fw.setUnselectedBG();
-                }
-            }
-        } else {
-            ObservableList<Node> listedDepFlights = fxTakeoffFlightsList.getChildren();
-            for(Node node : listedDepFlights) {
-                FlightView fw = (FlightView) node;
-                if(fw.isSelected()) {
-                    fw.setSelected(false);
-                    setSelectedDepartureFlight(null);
-                    fw.setUnselectedBG();
-                }
-            }
-        }
-    }
-     */
 
     public void setFlightListsBAppController(BAppController theFlightListsBAppController) {
         flightListsBAppController = theFlightListsBAppController;
