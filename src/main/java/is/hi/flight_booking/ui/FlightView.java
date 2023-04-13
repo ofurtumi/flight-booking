@@ -69,6 +69,22 @@ public class FlightView extends HBox {
                 .setText(Integer.toString(storedFlight.getNumSeatsAvailable() + storedFlight.getNumSeatsReserved()));
         fxListedFlightDate.setText(storedFlight.getArrivalTime().toString());
         fxListedFlightPrice.setText(formattedPrice);
+
+        if(!getIsOneWay() && isReturnFlight() && SFBWC.getSelectedReturnFlight() != null) {
+            this.setSelected(true);
+            setSelectedBG(this);
+            SFBWC.setSelectedReturnFlight(this);
+            setSelectedBG(SFBWC.getSelectedReturnFlight()); // semi-redundant, partur af visual haxi
+            SFBWC.getSelectedReturnFlight().setSelected(true); // semi-redundant, partur af visual haxi
+        } else if(!getIsOneWay() && !isReturnFlight() && SFBWC.getSelectedDepartureFlight() != null) {
+            this.setSelected(true);
+            setSelectedBG(this);
+            SFBWC.setSelectedDepartureFlight(this);
+            setSelectedBG(SFBWC.getSelectedDepartureFlight()); // semi-redundant, partur af visual haxi
+            SFBWC.getSelectedDepartureFlight().setSelected(true); // semi-redundant, partur af visual haxi
+        } else if(getIsOneWay()) {
+            // Þarf að klára seinna
+        }
     }
 
     private void readFlightView() {
@@ -85,12 +101,15 @@ public class FlightView extends HBox {
 
     @FXML
     public void fxListedFlightClickedHandler(MouseEvent e) {
-        SelectFlightsBothWaysController SFBWC = getsFBothWaysController();
+        // !!! Bæta við möguleikanum að þetta gæti verið OneWay!!!
+        SelectFlightsBothWaysController SFBWC;
+        SelectFlightsOneWayController SFOWC;
         if(this.getIsOneWay()) {
             e.consume();
             //Hér á eftir að útfæara oneWay
             return;
         } else {
+            SFBWC = getsFBothWaysController();
             if(this.isReturnFlight()){
                 if(this.isSelected()){
                     System.out.println("Already selected. Currently stored ret. fligth id: "
