@@ -34,7 +34,7 @@ public class BAppController implements Initializable {
     private DatePicker fxRetDate;
     @FXML
     private Text fxHeimkomaTxt;
-
+    private final String databaseURL = "db/flightBooking.db";
     private final String[] destinations = {"Akureyri", "Egilsstaðir", "Ísafjörður", "Keflavík", "Reykjavík",
             "Vestmannaeyjar"};
     private final String[] numberOfPassengers = {"1", "2", "3", "4", "5", "6"};
@@ -97,7 +97,7 @@ public class BAppController implements Initializable {
                 actionEvent.consume();
             } else { // ef reitir eru útfylltir
                 // Leitað af flugum eftir útfylltum reitum og athugað hvort að flug finnist með nægum sætum.
-                flightController = new FlightController("db/test.db");
+                flightController = new FlightController(databaseURL);
                 List<Flight> fromFlights;
                 List<Flight> retFlights;
                 if(getFxDepDate() != null) {
@@ -130,7 +130,7 @@ public class BAppController implements Initializable {
                 if (fromFlights.size() != 0 && retFlights.size() != 0) {
                     LocalDate fromFlightsMinDate = null;
                     for (Flight flight : fromFlights) { // Athuga hvort að næg sæti séu í boði frá brottfararstað
-                        if(fromFlightsMinDate == null || fromFlightsMinDate.isBefore(flight.getArrivalTime())){
+                        if(fromFlightsMinDate == null || flight.getArrivalTime().isBefore(fromFlightsMinDate)){
                             fromFlightsMinDate = flight.getArrivalTime();
                         }
                         if (flight.getNumSeatsAvailable() >= getFxNumPassengers()) {
@@ -138,6 +138,7 @@ public class BAppController implements Initializable {
                         }
                     }
                     for (Flight flight : retFlights) { // Athuga hvort að næg sæti séu í boði frá áfangastað
+                        System.out.println("Departure min date: " + fromFlightsMinDate + "| Return min date: " + flight.getArrivalTime());
                         if (flight.getNumSeatsAvailable() >= getFxNumPassengers()
                                 && flight.getArrivalTime().isAfter(fromFlightsMinDate)) {
                             retFlightWithSeats = true;
@@ -145,6 +146,10 @@ public class BAppController implements Initializable {
                         }
                     }
                 }
+
+                System.out.println("fromFlights ok: " + fromFlightWithSeats);
+                System.out.println("retFlights ok: " + retFlightWithSeats);
+
                 if (fromFlightWithSeats && retFlightWithSeats) { // Ef næg sæti og flug á báðum listum
                     BookingApplication bAppInstance = BookingApplication.getApplicationInstance();
                     bAppInstance.setStoredBAppController(this); // Þessi controller geymdur
@@ -170,7 +175,7 @@ public class BAppController implements Initializable {
                 actionEvent.consume();
             } else { // ef reitir eru útfylltir
                 // Leitað af flugum eftir útfylltum reitum og athugað hvort að flug finnist með nægum sætum.
-                flightController = new FlightController("db/test.db");
+                flightController = new FlightController(databaseURL);
                 List<Flight> fromFlights;
                 if(getFxDepDate() != null) {
                     fromFlights = flightController.searchFlights(getFxFromDest(), getFxToDest(), getFxDepDate());
@@ -213,6 +218,7 @@ public class BAppController implements Initializable {
         System.out.println("Þetta verður mögulega virkjað(?)");
         actionEvent.consume();
     }
+
     // Getterar fyrir valmöguleikana
     public int getFxNumPassengers() {
         return Integer.parseInt(fxNumPassengers.getSelectionModel().getSelectedItem());
