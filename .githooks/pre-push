@@ -11,7 +11,7 @@ fi
 
 # mvn test
 printf "\e[1;33mpre-push:\e[0m: mvn test\n"
-if mvn clean test; then
+if mvn test; then
 	printf "\e[1;32mSuccessful:\e[0m test\n"
 else
 	printf "\e[1;31mError:\e[0m test\n"
