@@ -53,8 +53,15 @@ public class SelectFlightsBothWaysController implements Initializable {
                 updatedDepartureFlights.add(flight);
             }
         }
+        LocalDate fromFlightMinDate = null;
+        for (Flight flight : updatedDepartureFlights) {
+            if(fromFlightMinDate == null || flight.getArrivalTime().isBefore(fromFlightMinDate)) {
+                fromFlightMinDate = flight.getArrivalTime();
+            }
+        }
         for (Flight flight : returnFlights) {
-            if(flight.getNumSeatsAvailable() >= numberOfPassenger) {
+            if(flight.getNumSeatsAvailable() >= numberOfPassenger
+                    && flight.getArrivalTime().isAfter(fromFlightMinDate)) {
                 updatedReturnFlights.add(flight);
             }
         }
