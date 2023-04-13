@@ -1,7 +1,7 @@
 #!/bin/bash
 #set -e
 
-if mvn rewrite:run; then
+if mvn rewrite:runNoFork; then
 	git add . && git commit -m "Automated: Linter"
 	printf "\e[1;32mSuccessful:\e[0m rewrite\n"
 else
