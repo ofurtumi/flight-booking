@@ -39,11 +39,11 @@ public class BAppController implements Initializable {
   @FXML
   private Button fxSearchFlights;
 
-  private String databaseURL = "db/flightBooking.db";
+  private final String databaseURL = "db/flightBooking.db";
 
-  private final String[] destinations = { "Akureyri", "Egilsstaðir", "Ísafjörður", "Keflavík", "Reykjavík",
-      "Vestmannaeyjar" };
-  private final String[] numberOfPassengers = { "1", "2", "3", "4", "5", "6" };
+  private final String[] destinations = {"Akureyri", "Egilsstaðir", "Ísafjörður", "Keflavík", "Reykjavík",
+      "Vestmannaeyjar"};
+  private final String[] numberOfPassengers = {"1", "2", "3", "4", "5", "6"};
 
   private FlightController flightController;
 
