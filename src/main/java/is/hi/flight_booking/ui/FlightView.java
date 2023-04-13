@@ -71,19 +71,29 @@ public class FlightView extends HBox {
         fxListedFlightPrice.setText(formattedPrice);
 
         if(!getIsOneWay() && isReturnFlight() && SFBWC.getSelectedReturnFlight() != null) {
-            this.setSelected(true);
-            setSelectedBG(this);
-            SFBWC.setSelectedReturnFlight(this);
-            setSelectedBG(SFBWC.getSelectedReturnFlight()); // semi-redundant, partur af visual haxi
-            SFBWC.getSelectedReturnFlight().setSelected(true); // semi-redundant, partur af visual haxi
+            if(this.getStoredFlight().getFlightId().equals(SFBWC.getSelectedReturnFlight().getStoredFlight().getFlightId())) {
+                this.setSelected(true);
+                setSelectedBG(this);
+                SFBWC.setSelectedReturnFlight(this);
+                setSelectedBG(SFBWC.getSelectedReturnFlight()); // semi-redundant, partur af visual haxi
+                SFBWC.getSelectedReturnFlight().setSelected(true); // semi-redundant, partur af visual haxi
+            }
         } else if(!getIsOneWay() && !isReturnFlight() && SFBWC.getSelectedDepartureFlight() != null) {
-            this.setSelected(true);
-            setSelectedBG(this);
-            SFBWC.setSelectedDepartureFlight(this);
-            setSelectedBG(SFBWC.getSelectedDepartureFlight()); // semi-redundant, partur af visual haxi
-            SFBWC.getSelectedDepartureFlight().setSelected(true); // semi-redundant, partur af visual haxi
-        } else if(getIsOneWay()) {
-            // Þarf að klára seinna
+            if(this.getStoredFlight().getFlightId().equals(SFBWC.getSelectedDepartureFlight().getStoredFlight().getFlightId())) {
+                this.setSelected(true);
+                setSelectedBG(this);
+                SFBWC.setSelectedDepartureFlight(this);
+                setSelectedBG(SFBWC.getSelectedDepartureFlight()); // semi-redundant, partur af visual haxi
+                SFBWC.getSelectedDepartureFlight().setSelected(true); // semi-redundant, partur af visual haxi
+            }
+        } else if(getIsOneWay() && SFOWC.getSelectedFlight() != null) {
+            if(this.getStoredFlight().getFlightId().equals(SFOWC.getSelectedFlight().getStoredFlight().getFlightId())) {
+                this.setSelected(true);
+                setSelectedBG(this);
+                SFOWC.setSelectedFlight(this);
+                setSelectedBG(SFOWC.getSelectedFlight()); // semi-redundant, partur af visual haxi
+                SFOWC.getSelectedFlight().setSelected(true); // semi-redundant, partur af visual haxi
+            }
         }
     }
 
@@ -102,12 +112,33 @@ public class FlightView extends HBox {
     @FXML
     public void fxListedFlightClickedHandler(MouseEvent e) {
         // !!! Bæta við möguleikanum að þetta gæti verið OneWay!!!
-        SelectFlightsBothWaysController SFBWC;
-        SelectFlightsOneWayController SFOWC;
+        SelectFlightsBothWaysController SFBWC = null;
+        SelectFlightsOneWayController SFOWC = null;
         if(this.getIsOneWay()) {
-            e.consume();
-            //Hér á eftir að útfæara oneWay
-            return;
+            SFOWC = getsFOneWayController();
+            if(this.isSelected()){
+                System.out.println("Already selected. Currently stored ret. fligth id: "
+                        + SFOWC.getSelectedFlight().getStoredFlight().getFlightId());
+                e.consume();
+
+            } else {
+                FlightView oldFV = SFOWC.getSelectedFlight();
+                if(oldFV != null){
+                    oldFV.setSelected(false);
+                    setUnselectedBG(oldFV);
+                    this.setSelected(true);
+                    setSelectedBG(this);
+                    SFOWC.setSelectedFlight(this);
+                    System.out.println("Stored return fligth id: " + SFOWC.getSelectedFlight().getStoredFlight().getFlightId());
+                    e.consume();
+                } else {
+                    this.setSelected(true);
+                    setSelectedBG(this);
+                    SFOWC.setSelectedFlight(this);
+                    System.out.println("Stored return fligth id: " + SFOWC.getSelectedFlight().getStoredFlight().getFlightId());
+                    e.consume();
+                }
+            }
         } else {
             SFBWC = getsFBothWaysController();
             if(this.isReturnFlight()){
@@ -116,10 +147,10 @@ public class FlightView extends HBox {
                             + SFBWC.getSelectedReturnFlight().getStoredFlight().getFlightId());
                     e.consume();
                 } else {
-                    FlightView oldReturnFW = SFBWC.getSelectedReturnFlight();
-                    if(oldReturnFW != null) {
-                        oldReturnFW.setSelected(false);
-                        setUnselectedBG(oldReturnFW);
+                    FlightView oldReturnFV = SFBWC.getSelectedReturnFlight();
+                    if(oldReturnFV != null) {
+                        oldReturnFV.setSelected(false);
+                        setUnselectedBG(oldReturnFV);
                         this.setSelected(true);
                         setSelectedBG(this);
                         SFBWC.setSelectedReturnFlight(this);
@@ -140,10 +171,10 @@ public class FlightView extends HBox {
                             + SFBWC.getSelectedDepartureFlight().getStoredFlight().getFlightId());
                     e.consume();
                 } else {
-                    FlightView oldDepartureFW = SFBWC.getSelectedDepartureFlight();
-                    if (oldDepartureFW != null) {
-                        oldDepartureFW.setSelected(false);
-                        setUnselectedBG(oldDepartureFW);
+                    FlightView oldDepartureFV = SFBWC.getSelectedDepartureFlight();
+                    if (oldDepartureFV != null) {
+                        oldDepartureFV.setSelected(false);
+                        setUnselectedBG(oldDepartureFV);
                         this.setSelected(true);
                         setSelectedBG(this);
                         SFBWC.setSelectedDepartureFlight(this);
@@ -159,13 +190,17 @@ public class FlightView extends HBox {
                 }
             }
         }
-        if(SFBWC.getSelectedDepartureFlight() != null){
+        if(getsFBothWaysController() != null && SFBWC.getSelectedDepartureFlight() != null){
             setSelectedBG(SFBWC.getSelectedDepartureFlight());
             SFBWC.getSelectedDepartureFlight().setSelected(true);
         }
-        if(SFBWC.getSelectedReturnFlight() != null){
+        if(getsFBothWaysController() != null && SFBWC.getSelectedReturnFlight() != null){
             setSelectedBG(SFBWC.getSelectedReturnFlight());
             SFBWC.getSelectedReturnFlight().setSelected(true);
+        }
+        if(SFOWC != null && SFOWC.getSelectedFlight() != null){
+            setSelectedBG(SFOWC.getSelectedFlight());
+            SFOWC.getSelectedFlight().setSelected(true);
         }
     }
     public void setSelectedBG(FlightView flightView) {
@@ -174,7 +209,7 @@ public class FlightView extends HBox {
     }
     public void setUnselectedBG(FlightView flightView) {
         flightView.setBackground(new Background(
-                new BackgroundFill(Color.web("#F4F4F4"), new CornerRadii(10.0), null)));
+                new BackgroundFill(Color.web("#FFFFFF"), new CornerRadii(10.0), null)));
     }
     private boolean getIsOneWay() {
         return isOneWay;

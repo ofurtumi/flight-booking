@@ -30,17 +30,17 @@
             <Font name="Arial Bold" size="36.0" />
          </font>
       </Text>
-      <ScrollPane pickOnBounds="false" prefHeight="200.0" prefWidth="1200.0" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS">
+      <ScrollPane focusTraversable="false" pickOnBounds="false" prefHeight="200.0" prefWidth="1200.0" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS">
          <VBox.margin>
             <Insets left="40.0" right="40.0" />
          </VBox.margin>
          <content>
-            <VBox fx:id="fxTakeoffFlightsList" prefWidth="1185.0" spacing="5.0" style="-fx-background-color: #ffffff;" />
+            <VBox fx:id="fxTakeoffFlightsList" pickOnBounds="false" prefWidth="1185.0" spacing="5.0" style="-fx-background-color: #ffffff;" />
          </content>
       </ScrollPane>
       <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button fx:id="fxBackToSearch" mnemonicParsing="false" prefHeight="60.0" prefWidth="200.0" text="TIL BAKA">
+            <Button fx:id="fxBackToSearch" mnemonicParsing="false" onAction="#fxSingleBack" prefHeight="60.0" prefWidth="200.0" text="TIL BAKA">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>

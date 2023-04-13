@@ -105,12 +105,13 @@ public class SelectFlightsBothWaysController implements Initializable {
     @FXML
     public void fxBack(ActionEvent backPressed) throws IOException {
         BookingApplication application = BookingApplication.getApplicationInstance();
+        application.setStoredBothWaysController(null);
         application.changeScene("/fxml/bookingApplication_View.fxml");
         backPressed.consume();
     }
 
     //Aðferðin sem býr til viðmóts elementið fyrir hvert flug
-    public void listFlights(List<Flight> depFlights, List<Flight> retFlights) {
+    private void listFlights(List<Flight> depFlights, List<Flight> retFlights) {
         fxTakeoffFlightsList.getChildren().clear();
         for(Flight flight : depFlights) {
             FlightView newListedDepFlight = new FlightView(flight, false, null, this);
