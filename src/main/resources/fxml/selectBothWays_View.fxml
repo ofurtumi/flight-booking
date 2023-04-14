@@ -61,7 +61,7 @@
             <Font name="Arial Bold" size="16.0" />
           </font>
         </Button>
-        <Button fx:id="fxChooseSeats" mnemonicParsing="false" prefHeight="60.0" prefWidth="200.0" text="ÁFRAM Í SÆTAVAL">
+        <Button fx:id="fxChooseSeats" mnemonicParsing="false" onAction="#fxSelectSeats" prefHeight="60.0" prefWidth="200.0" text="ÁFRAM Í SÆTAVAL">
           <HBox.margin>
             <Insets left="40.0" />
           </HBox.margin>

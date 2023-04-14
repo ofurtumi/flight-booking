@@ -5,6 +5,7 @@ import is.hi.flight_booking.controller.FlightController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -108,6 +109,23 @@ public class SelectFlightsBothWaysController implements Initializable {
         application.setStoredBothWaysController(null);
         application.changeScene("/fxml/bookingApplication_View.fxml");
         backPressed.consume();
+    }
+
+    public void fxSelectSeats(ActionEvent actionEvent) throws IOException {
+        if(getSelectedDepartureFlight().getStoredFlight().getArrivalTime().
+                isBefore(getSelectedReturnFlight().getStoredFlight().getArrivalTime())) {
+            BookingApplication application = BookingApplication.getApplicationInstance();
+            application.setStoredBothWaysController(this);
+            application.changeScene("/fxml/selectSeatsBothWays_View.fxml");
+            actionEvent.consume();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Ógilt Val");
+            alert.setHeaderText("Misræmi í dags. valinna fluga");
+            alert.setContentText("Dagsetning brottfarar verður að vera á undan dagsetning heimkomu");
+            alert.showAndWait();
+            actionEvent.consume();
+        }
     }
 
     //Aðferðin sem býr til viðmóts elementið fyrir hvert flug
