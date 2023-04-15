@@ -261,6 +261,7 @@ public class SelectSeatsBothWaysController implements Initializable {
         actionEvent.consume();
     }
 
+    // Hér fer bókunarferlið fram
     public void fxMakeBookingHandler(ActionEvent actionEvent) throws IOException {
         if(totalSeatsSelected != numberOfPassengers*2) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -393,32 +394,20 @@ public class SelectSeatsBothWaysController implements Initializable {
             boolean depBookingOk = BC.exists(depBooking);
             boolean retBookingOk = BC.exists(retBooking);
 
-            if (depBookingOk && retBookingOk) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Bókun staðfest");
-                alert.setHeaderText("Bókun tókst!");
-                alert.setContentText("Bókunarnúmer:\nBrottför: " + depBooking.getBookingID()
-                        + "\nHeimkoma: " + retBooking.getBookingID());
-                alert.showAndWait();
-                BookingApplication application = BookingApplication.getApplicationInstance();
-                application.setStoredBAppController(null);
-                application.setStoredBothWaysController(null);
-                application.setUseStoredFalse();
-                application.changeScene("/fxml/bookingApplication_View.fxml");
-                actionEvent.consume();
-            } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Villa við bókun");
-                alert.setHeaderText("Villa við bókun!");
-                alert.setContentText("Eitthvað fór úrskeiðis! Vinsamlegast reyndu aftur. Þú verður sendur aftur á upphafsglugga.");
-                alert.showAndWait();
-                BookingApplication application = BookingApplication.getApplicationInstance();
-                application.setStoredBAppController(null);
-                application.setStoredBothWaysController(null);
-                application.setUseStoredFalse();
-                application.changeScene("/fxml/bookingApplication_View.fxml");
-                actionEvent.consume();
-            }
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Bókun staðfest");
+            alert.setHeaderText("Bókun tókst!");
+            alert.setContentText("Bókunarnúmer:\nBrottför: " + depBooking.getBookingID()
+                    + "\nHeimkoma: " + retBooking.getBookingID());
+            alert.showAndWait();
+            BookingApplication application = BookingApplication.getApplicationInstance();
+            application.setStoredBAppController(null);
+            application.setStoredBothWaysController(null);
+            application.setUseStoredFalse();
+            application.changeScene("/fxml/bookingApplication_View.fxml");
+            actionEvent.consume();
+
         }
     }
 
