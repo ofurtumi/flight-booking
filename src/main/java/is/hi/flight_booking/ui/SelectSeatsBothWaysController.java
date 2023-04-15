@@ -1,12 +1,15 @@
 package is.hi.flight_booking.ui;
 
+import is.hi.flight_booking.application.Booking;
 import is.hi.flight_booking.application.Flight;
 import is.hi.flight_booking.application.Seat;
+import is.hi.flight_booking.application.User;
 import is.hi.flight_booking.controller.BookingController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -20,6 +23,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -57,8 +61,6 @@ public class SelectSeatsBothWaysController implements Initializable {
     @FXML
     private VBox fxRetA1, fxRetA2, fxRetB1, fxRetB2, fxRetC1, fxRetC2;
     @FXML
-    private TextField fxRetUserID;
-    @FXML
     private Text fxRetMinorFlightNum;
     @FXML
     private Text fxRetTotalPrice;
@@ -66,6 +68,10 @@ public class SelectSeatsBothWaysController implements Initializable {
 
     @FXML
     private Text fxFinalPrice;
+    @FXML
+    private TextField fxUserID;
+    @FXML
+    private TextField fxUserName;
 
     // ----------- Controller breytur --------------------------------
     // ---------------------------------------------------------------
@@ -255,7 +261,165 @@ public class SelectSeatsBothWaysController implements Initializable {
         actionEvent.consume();
     }
 
-    public void fxMakeBookingHandler(ActionEvent actionEvent) {
+    public void fxMakeBookingHandler(ActionEvent actionEvent) throws IOException {
+        if(totalSeatsSelected != numberOfPassengers*2) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Óklárað sætaval");
+            alert.setHeaderText("Ekki búið að velja öll sæti!");
+            alert.setContentText("Vertu viss um að þú hafir valið öll umbeðin sæti í báðum flugum.");
+            alert.showAndWait();
+            actionEvent.consume();
+        } else if(fxUserID.getText() == null || fxUserID.getText().length() != 10) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Kennitala í ólagi");
+            alert.setHeaderText("Kennitala ekki í gildu formi!");
+            alert.setContentText("Sláðu inn nákvæmlega 10 stafa kennitölu án bila eða merkja.");
+            alert.showAndWait();
+            actionEvent.consume();
+        } else if(fxUserName.getText() == null || fxUserName.getText().length() == 0
+                || fxUserName.getText().length() > 30) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Nafn í ólagi");
+            alert.setHeaderText("Nafn ekki í gildu formi!");
+            alert.setContentText("Nafn verður að vera a.m.k. 1 bókstafur og í mesta lagi 30 stafir");
+            alert.showAndWait();
+            actionEvent.consume();
+        } else {
+            User newUser = new User(fxUserID.getText(), fxUserName.getText());
+            List<Seat> selectedDepSeats = new ArrayList<>();
+            List<Seat> selectedRetSeats = new ArrayList<>();
+
+            if (fxDepA1Selected) {
+                for (Seat seat : departureFlightSeats) {
+                    if (seat.getId().equals("A1")) {
+                        selectedDepSeats.add(seat);
+                        break;
+                    }
+                }
+            }
+            if (fxDepA2Selected) {
+                for (Seat seat : departureFlightSeats) {
+                    if (seat.getId().equals("A2")) {
+                        selectedDepSeats.add(seat);
+                        break;
+                    }
+                }
+            }
+            if (fxDepB1Selected) {
+                for (Seat seat : departureFlightSeats) {
+                    if (seat.getId().equals("B1")) {
+                        selectedDepSeats.add(seat);
+                        break;
+                    }
+                }
+            }
+            if (fxDepB2Selected) {
+                for (Seat seat : departureFlightSeats) {
+                    if (seat.getId().equals("B2")) {
+                        selectedDepSeats.add(seat);
+                        break;
+                    }
+                }
+            }
+            if (fxDepC1Selected) {
+                for (Seat seat : departureFlightSeats) {
+                    if (seat.getId().equals("C1")) {
+                        selectedDepSeats.add(seat);
+                        break;
+                    }
+                }
+            }
+            if (fxDepC2Selected) {
+                for (Seat seat : departureFlightSeats) {
+                    if (seat.getId().equals("C2")) {
+                        selectedDepSeats.add(seat);
+                        break;
+                    }
+                }
+            }
+
+            if (fxRetA1Selected) {
+                for (Seat seat : returnFlightSeats) {
+                    if (seat.getId().equals("A1")) {
+                        selectedRetSeats.add(seat);
+                        break;
+                    }
+                }
+            }
+            if (fxRetA2Selected) {
+                for (Seat seat : returnFlightSeats) {
+                    if (seat.getId().equals("A2")) {
+                        selectedRetSeats.add(seat);
+                        break;
+                    }
+                }
+            }
+            if (fxRetB1Selected) {
+                for (Seat seat : returnFlightSeats) {
+                    if (seat.getId().equals("B1")) {
+                        selectedRetSeats.add(seat);
+                        break;
+                    }
+                }
+            }
+            if (fxRetB2Selected) {
+                for (Seat seat : returnFlightSeats) {
+                    if (seat.getId().equals("B2")) {
+                        selectedRetSeats.add(seat);
+                        break;
+                    }
+                }
+            }
+            if (fxRetC1Selected) {
+                for (Seat seat : returnFlightSeats) {
+                    if (seat.getId().equals("C1")) {
+                        selectedRetSeats.add(seat);
+                        break;
+                    }
+                }
+            }
+            if (fxRetC2Selected) {
+                for (Seat seat : returnFlightSeats) {
+                    if (seat.getId().equals("C2")) {
+                        selectedRetSeats.add(seat);
+                        break;
+                    }
+                }
+            }
+
+            Booking depBooking = BC.createBooking(departureFlight, newUser, selectedDepSeats);
+            Booking retBooking = BC.createBooking(returnFlight, newUser, selectedRetSeats);
+
+            boolean depBookingOk = BC.exists(depBooking);
+            boolean retBookingOk = BC.exists(retBooking);
+
+            if (depBookingOk && retBookingOk) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Bókun staðfest");
+                alert.setHeaderText("Bókun tókst!");
+                alert.setContentText("Bókunarnúmer:\nBrottför: " + depBooking.getBookingID()
+                        + "\nHeimkoma: " + retBooking.getBookingID());
+                alert.showAndWait();
+                BookingApplication application = BookingApplication.getApplicationInstance();
+                application.setStoredBAppController(null);
+                application.setStoredBothWaysController(null);
+                application.setUseStoredFalse();
+                application.changeScene("/fxml/bookingApplication_View.fxml");
+                actionEvent.consume();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Villa við bókun");
+                alert.setHeaderText("Villa við bókun!");
+                alert.setContentText("Eitthvað fór úrskeiðis! Vinsamlegast reyndu aftur. Þú verður sendur aftur á upphafsglugga.");
+                alert.showAndWait();
+                BookingApplication application = BookingApplication.getApplicationInstance();
+                application.setStoredBAppController(null);
+                application.setStoredBothWaysController(null);
+                application.setUseStoredFalse();
+                application.changeScene("/fxml/bookingApplication_View.fxml");
+                actionEvent.consume();
+            }
+        }
     }
 
     // ------===== Departure Flight Seat Mouse Events ======-----------
