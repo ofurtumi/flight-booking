@@ -112,19 +112,37 @@ public class SelectFlightsBothWaysController implements Initializable {
     }
 
     public void fxSelectSeats(ActionEvent actionEvent) throws IOException {
-        if(getSelectedDepartureFlight().getStoredFlight().getArrivalTime().
+        if((getSelectedDepartureFlight() != null && getSelectedReturnFlight() != null)
+                && getSelectedDepartureFlight().getStoredFlight().getArrivalTime().
                 isBefore(getSelectedReturnFlight().getStoredFlight().getArrivalTime())) {
             BookingApplication application = BookingApplication.getApplicationInstance();
             application.setStoredBothWaysController(this);
             application.changeScene("/fxml/selectSeatsBothWays_View.fxml");
             actionEvent.consume();
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Ógilt Val");
-            alert.setHeaderText("Misræmi í dags. valinna fluga");
-            alert.setContentText("Dagsetning brottfarar verður að vera á undan dagsetning heimkomu");
-            alert.showAndWait();
-            actionEvent.consume();
+            if(getSelectedDepartureFlight() == null || getSelectedReturnFlight() == null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Óvalið flug");
+                alert.setHeaderText("Val á flugi vantar.");
+                alert.setContentText("Þú átt eftir að velja flug fyrir bæði brottför og/eða heimferð.");
+                alert.showAndWait();
+                if(getSelectedDepartureFlight() != null) {
+                    getSelectedDepartureFlight().setSelectedBG(getSelectedDepartureFlight()); // visual hax
+                }
+                if(getSelectedReturnFlight() != null) {
+                    getSelectedReturnFlight().setSelectedBG(getSelectedReturnFlight()); // visual hax
+                }
+                actionEvent.consume();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Ógilt Val");
+                alert.setHeaderText("Misræmi í dags. valinna fluga");
+                alert.setContentText("Dagsetning brottfarar verður að vera á undan dagsetning heimkomu");
+                alert.showAndWait();
+                getSelectedDepartureFlight().setSelectedBG(getSelectedDepartureFlight()); // visual hax
+                getSelectedReturnFlight().setSelectedBG(getSelectedReturnFlight()); // visual hax
+                actionEvent.consume();
+            }
         }
     }
 

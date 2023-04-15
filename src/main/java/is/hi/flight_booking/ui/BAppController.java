@@ -87,6 +87,15 @@ public class BAppController implements Initializable {
     }
     @FXML // Það sem gerist þegar ýtt er á "LEITA" takkann
     public void fxSearchButton(ActionEvent actionEvent) throws IOException {
+        if (getFxFromDest().equals(getFxToDest())) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Villa við leit");
+            alert.setHeaderText("Valdir áfangastaðir þeir sömu");
+            alert.setContentText("Vinsamlegast veldu ólíkan brottfarar- og áfangastað.");
+            alert.showAndWait();
+            actionEvent.consume();
+            return;
+        }
         if (getFxBothWays()) { // Það sem gerist ef hakað er í "Báðar leiðir" þegar ýtt er á "LEITA" takkann
             if (getFxFromDest() == null || getFxToDest() == null) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
