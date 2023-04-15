@@ -76,6 +76,15 @@ public class SelectSeatsBothWaysController implements Initializable {
             fxDepB2Res = false, fxDepC1Res = false, fxDepC2Res = false,
             fxRetA1Res= false, fxRetA2Res= false, fxRetB1Res= false,
             fxRetB2Res= false, fxRetC1Res= false, fxRetC2Res= false;
+
+    private boolean fxDepA1Selected = false, fxDepA2Selected = false, fxDepB1Selected = false,
+            fxDepB2Selected = false, fxDepC1Selected = false, fxDepC2Selected = false,
+            fxRetA1Selected= false, fxRetA2Selected= false, fxRetB1Selected= false,
+            fxRetB2Selected= false, fxRetC1Selected= false, fxRetC2Selected= false;
+
+    private int depSeatsSelected = 0;
+    private int retSeatsSelected = 0;
+    private int totalSeatsSelected = 0;
     // ---------------------------------------------------------------
 
     // ----------- Upplýsinga breytur --------------------------------
@@ -246,21 +255,171 @@ public class SelectSeatsBothWaysController implements Initializable {
     // ------===== Departure Flight Seat Mouse Events ======-----------
     // ----------------------------------------------------------------
     public void fxDepA1Click(MouseEvent mouseEvent) {
+        if(fxDepA1Res) {
+            System.out.println("Sæti A1 er frátekið");
+            mouseEvent.consume();
+        } else {
+            if(fxDepA1Selected) {
+                fxDepA1Selected = false;
+                depSeatsSelected--;
+                totalSeatsSelected--;
+                fxDepSeatsSelected.setText(Integer.toString(depSeatsSelected));
+                Platform.runLater(() -> setSeatUnselectedBG(fxDepA1));
+                mouseEvent.consume();
+            } else {
+                if(numberOfPassengers == depSeatsSelected) {
+                    System.out.println("Sæti fyrir alla farþega hafa þegar verið valin fyrir brottfararflug.");
+                    mouseEvent.consume();
+                } else {
+                    fxDepA1Selected = true;
+                    depSeatsSelected++;
+                    totalSeatsSelected++;
+                    fxDepSeatsSelected.setText(Integer.toString(depSeatsSelected));
+                    Platform.runLater(() -> setSeatSelectedBG(fxDepA1));
+                    mouseEvent.consume();
+                }
+            }
+        }
     }
 
     public void fxDepA2Click(MouseEvent mouseEvent) {
+        if(fxDepA2Res) {
+            System.out.println("Sæti A2 er frátekið");
+            mouseEvent.consume();
+        } else {
+            if(fxDepA2Selected) {
+                fxDepA2Selected = false;
+                depSeatsSelected--;
+                totalSeatsSelected--;
+                fxDepSeatsSelected.setText(Integer.toString(depSeatsSelected));
+                Platform.runLater(() -> setSeatUnselectedBG(fxDepA2));
+                mouseEvent.consume();
+            } else {
+                if(numberOfPassengers == depSeatsSelected) {
+                    System.out.println("Sæti fyrir alla farþega hafa þegar verið valin fyrir brottfararflug.");
+                    mouseEvent.consume();
+                } else {
+                    fxDepA2Selected = true;
+                    depSeatsSelected++;
+                    totalSeatsSelected++;
+                    fxDepSeatsSelected.setText(Integer.toString(depSeatsSelected));
+                    Platform.runLater(() -> setSeatSelectedBG(fxDepA2));
+                    mouseEvent.consume();
+                }
+            }
+        }
     }
 
     public void fxDepB1Click(MouseEvent mouseEvent) {
+        if(fxDepB1Res) {
+            System.out.println("Sæti B1 er frátekið");
+            mouseEvent.consume();
+        } else {
+            if(fxDepB1Selected) {
+                fxDepB1Selected = false;
+                depSeatsSelected--;
+                totalSeatsSelected--;
+                fxDepSeatsSelected.setText(Integer.toString(depSeatsSelected));
+                Platform.runLater(() -> setSeatUnselectedBG(fxDepB1));
+                mouseEvent.consume();
+            } else {
+                if(numberOfPassengers == depSeatsSelected) {
+                    System.out.println("Sæti fyrir alla farþega hafa þegar verið valin fyrir brottfararflug.");
+                    mouseEvent.consume();
+                } else {
+                    fxDepB1Selected = true;
+                    depSeatsSelected++;
+                    totalSeatsSelected++;
+                    fxDepSeatsSelected.setText(Integer.toString(depSeatsSelected));
+                    Platform.runLater(() -> setSeatSelectedBG(fxDepB1));
+                    mouseEvent.consume();
+                }
+            }
+        }
     }
 
     public void fxDepB2Click(MouseEvent mouseEvent) {
+        if(fxDepB2Res) {
+            System.out.println("Sæti B2 er frátekið");
+            mouseEvent.consume();
+        } else {
+            if(fxDepB2Selected) {
+                fxDepB2Selected = false;
+                depSeatsSelected--;
+                totalSeatsSelected--;
+                fxDepSeatsSelected.setText(Integer.toString(depSeatsSelected));
+                Platform.runLater(() -> setSeatUnselectedBG(fxDepB2));
+                mouseEvent.consume();
+            } else {
+                if(numberOfPassengers == depSeatsSelected) {
+                    System.out.println("Sæti fyrir alla farþega hafa þegar verið valin fyrir brottfararflug.");
+                    mouseEvent.consume();
+                } else {
+                    fxDepB2Selected = true;
+                    depSeatsSelected++;
+                    totalSeatsSelected++;
+                    fxDepSeatsSelected.setText(Integer.toString(depSeatsSelected));
+                    Platform.runLater(() -> setSeatSelectedBG(fxDepB2));
+                    mouseEvent.consume();
+                }
+            }
+        }
     }
 
     public void fxDepC1Click(MouseEvent mouseEvent) {
+        if(fxDepC1Res) {
+            System.out.println("Sæti C1 er frátekið");
+            mouseEvent.consume();
+        } else {
+            if(fxDepC1Selected) {
+                fxDepC1Selected = false;
+                depSeatsSelected--;
+                totalSeatsSelected--;
+                fxDepSeatsSelected.setText(Integer.toString(depSeatsSelected));
+                Platform.runLater(() -> setSeatUnselectedBG(fxDepC1));
+                mouseEvent.consume();
+            } else {
+                if(numberOfPassengers == depSeatsSelected) {
+                    System.out.println("Sæti fyrir alla farþega hafa þegar verið valin fyrir brottfararflug.");
+                    mouseEvent.consume();
+                } else {
+                    fxDepC1Selected = true;
+                    depSeatsSelected++;
+                    totalSeatsSelected++;
+                    fxDepSeatsSelected.setText(Integer.toString(depSeatsSelected));
+                    Platform.runLater(() -> setSeatSelectedBG(fxDepC1));
+                    mouseEvent.consume();
+                }
+            }
+        }
     }
 
     public void fxDepC2Click(MouseEvent mouseEvent) {
+        if(fxDepC2Res) {
+            System.out.println("Sæti C2 er frátekið");
+            mouseEvent.consume();
+        } else {
+            if(fxDepC2Selected) {
+                fxDepC2Selected = false;
+                depSeatsSelected--;
+                totalSeatsSelected--;
+                fxDepSeatsSelected.setText(Integer.toString(depSeatsSelected));
+                Platform.runLater(() -> setSeatUnselectedBG(fxDepC2));
+                mouseEvent.consume();
+            } else {
+                if(numberOfPassengers == depSeatsSelected) {
+                    System.out.println("Sæti fyrir alla farþega hafa þegar verið valin fyrir brottfararflug.");
+                    mouseEvent.consume();
+                } else {
+                    fxDepC2Selected = true;
+                    depSeatsSelected++;
+                    totalSeatsSelected++;
+                    fxDepSeatsSelected.setText(Integer.toString(depSeatsSelected));
+                    Platform.runLater(() -> setSeatSelectedBG(fxDepC2));
+                    mouseEvent.consume();
+                }
+            }
+        }
     }
     // ----------------------------------------------------------------
 
@@ -268,21 +427,170 @@ public class SelectSeatsBothWaysController implements Initializable {
     // ----------------------------------------------------------------
 
     public void fxRetA1Click(MouseEvent mouseEvent) {
+        if(fxRetA1Res) {
+            System.out.println("Sæti A1 er frátekið");
+            mouseEvent.consume();
+        } else {
+            if(fxRetA1Selected) {
+                fxRetA1Selected = false;
+                retSeatsSelected--;
+                totalSeatsSelected--;
+                fxRetSeatsSelected.setText(Integer.toString(retSeatsSelected));
+                Platform.runLater(() -> setSeatUnselectedBG(fxRetA1));
+                mouseEvent.consume();
+            } else {
+                if(numberOfPassengers == retSeatsSelected) {
+                    System.out.println("Sæti fyrir alla farþega hafa þegar verið valin fyrir brottfararflug.");
+                    mouseEvent.consume();
+                } else {
+                    fxRetA1Selected = true;
+                    retSeatsSelected++;
+                    totalSeatsSelected++;
+                    fxRetSeatsSelected.setText(Integer.toString(retSeatsSelected));
+                    Platform.runLater(() -> setSeatSelectedBG(fxRetA1));
+                    mouseEvent.consume();
+                }
+            }
+        }
     }
 
     public void fxRetA2Click(MouseEvent mouseEvent) {
+        if(fxRetA2Res) {
+            System.out.println("Sæti A2 er frátekið");
+            mouseEvent.consume();
+        } else {
+            if(fxRetA2Selected) {
+                fxRetA2Selected = false;
+                retSeatsSelected--;
+                totalSeatsSelected--;
+                fxRetSeatsSelected.setText(Integer.toString(retSeatsSelected));
+                Platform.runLater(() -> setSeatUnselectedBG(fxRetA2));
+                mouseEvent.consume();
+            } else {
+                if(numberOfPassengers == retSeatsSelected) {
+                    System.out.println("Sæti fyrir alla farþega hafa þegar verið valin fyrir brottfararflug.");
+                    mouseEvent.consume();
+                } else {
+                    fxRetA2Selected = true;
+                    retSeatsSelected++;
+                    totalSeatsSelected++;
+                    fxRetSeatsSelected.setText(Integer.toString(retSeatsSelected));
+                    Platform.runLater(() -> setSeatSelectedBG(fxRetA2));
+                    mouseEvent.consume();
+                }
+            }
+        }
     }
 
     public void fxRetB1Click(MouseEvent mouseEvent) {
+        if(fxRetB1Res) {
+            System.out.println("Sæti B1 er frátekið");
+            mouseEvent.consume();
+        } else {
+            if(fxRetB1Selected) {
+                fxRetB1Selected = false;
+                retSeatsSelected--;
+                totalSeatsSelected--;
+                fxRetSeatsSelected.setText(Integer.toString(retSeatsSelected));
+                Platform.runLater(() -> setSeatUnselectedBG(fxRetB1));
+                mouseEvent.consume();
+            } else {
+                if(numberOfPassengers == retSeatsSelected) {
+                    System.out.println("Sæti fyrir alla farþega hafa þegar verið valin fyrir brottfararflug.");
+                    mouseEvent.consume();
+                } else {
+                    fxRetB1Selected = true;
+                    retSeatsSelected++;
+                    totalSeatsSelected++;
+                    fxRetSeatsSelected.setText(Integer.toString(retSeatsSelected));
+                    Platform.runLater(() -> setSeatSelectedBG(fxRetB1));
+                    mouseEvent.consume();
+                }
+            }
+        }
     }
-
     public void fxRetB2Click(MouseEvent mouseEvent) {
+        if(fxRetB2Res) {
+            System.out.println("Sæti B2 er frátekið");
+            mouseEvent.consume();
+        } else {
+            if(fxRetB2Selected) {
+                fxRetB2Selected = false;
+                retSeatsSelected--;
+                totalSeatsSelected--;
+                fxRetSeatsSelected.setText(Integer.toString(retSeatsSelected));
+                Platform.runLater(() -> setSeatUnselectedBG(fxRetB2));
+                mouseEvent.consume();
+            } else {
+                if(numberOfPassengers == retSeatsSelected) {
+                    System.out.println("Sæti fyrir alla farþega hafa þegar verið valin fyrir brottfararflug.");
+                    mouseEvent.consume();
+                } else {
+                    fxRetB2Selected = true;
+                    retSeatsSelected++;
+                    totalSeatsSelected++;
+                    fxRetSeatsSelected.setText(Integer.toString(retSeatsSelected));
+                    Platform.runLater(() -> setSeatSelectedBG(fxRetB2));
+                    mouseEvent.consume();
+                }
+            }
+        }
     }
 
     public void fxRetC1Click(MouseEvent mouseEvent) {
+        if(fxRetC1Res) {
+            System.out.println("Sæti C1 er frátekið");
+            mouseEvent.consume();
+        } else {
+            if(fxRetC1Selected) {
+                fxRetC1Selected = false;
+                retSeatsSelected--;
+                totalSeatsSelected--;
+                fxRetSeatsSelected.setText(Integer.toString(retSeatsSelected));
+                Platform.runLater(() -> setSeatUnselectedBG(fxRetC1));
+                mouseEvent.consume();
+            } else {
+                if(numberOfPassengers == retSeatsSelected) {
+                    System.out.println("Sæti fyrir alla farþega hafa þegar verið valin fyrir brottfararflug.");
+                    mouseEvent.consume();
+                } else {
+                    fxRetC1Selected = true;
+                    retSeatsSelected++;
+                    totalSeatsSelected++;
+                    fxRetSeatsSelected.setText(Integer.toString(retSeatsSelected));
+                    Platform.runLater(() -> setSeatSelectedBG(fxRetC1));
+                    mouseEvent.consume();
+                }
+            }
+        }
     }
 
     public void fxRetC2Click(MouseEvent mouseEvent) {
+        if(fxRetC2Res) {
+            System.out.println("Sæti C2 er frátekið");
+            mouseEvent.consume();
+        } else {
+            if(fxRetC2Selected) {
+                fxRetC2Selected = false;
+                retSeatsSelected--;
+                totalSeatsSelected--;
+                fxRetSeatsSelected.setText(Integer.toString(retSeatsSelected));
+                Platform.runLater(() -> setSeatUnselectedBG(fxRetC2));
+                mouseEvent.consume();
+            } else {
+                if(numberOfPassengers == retSeatsSelected) {
+                    System.out.println("Sæti fyrir alla farþega hafa þegar verið valin fyrir brottfararflug.");
+                    mouseEvent.consume();
+                } else {
+                    fxRetC2Selected = true;
+                    retSeatsSelected++;
+                    totalSeatsSelected++;
+                    fxRetSeatsSelected.setText(Integer.toString(retSeatsSelected));
+                    Platform.runLater(() -> setSeatSelectedBG(fxRetC2));
+                    mouseEvent.consume();
+                }
+            }
+        }
     }
     // ----------------------------------------------------------------
 }
