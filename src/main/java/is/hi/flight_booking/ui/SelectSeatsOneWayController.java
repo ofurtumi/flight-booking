@@ -56,12 +56,12 @@ public class SelectSeatsOneWayController implements Initializable {
   private BookingController BC;
   private Flight departureFlight;
 
-  private boolean fxDepA1Res = false, fxDepA2Res = false, fxDepB1Res = false,
-      fxDepB2Res = false, fxDepC1Res = false, fxDepC2Res = false;
-  private boolean fxDepA1Selected = false, fxDepA2Selected = false, fxDepB1Selected = false,
-      fxDepB2Selected = false, fxDepC1Selected = false, fxDepC2Selected = false;
+  private boolean fxDepA1Res, fxDepA2Res, fxDepB1Res,
+      fxDepB2Res, fxDepC1Res, fxDepC2Res;
+  private boolean fxDepA1Selected, fxDepA2Selected, fxDepB1Selected,
+      fxDepB2Selected, fxDepC1Selected, fxDepC2Selected;
 
-  private int depSeatsSelected = 0;
+  private int depSeatsSelected;
 
   private String departureFlightId;
   private String departureFlightFrom, departureFlightTo;
@@ -216,7 +216,7 @@ public class SelectSeatsOneWayController implements Initializable {
 
       if (fxDepA1Selected) {
         for (Seat seat : departureFlightSeats) {
-          if (seat.getId().equals("A1")) {
+          if ("A1".equals(seat.getId())) {
             selectedDepSeats.add(seat);
             break;
           }
@@ -224,7 +224,7 @@ public class SelectSeatsOneWayController implements Initializable {
       }
       if (fxDepA2Selected) {
         for (Seat seat : departureFlightSeats) {
-          if (seat.getId().equals("A2")) {
+          if ("A2".equals(seat.getId())) {
             selectedDepSeats.add(seat);
             break;
           }
@@ -232,7 +232,7 @@ public class SelectSeatsOneWayController implements Initializable {
       }
       if (fxDepB1Selected) {
         for (Seat seat : departureFlightSeats) {
-          if (seat.getId().equals("B1")) {
+          if ("B1".equals(seat.getId())) {
             selectedDepSeats.add(seat);
             break;
           }
@@ -240,7 +240,7 @@ public class SelectSeatsOneWayController implements Initializable {
       }
       if (fxDepB2Selected) {
         for (Seat seat : departureFlightSeats) {
-          if (seat.getId().equals("B2")) {
+          if ("B2".equals(seat.getId())) {
             selectedDepSeats.add(seat);
             break;
           }
@@ -248,7 +248,7 @@ public class SelectSeatsOneWayController implements Initializable {
       }
       if (fxDepC1Selected) {
         for (Seat seat : departureFlightSeats) {
-          if (seat.getId().equals("C1")) {
+          if ("C1".equals(seat.getId())) {
             selectedDepSeats.add(seat);
             break;
           }
@@ -256,7 +256,7 @@ public class SelectSeatsOneWayController implements Initializable {
       }
       if (fxDepC2Selected) {
         for (Seat seat : departureFlightSeats) {
-          if (seat.getId().equals("C2")) {
+          if ("C2".equals(seat.getId())) {
             selectedDepSeats.add(seat);
             break;
           }
