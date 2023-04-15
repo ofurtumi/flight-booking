@@ -243,17 +243,6 @@
                               <Insets top="40.0" />
                            </padding>
                            <children>
-                              <Text fill="#3d5a80" strokeType="OUTSIDE" strokeWidth="0.0" text="Sláðu inn kennitöluna þína:">
-                                 <font>
-                                    <Font name="Arial Bold" size="18.0" />
-                                 </font>
-                              </Text>
-                              <TextField fx:id="fxDepUserID" maxWidth="-Infinity" prefWidth="200.0" promptText="ddmmááxxxx" />
-                              <Text fill="#404040" strokeType="OUTSIDE" strokeWidth="0.0" text="A.T.H. kennitala verður að vera án bilstafa og merkja">
-                                 <VBox.margin>
-                                    <Insets bottom="40.0" />
-                                 </VBox.margin>
-                              </Text>
                               <HBox maxHeight="-Infinity" prefHeight="25.0" prefWidth="200.0">
                                  <children>
                                     <Text fill="#3d5a80" strokeType="OUTSIDE" strokeWidth="0.0" text="Helidarverð fyrir flug ">
@@ -526,17 +515,6 @@
                               <Insets top="40.0" />
                            </padding>
                            <children>
-                              <Text fill="#3d5a80" strokeType="OUTSIDE" strokeWidth="0.0" text="Sláðu inn kennitöluna þína:">
-                                 <font>
-                                    <Font name="Arial Bold" size="18.0" />
-                                 </font>
-                              </Text>
-                              <TextField fx:id="fxRetUserID" maxWidth="-Infinity" prefWidth="200.0" promptText="ddmmááxxxx" />
-                              <Text fill="#404040" strokeType="OUTSIDE" strokeWidth="0.0" text="A.T.H. kennitala verður að vera án bilstafa og merkja">
-                                 <VBox.margin>
-                                    <Insets bottom="40.0" />
-                                 </VBox.margin>
-                              </Text>
                               <HBox maxHeight="-Infinity" prefHeight="25.0" prefWidth="200.0">
                                  <children>
                                     <Text fill="#3d5a80" strokeType="OUTSIDE" strokeWidth="0.0" text="Helidarverð fyrir flug ">
@@ -570,6 +548,21 @@
                                     </Text>
                                  </children>
                               </HBox>
+                              <VBox alignment="BOTTOM_LEFT" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Text fill="#3d5a80" strokeType="OUTSIDE" strokeWidth="0.0" text="Sláðu inn kennitöluna þína:">
+                                       <font>
+                                          <Font name="Arial Bold" size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <TextField fx:id="fxRetUserID" maxWidth="-Infinity" prefWidth="200.0" promptText="ddmmááxxxx" />
+                                    <Text fill="#404040" strokeType="OUTSIDE" strokeWidth="0.0" text="A.T.H. kennitala verður að vera án bilstafa og merkja">
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </Text>
+                                 </children>
+                              </VBox>
                            </children>
                         </VBox>
                      </children>
@@ -611,7 +604,7 @@
                   </Text>
                   <Button fx:id="fxBookButton" mnemonicParsing="false" onAction="#fxMakeBookingHandler" prefHeight="70.0" prefWidth="220.0" text="BÓKA">
                      <HBox.margin>
-                        <Insets left="40.0" />
+                        <Insets left="40.0" right="40.0" />
                      </HBox.margin>
                      <font>
                         <Font name="Arial Bold" size="28.0" />

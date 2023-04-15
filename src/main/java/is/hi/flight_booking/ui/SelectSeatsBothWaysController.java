@@ -33,8 +33,6 @@ public class SelectSeatsBothWaysController implements Initializable {
     @FXML
     private VBox fxDepA1, fxDepA2, fxDepB1, fxDepB2, fxDepC1, fxDepC2;
     @FXML
-    private TextField fxDepUserID;
-    @FXML
     private Text fxDepMinorFlightNum;
     @FXML
     private Text fxDepTotalPrice;
