@@ -1002,7 +1002,7 @@ VALUES
 INSERT INTO
   Seats (flightId, position, reserved)
 VALUES
-  ('F-000', 'A1', false),('F-000', 'B1', false),('F-000', 'C1', false),('F-000', 'D1', false),
+('F-000', 'A1', false),('F-000', 'B1', false),('F-000', 'C1', false),('F-000', 'D1', false),
 ('F-000', 'A2', false),('F-000', 'B2', false),('F-000', 'C2', false),('F-000', 'D2', false),
 ('F-000', 'A3', false),('F-000', 'B3', false),('F-000', 'C3', false),('F-000', 'D3', false),
 ('F-000', 'A4', false),('F-000', 'B4', false),('F-000', 'C4', false),('F-000', 'D4', false),
@@ -10001,8 +10001,7 @@ VALUES
 ('F-899', 'A7', false),('F-899', 'B7', false),('F-899', 'C7', false),('F-899', 'D7', false),
 ('F-899', 'A8', false),('F-899', 'B8', false),('F-899', 'C8', false),('F-899', 'D8', false),
 ('F-899', 'A9', false),('F-899', 'B9', false),('F-899', 'C9', false),('F-899', 'D9', false),
-('F-899', 'A10', false),('F-899', 'B10', false),('F-899', 'C10', false),('F-899', 'D10', false);
-
+('F-899', 'A10', false),('F-899', 'B10', false),('F-899', 'C10', false),('F-899', 'D10', false),
 ('F-900', 'A1', false),('F-900', 'B1', false),('F-900', 'C1', false),('F-900', 'D1', false),
 ('F-900', 'A2', false),('F-900', 'B2', false),('F-900', 'C2', false),('F-900', 'D2', false),
 ('F-900', 'A3', false),('F-900', 'B3', false),('F-900', 'C3', false),('F-900', 'D3', false),
