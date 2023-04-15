@@ -3,12 +3,17 @@ package is.hi.flight_booking.ui;
 import is.hi.flight_booking.application.Flight;
 import is.hi.flight_booking.application.Seat;
 import is.hi.flight_booking.controller.BookingController;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.net.URL;
@@ -66,6 +71,11 @@ public class SelectSeatsBothWaysController implements Initializable {
     private SelectFlightsBothWaysController storedSFBWC;
     private BookingController BC;
     private Flight departureFlight, returnFlight;
+
+    private boolean fxDepA1Res = false, fxDepA2Res = false, fxDepB1Res = false,
+            fxDepB2Res = false, fxDepC1Res = false, fxDepC2Res = false,
+            fxRetA1Res= false, fxRetA2Res= false, fxRetB1Res= false,
+            fxRetB2Res= false, fxRetC1Res= false, fxRetC2Res= false;
     // ---------------------------------------------------------------
 
     // ----------- Upplýsinga breytur --------------------------------
@@ -126,6 +136,105 @@ public class SelectSeatsBothWaysController implements Initializable {
 
         // ###### Annað FXML Stillt ######
         fxFinalPrice.setText(numberFormat.format(departureTotalPrice+returnTotalPrice));
+        setStartSeats(departureFlightSeats, returnFlightSeats);
+        setSeatSelectedBG(fxDepA1);
+    }
+
+    private void setSeatReservedBG(VBox seatIcon) {
+        seatIcon.setBackground(new Background(
+                new BackgroundFill(Color.RED, new CornerRadii(10.0), null)));
+    }
+
+    private void setSeatUnselectedBG(VBox seatIcon) {
+        seatIcon.setBackground(new Background(
+                new BackgroundFill(Color.LIGHTSKYBLUE, new CornerRadii(10.0), null)));
+    }
+
+    private void setSeatSelectedBG(VBox seatIcon) {
+        seatIcon.setBackground(new Background(
+                new BackgroundFill(Color.LIMEGREEN, new CornerRadii(10.0), null)));
+    }
+
+    // Aðferð til þess að stilla upphafsástand sæta í fxml
+    private void setStartSeats(List<Seat> depSeats, List<Seat> retSeats) {
+        for(Seat seat : depSeats) {
+            String seatId = seat.getId();
+            boolean reserved = seat.isReserved();
+            System.out.println("Departure seatId: " + seatId + "| is reserved: " + reserved);
+
+            switch (seatId) {
+                case "A1":
+                    if(reserved){ fxDepA1Res = true; Platform.runLater(() -> setSeatReservedBG(fxDepA1));
+                    } else { Platform.runLater(() -> setSeatUnselectedBG(fxDepA1)); }
+                    break;
+                case "A2":
+                    System.out.println("In case 'A2' for dep.");
+                    if(reserved){ fxDepA2Res = true; Platform.runLater(() -> setSeatReservedBG(fxDepA2));
+                    } else { Platform.runLater(() -> setSeatUnselectedBG(fxDepA2)); }
+                    break;
+                case "B1":
+                    System.out.println("In case 'B1' for dep.");
+                    if(reserved){ fxDepB1Res = true; Platform.runLater(() -> setSeatReservedBG(fxDepB1));
+                    } else { Platform.runLater(() -> setSeatUnselectedBG(fxDepB1)); }
+                    break;
+                case "B2":
+                    System.out.println("In case 'B2' for dep.");
+                    if(reserved){ fxDepB2Res = true; Platform.runLater(() -> setSeatReservedBG(fxDepB2));
+                    } else { Platform.runLater(() -> setSeatUnselectedBG(fxDepB2)); }
+                    break;
+                case "C1":
+                    System.out.println("In case 'C1' for dep.");
+                    if(reserved){ fxDepC1Res = true; Platform.runLater(() -> setSeatReservedBG(fxDepC1));
+                    } else { Platform.runLater(() -> setSeatUnselectedBG(fxDepC1)); }
+                    break;
+                case "C2":
+                    System.out.println("In case 'C2' for dep.");
+                    if(reserved){ fxDepC2Res = true; Platform.runLater(() -> setSeatReservedBG(fxDepC2));
+                    } else { Platform.runLater(() -> setSeatUnselectedBG(fxDepC2)); }
+                    break;
+                default:
+                    System.out.println("Eitthvað fór úrskeiðis í sætalitun Dep");
+            }
+        }
+        for(Seat seat : retSeats) {
+            String seatId = seat.getId();
+            boolean reserved = seat.isReserved();
+            System.out.println("Return seatId: " + seatId + "| is reserved: " + reserved);
+
+            switch (seatId) {
+                case "A1":
+                    if(reserved){ fxRetA1Res = true; Platform.runLater(() -> setSeatReservedBG(fxRetA1));
+                    } else { Platform.runLater(() -> setSeatUnselectedBG(fxRetA1)); }
+                    break;
+                case "A2":
+                    System.out.println("In case 'A2' for Ret.");
+                    if(reserved){ fxRetA2Res = true; Platform.runLater(() -> setSeatReservedBG(fxRetA2));
+                    } else { Platform.runLater(() -> setSeatUnselectedBG(fxRetA2)); }
+                    break;
+                case "B1":
+                    System.out.println("In case 'B1' for Ret.");
+                    if(reserved){ fxRetB1Res = true; Platform.runLater(() -> setSeatReservedBG(fxRetB1));
+                    } else { Platform.runLater(() -> setSeatUnselectedBG(fxRetB1)); }
+                    break;
+                case "B2":
+                    System.out.println("In case 'B2' for Ret.");
+                    if(reserved){ fxRetB2Res = true; Platform.runLater(() -> setSeatReservedBG(fxRetB2));
+                    } else { Platform.runLater(() -> setSeatUnselectedBG(fxRetB2)); }
+                    break;
+                case "C1":
+                    System.out.println("In case 'C1' for Ret.");
+                    if(reserved){ fxRetC1Res = true; Platform.runLater(() -> setSeatReservedBG(fxRetC1));
+                    } else { Platform.runLater(() -> setSeatUnselectedBG(fxRetC1)); }
+                    break;
+                case "C2":
+                    System.out.println("In case 'C2' for Ret.");
+                    if(reserved){ fxRetC2Res = true; Platform.runLater(() -> setSeatReservedBG(fxRetC2));
+                    } else { Platform.runLater(() -> setSeatUnselectedBG(fxRetC2)); }
+                    break;
+                default:
+                    System.out.println("Eitthvað fór úrskeiðis í sætalitun Ret");
+            }
+        }
     }
 
     public void fxBackHandler(ActionEvent actionEvent) {

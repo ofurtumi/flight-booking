@@ -109,7 +109,7 @@
                                     </Text>
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER" maxWidth="-Infinity" prefHeight="100.0" prefWidth="240.0" spacing="20.0" style="-fx-background-color: #3d5a81;" VBox.vgrow="ALWAYS">
+                              <HBox alignment="CENTER" maxWidth="-Infinity" pickOnBounds="false" prefHeight="100.0" prefWidth="240.0" spacing="20.0" style="-fx-background-color: #3d5a81;" VBox.vgrow="ALWAYS">
                                  <children>
                                     <VBox fx:id="fxDepA1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#fxDepA1Click" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #ffffff; -fx-border-width: 3px;">
                                        <children>
@@ -381,7 +381,7 @@
                                     </Text>
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER" maxWidth="-Infinity" prefHeight="100.0" prefWidth="240.0" spacing="20.0" style="-fx-background-color: #3d5a81;" VBox.vgrow="ALWAYS">
+                              <HBox alignment="CENTER" maxWidth="-Infinity" pickOnBounds="false" prefHeight="100.0" prefWidth="240.0" spacing="20.0" style="-fx-background-color: #3d5a81;" VBox.vgrow="ALWAYS">
                                  <children>
                                     <VBox fx:id="fxRetA1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#fxRetA1Click" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #ffffff; -fx-border-width: 3px;">
                                        <children>
