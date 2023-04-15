@@ -153,7 +153,6 @@ public class SelectSeatsBothWaysController implements Initializable {
         // ###### Annað FXML Stillt ######
         fxFinalPrice.setText(numberFormat.format(departureTotalPrice+returnTotalPrice));
         setStartSeats(departureFlightSeats, returnFlightSeats);
-        setSeatSelectedBG(fxDepA1);
     }
 
     // Aðferðir til þess að lita sætinn.
@@ -270,19 +269,19 @@ public class SelectSeatsBothWaysController implements Initializable {
             alert.setContentText("Vertu viss um að þú hafir valið öll umbeðin sæti í báðum flugum.");
             alert.showAndWait();
             actionEvent.consume();
-        } else if(fxUserID.getText() == null || fxUserID.getText().length() != 10) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Kennitala í ólagi");
-            alert.setHeaderText("Kennitala ekki í gildu formi!");
-            alert.setContentText("Sláðu inn nákvæmlega 10 stafa kennitölu án bila eða merkja.");
-            alert.showAndWait();
-            actionEvent.consume();
         } else if(fxUserName.getText() == null || fxUserName.getText().length() == 0
                 || fxUserName.getText().length() > 30) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Nafn í ólagi");
             alert.setHeaderText("Nafn ekki í gildu formi!");
             alert.setContentText("Nafn verður að vera a.m.k. 1 bókstafur og í mesta lagi 30 stafir");
+            alert.showAndWait();
+            actionEvent.consume();
+        } else if(fxUserID.getText() == null || fxUserID.getText().length() != 10) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Kennitala í ólagi");
+            alert.setHeaderText("Kennitala ekki í gildu formi!");
+            alert.setContentText("Sláðu inn nákvæmlega 10 stafa kennitölu án bila eða merkja.");
             alert.showAndWait();
             actionEvent.consume();
         } else {
@@ -391,16 +390,13 @@ public class SelectSeatsBothWaysController implements Initializable {
             Booking depBooking = BC.createBooking(departureFlight, newUser, selectedDepSeats);
             Booking retBooking = BC.createBooking(returnFlight, newUser, selectedRetSeats);
 
-            boolean depBookingOk = BC.exists(depBooking);
-            boolean retBookingOk = BC.exists(retBooking);
-
-
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Bókun staðfest");
             alert.setHeaderText("Bókun tókst!");
             alert.setContentText("Bókunarnúmer:\nBrottför: " + depBooking.getBookingID()
                     + "\nHeimkoma: " + retBooking.getBookingID());
             alert.showAndWait();
+
             BookingApplication application = BookingApplication.getApplicationInstance();
             application.setStoredBAppController(null);
             application.setStoredBothWaysController(null);

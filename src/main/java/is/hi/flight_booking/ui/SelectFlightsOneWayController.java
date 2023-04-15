@@ -5,6 +5,7 @@ import is.hi.flight_booking.controller.FlightController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -51,6 +52,22 @@ public class SelectFlightsOneWayController implements Initializable {
         application.setStoredOneWayController(null);
         application.changeScene("/fxml/bookingApplication_View.fxml");
         backPressed.consume();
+    }
+
+    @FXML
+    public void fxChooseSeatsSF(ActionEvent actionEvent) throws IOException {
+        if(getSelectedFlight() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Óvalið flug");
+            alert.setHeaderText("Val á flugi vantar.");
+            alert.setContentText("Þú átt eftir að velja flug.");
+            alert.showAndWait();
+        } else {
+            BookingApplication application = BookingApplication.getApplicationInstance();
+            application.setStoredOneWayController(this);
+            application.changeScene("/fxml/selectSeatsOneWay_View.fxml");
+            actionEvent.consume();
+        }
     }
 
     private void listFlights(List<Flight> depFlights) {
