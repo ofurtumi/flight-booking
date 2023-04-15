@@ -16,6 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
 import java.net.URL;
 import java.text.NumberFormat;
 import java.time.LocalDate;
@@ -149,6 +150,7 @@ public class SelectSeatsBothWaysController implements Initializable {
         setSeatSelectedBG(fxDepA1);
     }
 
+    // Aðferðir til þess að lita sætinn.
     private void setSeatReservedBG(VBox seatIcon) {
         seatIcon.setBackground(new Background(
                 new BackgroundFill(Color.RED, new CornerRadii(10.0), null)));
@@ -246,7 +248,11 @@ public class SelectSeatsBothWaysController implements Initializable {
         }
     }
 
-    public void fxBackHandler(ActionEvent actionEvent) {
+    public void fxBackHandler(ActionEvent actionEvent) throws IOException {
+        BookingApplication application = BookingApplication.getApplicationInstance();
+        application.setStoredBothWaysController(null);
+        application.changeScene("/fxml/selectBothWays_View.fxml");
+        actionEvent.consume();
     }
 
     public void fxMakeBookingHandler(ActionEvent actionEvent) {
