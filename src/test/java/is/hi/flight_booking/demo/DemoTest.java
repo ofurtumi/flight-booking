@@ -74,7 +74,7 @@ public class DemoTest {
   public void MakeUser() {
     assertEquals("0000006969", user.getId());
     assertEquals("Testur", user.getName());
-    assertArrayEquals(new String[] { "0000006969", "Testur" }, user.getInfo());
+    assertArrayEquals(new String[]{"0000006969", "Testur"}, user.getInfo());
   }
 
   @Test
