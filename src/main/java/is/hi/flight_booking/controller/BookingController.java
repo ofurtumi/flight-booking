@@ -65,4 +65,20 @@ public class BookingController implements BookingControllerInterface {
   public boolean exists(Booking booking) {
     return BR.checkIfExists(booking);
   }
+
+  /**
+   * @return All bookings currently on the database
+   */
+  public List<Booking> getBookings() {
+    return BR.getBookings();
+  }
+
+  /**
+   *
+   * @param SSN Social security number of the person who created a booking
+   * @return List of bookings, associated with this SSN
+   */
+  public List<Booking> getBookings(String SSN) {
+    return BR.getBookingById(SSN);
+  }
 }
