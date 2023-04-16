@@ -9,17 +9,18 @@ import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.FixMethodOrder;
 import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runners.MethodSorters;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import is.hi.flight_booking.application.Booking;
 import is.hi.flight_booking.application.Flight;
 import is.hi.flight_booking.application.Seat;
 import is.hi.flight_booking.application.User;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class BookingControllerTest {
   private BookingController BC;
   private Flight flight;
@@ -50,14 +51,18 @@ public class BookingControllerTest {
   }
 
   @Test
-  public void ATestCreate() {
+  @Order(1)
+  public void TestCreate() {
+    System.out.println("Test: 1");
     Booking testBooking = BC.createBooking(flight, user, seats);
     assertEquals(ref, testBooking);
   }
 
   @Test
-  public void BisOnDB() {
+  @Order(2)
+  public void isOnDB() {
     try {
+      System.out.println("Test: 2");
       assertTrue(BC.exists(ref));
     } catch (Exception e) {
       System.err.printf("Klikkaði að finna á DB: \n%s", e);
@@ -65,13 +70,23 @@ public class BookingControllerTest {
   }
 
   @Test
-  public void CTestDelete() {
-    BC.deleteBooking(ref);
+  @Order(3)
+  public void getBooking() {
+    System.out.println("Test: 3");
+    ArrayList<Booking> testBookings = new ArrayList<Booking>(BC.getBookings("B-3010853549-000"));
+    try {
+      assertEquals(ref, testBookings.get(0));
+    } catch (Exception e) {
+      System.err.printf("Klikkaði að finna á DB: \n%s", e);
+    }
   }
 
   @Test
-  public void DisOnDB() {
+  @Order(4)
+  public void isNotOnDB() {
     try {
+      System.out.println("Test: 4");
+      BC.deleteBooking(ref);
       System.out.println("Á að koma Seats do not exist");
       assertFalse(BC.exists(ref));
     } catch (Exception e) {
