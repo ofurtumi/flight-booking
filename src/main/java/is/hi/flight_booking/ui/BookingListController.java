@@ -1,6 +1,7 @@
 package is.hi.flight_booking.ui;
 
 import is.hi.flight_booking.application.Booking;
+import is.hi.flight_booking.application.Flight;
 import is.hi.flight_booking.controller.BookingController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,6 +30,7 @@ public class BookingListController implements Initializable {
         userId = application.getStoredBAppController().getKt();
         fxMainUserId.setText(userId);
         List<Booking> userBookings = BC.getBookings(userId);
+        listBookings(userBookings);
     }
 
     public void fxBackHandler(ActionEvent actionEvent) throws IOException {
@@ -37,6 +39,14 @@ public class BookingListController implements Initializable {
         application.setStoredBAppController(null);
         application.setUseStoredFalse();
         actionEvent.consume();
+    }
+
+    private void listBookings(List<Booking> bookings) {
+        fxBookingsList.getChildren().clear();
+        for (Booking booking : bookings) {
+            BookingView newListedDepFlight = new BookingView(booking);
+            fxBookingsList.getChildren().add(newListedDepFlight);
+        }
     }
 
     public void fxDeleteBookingHandler(ActionEvent actionEvent) {

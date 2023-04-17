@@ -1,12 +1,11 @@
 package is.hi.flight_booking.ui;
 
 import is.hi.flight_booking.application.Booking;
-import is.hi.flight_booking.application.Flight;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
-import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
 import java.text.NumberFormat;
@@ -29,15 +28,31 @@ public class BookingView extends HBox {
     @FXML
     private Text fxBookingPrice;
 
+    private NumberFormat numberFormat = NumberFormat.getInstance(Locale.GERMANY);
+
     public BookingView(Booking booking) {
         readBookingView();
 
-        NumberFormat numberFormat = NumberFormat.getInstance(Locale.GERMANY);
+        fxBookingId.setText(booking.getBookingID());
+        fxFlightId.setText(booking.getFlight().getFlightId());
+        fxFlightFrom.setText(booking.getFlight().getDepartureAddress());
+        fxFlightTo.setText(booking.getFlight().getArrivalAddress());
+        fxFlightDate.setText(booking.getFlight().getArrivalTime().toString());
+        fxNumberOfSeats.setText(Integer.toString(booking.getSeats().size()));
+        fxBookingPrice.setText(numberFormat.format((long) booking.getFlight().getPrice() *Integer.parseInt(fxNumberOfSeats.getText())));
+
+
         //String formattedPrice = numberFormat.format(storedFlight.getPrice());
     }
 
+    @FXML
+    public void fxBookingClikcedHandler(MouseEvent e) {
+        System.out.println("ok");
+        e.consume();
+    }
+
     private void readBookingView() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/flight_fxml/flight_view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/flight_fxml/booking_view.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
@@ -46,10 +61,5 @@ public class BookingView extends HBox {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-    }
-
-    @FXML
-    public void fxBookingClikcedHandler(MouseEvent mouseEvent) {
-
     }
 }
