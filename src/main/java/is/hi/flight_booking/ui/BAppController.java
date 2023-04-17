@@ -34,6 +34,9 @@ public class BAppController implements Initializable {
   private DatePicker fxRetDate;
   @FXML
   private Text fxHeimkomaTxt;
+  @FXML
+  private TextField fxBookingKt;
+
   private final String databaseURL = "db/flightBooking.db";
   private final String[] destinations = {"Akureyri", "Egilsstaðir", "Ísafjörður", "Keflavík", "Reykjavík",
       "Vestmannaeyjar"};
@@ -227,9 +230,20 @@ public class BAppController implements Initializable {
   }
 
   @FXML // Það sem gerist þegar ýtt er á "Finna bókun" takkann
-  public void fxSearchForBooking(ActionEvent actionEvent) {
-    System.out.println("Þetta verður mögulega virkjað(?)");
-    actionEvent.consume();
+  public void fxSearchForBooking(ActionEvent actionEvent) throws IOException {
+    if(getKt() != null && getKt().length() == 10) {
+      BookingApplication application = BookingApplication.getApplicationInstance();
+      application.setStoredBAppController(this);
+      application.changeScene("/flight_fxml/viewBookings_view.fxml");
+      actionEvent.consume();
+    } else {
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Misheppnuð bókunarleit");
+      alert.setHeaderText("Kennitala í röngu formi");
+      alert.setContentText("Kennitala verður að vera nákvæmlega 10 stafir án merkja og/eða bila.");
+      alert.showAndWait();
+      actionEvent.consume();
+    }
   }
 
   // Getterar fyrir valmöguleikana
@@ -260,4 +274,6 @@ public class BAppController implements Initializable {
   public FlightController getFlightController() {
     return flightController;
   }
+
+  public String getKt() { return fxBookingKt.getText();}
 }
