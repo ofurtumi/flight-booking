@@ -6,15 +6,14 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.FixMethodOrder;
-import org.junit.runners.MethodSorters;
 import org.junit.Test;
-
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.TestMethodOrder;
 import is.hi.flight_booking.application.Booking;
 import is.hi.flight_booking.application.Flight;
 import is.hi.flight_booking.application.Seat;
@@ -24,7 +23,7 @@ import is.hi.flight_booking.controller.FlightController;
 
 // Hugsað sem test fyrir heilt ferli í bæði leit, vali og bókun í kerfinu
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class DemoTest {
   private User user;
   private List<Flight> flights;
@@ -56,32 +55,37 @@ public class DemoTest {
   }
 
   @Test
-  public void A_SearchAndChooseFlight() {
+  @Order(1)
+  public void SearchAndChooseFlight() {
     assertEquals("F-000", flight.getFlightId());
     assertEquals(15000, flight.getPrice());
   }
 
   @Test
-  public void B_ChooseSeats() {
+  @Order(2)
+  public void ChooseSeats() {
     assertEquals("A1", seats.get(0).getId());
     assertEquals("A2", seats.get(1).getId());
     assertEquals("B1", seats.get(2).getId());
   }
 
   @Test
-  public void C_MakeUser() {
+  @Order(3)
+  public void MakeUser() {
     assertEquals("0000006969", user.getId());
     assertEquals("Testur", user.getName());
     assertArrayEquals(new String[]{"0000006969", "Testur"}, user.getInfo());
   }
 
   @Test
-  public void D_CreateBooking() {
+  @Order(4)
+  public void CreateBooking() {
     assertTrue(BC.exists(booking));
   }
 
   @Test
-  public void E_DeleteBooking() {
+  @Order(5)
+  public void DeleteBooking() {
     BC.deleteBooking(booking);
     System.err.println("Á að koma Seats do not exist");
     assertFalse(BC.exists(booking));

@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import is.hi.flight_booking.application.Booking;
 import is.hi.flight_booking.application.Flight;
@@ -141,5 +142,93 @@ public class BookingRepository implements BookingRepositoryInterface {
   @Deprecated
   public void updateSeat(Booking booking, Seat oldSeat, Seat newSeat) {
     throw new UnsupportedOperationException("ekki nota þessa aðferð");
+  }
+
+  public List<Booking> getBookings() {
+    List<Booking> bookings = new ArrayList<>();
+    DB db = new DB(connectionURL);
+    db.open();
+
+    ResultSet bookingRS = db.query("SELECT * FROM Bookings");
+
+    try {
+      while (bookingRS.next()) {
+        String bookingId = bookingRS.getString("bookingId");
+        String flightId = bookingRS.getString("flightId");
+        String userId = bookingRS.getString("userId");
+
+        ResultSet seatRS = db.query("SELECT * FROM Seats WHERE bookingId = ?", bookingId);
+        ArrayList<Seat> seats = new ArrayList<>();
+        while (seatRS.next()) {
+          Seat tempSeat = new Seat(seatRS.getString("position"), seatRS.getString("flightId"),
+              seatRS.getBoolean("reserved"));
+          seats.add(tempSeat);
+        }
+
+        ResultSet flightRS = db.query("SELECT * FROM Flights WHERE flightId = ?", flightId);
+        Flight flight = new Flight(
+            flightRS.getString("flightId"),
+            seats,
+            flightRS.getString("departureAddress"),
+            flightRS.getString("arrivalAddress"),
+            LocalDate.parse(flightRS.getString("departureTime")),
+            LocalDate.parse(flightRS.getString("arrivalTime")),
+            flightRS.getInt("price"));
+
+        ResultSet userRS = db.query("SELECT * FROM Users WHERE userId = ?", userId);
+        User user = new User(userRS.getString("userId"), userRS.getString("name"));
+
+        bookings.add(new Booking(flight, user, bookingId, seats));
+      }
+    } catch (SQLException e) {
+      System.err.println(e);
+    }
+
+    db.close();
+    return bookings;
+  }
+
+  public List<Booking> getBookingById(String SSN) {
+    List<Booking> bookings = new ArrayList<>();
+    DB db = new DB(connectionURL);
+    db.open();
+
+    ResultSet bookingRS = db.query("SELECT * FROM Bookings WHERE userId = ?", SSN);
+
+    try {
+      while (bookingRS.next()) {
+        String bookingId = bookingRS.getString("bookingId");
+        String flightId = bookingRS.getString("flightId");
+        String userId = bookingRS.getString("userId");
+
+        ResultSet seatRS = db.query("SELECT * FROM Seats WHERE bookingId = ?", bookingId);
+        ArrayList<Seat> seats = new ArrayList<>();
+        while (seatRS.next()) {
+          Seat tempSeat = new Seat(seatRS.getString("position"), seatRS.getString("flightId"),
+              seatRS.getBoolean("reserved"));
+          seats.add(tempSeat);
+        }
+
+        ResultSet flightRS = db.query("SELECT * FROM Flights WHERE flightId = ?", flightId);
+        Flight flight = new Flight(
+            flightRS.getString("flightId"),
+            seats,
+            flightRS.getString("departureAddress"),
+            flightRS.getString("arrivalAddress"),
+            LocalDate.parse(flightRS.getString("departureTime")),
+            LocalDate.parse(flightRS.getString("arrivalTime")),
+            flightRS.getInt("price"));
+
+        ResultSet userRS = db.query("SELECT * FROM Users WHERE userId = ?", userId);
+        User user = new User(userRS.getString("userId"), userRS.getString("name"));
+
+        bookings.add(new Booking(flight, user, bookingId, seats));
+      }
+    } catch (SQLException e) {
+      System.err.println(e);
+    }
+
+    db.close();
+    return bookings;
   }
 }
