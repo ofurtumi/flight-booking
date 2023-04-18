@@ -35,9 +35,9 @@ public class BookingView extends HBox {
 
     private final Booking storedBooking;
 
-    private BookingListController BLC;
+  private final BookingListController BLC;
 
-    private NumberFormat numberFormat = NumberFormat.getInstance(Locale.GERMANY);
+  private final NumberFormat numberFormat = NumberFormat.getInstance(Locale.GERMANY);
 
     public BookingView(Booking booking, BookingListController BLC) {
         readBookingView();
@@ -50,7 +50,7 @@ public class BookingView extends HBox {
         fxFlightTo.setText(booking.getFlight().getArrivalAddress());
         fxFlightDate.setText(booking.getFlight().getArrivalTime().toString());
         fxNumberOfSeats.setText(Integer.toString(booking.getSeats().size()));
-        fxBookingPrice.setText(numberFormat.format((long) booking.getFlight().getPrice() *Integer.parseInt(fxNumberOfSeats.getText())));
+        fxBookingPrice.setText(numberFormat.format((long) booking.getFlight().getPrice() * Integer.parseInt(fxNumberOfSeats.getText())));
 
 
         //String formattedPrice = numberFormat.format(storedFlight.getPrice());

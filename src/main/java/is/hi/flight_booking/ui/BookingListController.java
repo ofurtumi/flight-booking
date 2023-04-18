@@ -25,7 +25,7 @@ public class BookingListController implements Initializable {
 
     private String userId;
 
-    private BookingController BC = new BookingController("db/flightBooking.db");
+  private final BookingController BC = new BookingController("db/flightBooking.db");
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
