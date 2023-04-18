@@ -1,11 +1,12 @@
 package is.hi.flight_booking.ui;
 
 import is.hi.flight_booking.application.Booking;
-import is.hi.flight_booking.application.Flight;
 import is.hi.flight_booking.controller.BookingController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -19,6 +20,8 @@ public class BookingListController implements Initializable {
     private Text fxMainUserId;
     @FXML
     private VBox fxBookingsList;
+
+    private BookingView selectedBooking;
 
     private String userId;
 
@@ -42,13 +45,49 @@ public class BookingListController implements Initializable {
     }
 
     private void listBookings(List<Booking> bookings) {
-        fxBookingsList.getChildren().clear();
-        for (Booking booking : bookings) {
-            BookingView newListedDepFlight = new BookingView(booking);
-            fxBookingsList.getChildren().add(newListedDepFlight);
+        if(bookings.isEmpty()) {
+            fxBookingsList.getChildren().clear();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Ekkert fannst");
+            alert.setHeaderText("Engin bókun til");
+            alert.setContentText("Engin bókun finnst fyrir kt: " + userId);
+            alert.showAndWait();
+        } else {
+            fxBookingsList.getChildren().clear();
+            for (Booking booking : bookings) {
+                BookingView newListedDepFlight = new BookingView(booking, this);
+                fxBookingsList.getChildren().add(newListedDepFlight);
+            }
         }
     }
 
     public void fxDeleteBookingHandler(ActionEvent actionEvent) {
+        if(selectedBooking != null) {
+            BC.deleteBooking(getSelectedBooking().getStoredBooking());
+            List<Booking> userBookings = BC.getBookings(userId);
+            listBookings(userBookings);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Bókun eytt");
+            alert.setHeaderText("Bókuninni hefur verið eytt");
+            alert.setContentText("Bókunarnúmer: " + getSelectedBooking().getStoredBooking().getBookingID());
+            alert.showAndWait();
+            setSelectedBooking(null);
+            actionEvent.consume();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Ekkert valið");
+            alert.setHeaderText("Bókun til eyðingar ekki valinn");
+            alert.setContentText("Vertu viss um að bókun til eyðingar sé valin.");
+            alert.showAndWait();
+            actionEvent.consume();
+        }
+    }
+
+    public BookingView getSelectedBooking() {
+        return selectedBooking;
+    }
+
+    public void setSelectedBooking(BookingView selectedBooking) {
+        this.selectedBooking = selectedBooking;
     }
 }

@@ -1,10 +1,15 @@
 package is.hi.flight_booking.ui;
 
 import is.hi.flight_booking.application.Booking;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -28,11 +33,17 @@ public class BookingView extends HBox {
     @FXML
     private Text fxBookingPrice;
 
+    private final Booking storedBooking;
+
+    private BookingListController BLC;
+
     private NumberFormat numberFormat = NumberFormat.getInstance(Locale.GERMANY);
 
-    public BookingView(Booking booking) {
+    public BookingView(Booking booking, BookingListController BLC) {
         readBookingView();
 
+        this.BLC = BLC;
+        storedBooking = booking;
         fxBookingId.setText(booking.getBookingID());
         fxFlightId.setText(booking.getFlight().getFlightId());
         fxFlightFrom.setText(booking.getFlight().getDepartureAddress());
@@ -47,8 +58,24 @@ public class BookingView extends HBox {
 
     @FXML
     public void fxBookingClikcedHandler(MouseEvent e) {
-        System.out.println("ok");
-        e.consume();
+        if (BLC.getSelectedBooking() != null) {
+            setUnselectedBookingBG(BLC.getSelectedBooking());
+            setSelectedBookingBG(this);
+            BLC.setSelectedBooking(this);
+            Platform.runLater(() -> setSelectedBookingBG(BLC.getSelectedBooking()));
+            Platform.runLater(() -> setSelectedBookingBG(this));
+            System.out.println(
+                    "Stored departure fligth id: " + BLC.getSelectedBooking().getStoredBooking().getBookingID());
+            e.consume();
+        } else {
+            setSelectedBookingBG(this);
+            BLC.setSelectedBooking(this);
+            Platform.runLater(() -> setSelectedBookingBG(BLC.getSelectedBooking()));
+            Platform.runLater(() -> setSelectedBookingBG(this));
+            System.out.println(
+                    "Stored departure fligth id: " + BLC.getSelectedBooking().getStoredBooking().getBookingID());
+            e.consume();
+        }
     }
 
     private void readBookingView() {
@@ -61,5 +88,20 @@ public class BookingView extends HBox {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+    }
+
+    public Booking getStoredBooking() {
+        return storedBooking;
+    }
+
+
+    public void setSelectedBookingBG(BookingView booking) {
+        booking.setBackground(new Background(
+                new BackgroundFill(Color.LIGHTSTEELBLUE, new CornerRadii(10.0), null)));
+    }
+
+    public void setUnselectedBookingBG(BookingView booking) {
+        booking.setBackground(new Background(
+                new BackgroundFill(Color.web("#FFFFFF"), new CornerRadii(10.0), null)));
     }
 }

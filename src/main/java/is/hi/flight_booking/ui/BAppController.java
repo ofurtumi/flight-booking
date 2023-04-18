@@ -91,7 +91,7 @@ public class BAppController implements Initializable {
 
   @FXML // Það sem gerist þegar ýtt er á "LEITA" takkann
   public void fxSearchButton(ActionEvent actionEvent) throws IOException {
-    if (getFxFromDest().equals(getFxToDest())) {
+    if ((getFxFromDest() != null && getFxToDest() != null) && getFxFromDest().equals(getFxToDest())) {
       Alert alert = new Alert(Alert.AlertType.ERROR);
       alert.setTitle("Villa við leit");
       alert.setHeaderText("Valdir áfangastaðir þeir sömu");
@@ -234,6 +234,7 @@ public class BAppController implements Initializable {
     if(getKt() != null && getKt().length() == 10) {
       BookingApplication application = BookingApplication.getApplicationInstance();
       application.setStoredBAppController(this);
+      application.setUseStoredTrue();
       application.changeScene("/flight_fxml/viewBookings_view.fxml");
       actionEvent.consume();
     } else {
