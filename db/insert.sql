@@ -996,8 +996,8 @@ VALUES
 INSERT INTO
   Bookings (userId, flightId, bookingId)
 VALUES
-  ('0609013170', 'F-002', 'B-1010012260-000'),
-  ('0609013170', 'F-001', 'B-1010012260-000');
+  ('0609013170', 'F-002', 'B-0609013170-002'),
+  ('0609013170', 'F-001', 'B-0609013170-001');
 
 INSERT INTO
   Seats (flightId, position, reserved)
@@ -10602,3 +10602,8 @@ VALUES
 ('F-959', 'A8', false),('F-959', 'B8', false),('F-959', 'C8', false),('F-959', 'D8', false),
 ('F-959', 'A9', false),('F-959', 'B9', false),('F-959', 'C9', false),('F-959', 'D9', false),
 ('F-959', 'A10', false),('F-959', 'B10', false),('F-959', 'C10', false),('F-959', 'D10', false);
+
+UPDATE Seats SET reserved = true, bookingId = "B-0609013170-001" WHERE flightId = "F-001" and position = 'A1';
+UPDATE Seats SET reserved = true, bookingId = "B-0609013170-001" WHERE flightId = "F-001" and position = 'A2';
+UPDATE Seats SET reserved = true, bookingId = "B-0609013170-001" WHERE flightId = "F-001" and position = 'B1';
+UPDATE Seats SET reserved = true, bookingId = "B-0609013170-002" WHERE flightId = "F-002" and position = 'A1';
